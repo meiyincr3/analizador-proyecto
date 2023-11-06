@@ -3,7 +3,7 @@
 import ply.lex as lex
 
 reserved = {
-    #Meiyin Chang 
+    # Inicio Meiyin Chang 
     #Control Structures
     'if': 'IF', 
     'else': 'ELSE', 
@@ -14,26 +14,34 @@ reserved = {
     'switch':'SWITCH',
     'do': 'DO',
     'case': 'CASE',
+     # Fin Meiyin Chang
     #Data Structures
+    # Inicio Meiyin Chang
     'array':'ARRAY',
     'SplStack':'STACK',
     'SplQueue' : 'QUEUE',
     'push': 'PUSH',
     'pop' : 'POP',
     'current' : 'CURRENT',
+    # Fin Meiyin Chang
     #More Words
+    # Inicio Meiyin Chang
     'and':'AND',
     'or':'OR',
     'echo':'ECHO',
-    'class':'CLASS'
-    'function':'FUNCTION'
-    'try':'TRY'
-    'catch':'CATCH'       
+    'class':'CLASS',
+    'function':'FUNCTION',
+    'try':'TRY',
+    'catch':'CATCH',
+    'switch':'SWITCH', 
+     # Fin Meiyin Chang      
     }
+
 
 # Secuencia de tokens
 tokens = (
-    'IDENTIFICADOR',
+  # Inicio Meiyin Chang
+    'IDENTIFIER',
     'INTEGER',
     'FLOTANTE',
     'PLUS',
@@ -49,7 +57,8 @@ tokens = (
     'ELESSTHAN',
     'COLON',
     'MODULE',
-    'DIVIDEI',
+    'DIVIDE',
+  # Fin Meiyin Chang
 )+tuple(reservadas.values())
 
 # Expresiones Regulares simples para símbolos
@@ -66,16 +75,16 @@ t_LESSTHAN = r'<'
 t_ELESSTHAN = r'<='
 t_COLON = r':'
 t_MODULE = r'%'
-t_DIVIDEI = r'//'
+t_DIVIDE = r'//'
 
 
 #t_FLOTANTE = r'\d+\.\d+'
 
 #Si se repiten caracteres es mejor utilizar una funcion
 # Expresión regular para números, incluye cast
-def t_IDENTIFICADOR(t):
-  r'[a-z_]\w*'
-  t.type = reservadas.get(t.value,'IDENTIFICADOR')
+def t_IDENTIFIER(t):
+  r'\$[a-z_]\w*'
+  t.type = reserved.get(t.value,'IDENTIFIER')
   return t
 
 
