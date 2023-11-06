@@ -40,7 +40,6 @@ reserved = {
 
 # Secuencia de tokens
 tokens = (
-  # Inicio Meiyin Chang
     'IDENTIFIER',
     'INTEGER',
     'FLOTANTE',
@@ -51,6 +50,7 @@ tokens = (
     'LPAREN',
     'RPAREN',
     'EQUALS',
+  # Inicio Meiyin Chang
     'GREATERTHAN',
     'EGREATERTHAN',
     'LESSTHAN',
@@ -69,6 +69,7 @@ t_DIVIDE = r'/'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_EQUALS = r'='
+# Inicio Meiyin Chang
 t_GREATERTHAN = r'>'
 t_EGREATERTHAN = r'>='
 t_LESSTHAN = r'<'
@@ -76,6 +77,7 @@ t_ELESSTHAN = r'<='
 t_COLON = r':'
 t_MODULE = r'%'
 t_DIVIDE = r'//'
+# Fin Meiyin Chang
 
 
 #t_FLOTANTE = r'\d+\.\d+'
