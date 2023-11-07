@@ -68,23 +68,25 @@ tokens = (
     'PLUS',
     'MINUS',
     'POWERBY',
-    'ASSIGMENT',
-    'STRICT',
-    'NSTRICT'
+    'ASSINGMENT',
+    'IDENTICAL',
+    'NOTIDENTICAL', 
   #Fin Irving Macias
-    'TIMES',
-    'DIVIDE',
+    'DIVIDE',   
     'LPAREN',
     'RPAREN',
     'EQUALS',
   # Inicio Meiyin Chang
+    'TIMES',
     'GREATERTHAN',
-    'EGREATERTHAN',
+    'GREATERTHANEQ',
     'LESSTHAN',
-    'ELESSTHAN',
+    'LESSTHANEQ',
     'COLON',
     'MODULE',
-    'DIVIDE',
+    'INTDIVIDE',
+    'ARROW',
+    'SIMPLEARROW',
   # Fin Meiyin Chang
 )+tuple(reserved.values())
 
@@ -94,22 +96,27 @@ t_PLUS = r'\+'
 t_MINUS = r'-'
 t_TIMES = r'\*'
 t_POWERBY = r'\*\*'
-t_ASSIGMENT = r'='
-t_STRICT = r'==='
-t_NSTRICT = r'!=='
+t_ASSINGMENT = r'='
+t_IDENTICAL = r'==='
+t_NOTIDENTICAL = r'!=='
 #Fin Irving Macias
-t_DIVIDE = r'/'
+
+
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_EQUALS = r'=='
+
 # Inicio Meiyin Chang
+t_DIVIDE = r'/'
 t_GREATERTHAN = r'>'
-t_EGREATERTHAN = r'>='
+t_GREATERTHANEQ = r'>='
 t_LESSTHAN = r'<'
-t_ELESSTHAN = r'<='
+t_LESSTHANEQ = r'<='
 t_COLON = r':'
 t_MODULE = r'%'
-t_DIVIDE = r'//'
+t_INTDIVIDE = r'//'
+t_ARROW = r'=\>'
+t_SIMPLEARROW = r'-\>'
 # Fin Meiyin Chang
 
 
@@ -117,11 +124,11 @@ t_DIVIDE = r'//'
 
 #Si se repiten caracteres es mejor utilizar una funcion
 # Expresión regular para números, incluye cast
+# Inicio Meiyin Chang
 def t_IDENTIFIER(t):
-  r'\$[a-z_]\w*'
+  r'\$[a-zA-Z_]\w*'
   t.type = reserved.get(t.value,'IDENTIFIER')
   return t
-
 
 def t_FLOAT(t):
   r'\d+\.\d+'
@@ -133,8 +140,11 @@ def t_INTEGER(t):
   t.value = int(t.value)
   return t
 
+#Inicio Irving y Meiyin
 def t_COMMENTS(t):
-  r'\/\/.*'
+  r'(\/\/.*)|(\/\*(.|\s)*\*\/)|(\#.*)'
+  return t
+#Fin Irving y Meiyin
 
 # Expresión regular para reconocer saltos de línea
 def t_newline(t):
@@ -153,7 +163,6 @@ def t_error(t):
   )
   t.lexer.skip(1)
 
-
 # Construye el lexer
 lexer = lex.lex()
 
@@ -162,9 +171,9 @@ code = '''if 4 > var:
 if 4 % 2:
 if 4 // 2:
 mivar = 3 + 4 * 10.8 + hola
-  + -20 * 7
-  
+  + -20 * 7 
 '''
+
 algoritmoIrving = '''
 $a = 5;
 $b = 2.5;
@@ -192,10 +201,10 @@ if ($a !== $b) {
 }
 '''
 # Enviando el código
-ingresa = input("Ingrese: ")
-print(ingresa)
-lexer.input(ingresa)
-
+#ingresa = input("Ingrese: ")
+#print(ingresa)
+#lexer.input(ingresa)
+lexer.input(algoritmoIrving)
 
 
 # Tokenizar
