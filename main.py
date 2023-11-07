@@ -61,11 +61,17 @@ reserved = {
 
 # Secuencia de tokens
 tokens = (
+  #Inicio Irving Macias
     'IDENTIFIER',
     'INTEGER',
-    'FLOTANTE',
+    'FLOAT',
     'PLUS',
     'MINUS',
+    'POWERBY',
+    'ASSIGMENT',
+    'STRICT',
+    'NSTRICT'
+  #Fin Irving Macias
     'TIMES',
     'DIVIDE',
     'LPAREN',
@@ -80,16 +86,22 @@ tokens = (
     'MODULE',
     'DIVIDE',
   # Fin Meiyin Chang
-)+tuple(reservadas.values())
+)+tuple(reserved.values())
 
 # Expresiones Regulares simples para símbolos
+#Inicio Irving Macias
 t_PLUS = r'\+'
 t_MINUS = r'-'
 t_TIMES = r'\*'
+t_POWERBY = r'\*\*'
+t_ASSIGMENT = r'='
+t_STRICT = r'==='
+t_NSTRICT = r'!=='
+#Fin Irving Macias
 t_DIVIDE = r'/'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
-t_EQUALS = r'='
+t_EQUALS = r'=='
 # Inicio Meiyin Chang
 t_GREATERTHAN = r'>'
 t_EGREATERTHAN = r'>='
@@ -111,7 +123,7 @@ def t_IDENTIFIER(t):
   return t
 
 
-def t_FLOTANTE(t):
+def t_FLOAT(t):
   r'\d+\.\d+'
   return t
 
