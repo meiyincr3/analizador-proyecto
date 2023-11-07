@@ -135,17 +135,16 @@ t_NOTIDENTICAL = r'!=='
 #Inicio Diego Martinez
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
-t_DIVIDE = r'/'
+t_DIVIDE = r'\/'
 t_EQUALS = r'=='
-t_INCREMENT = r'++'
-t_DECREMENT = r'--'
+t_INCREMENT = r'\+\+'
+t_DECREMENT = r'\-\-'
 t_SEMICOLON = r';'
 t_ANDEQUAL = r'&='
 t_DOUBLECOLON = r'::'
 #Fin Diego Martinez
 
 # Inicio Meiyin Chang
-t_DIVIDE = r'/'
 t_GREATERTHAN = r'>'
 t_GREATERTHANEQ = r'>='
 t_LESSTHAN = r'<'
