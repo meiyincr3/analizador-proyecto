@@ -133,7 +133,8 @@ def t_INTEGER(t):
   t.value = int(t.value)
   return t
 
-
+def t_COMMENTS(t):
+  r'\/\/.*'
 
 # Expresión regular para reconocer saltos de línea
 def t_newline(t):
@@ -164,7 +165,32 @@ mivar = 3 + 4 * 10.8 + hola
   + -20 * 7
   
 '''
+algoritmoIrving = '''
+$a = 5;
+$b = 2.5;
+$c = 3;
+$d = 5;
 
+if ($a == ($b + $b)) {
+    echo "a igual 5<br>";
+}
+
+if ($a - $c == 2) {
+    echo "Resta igual a 2<br>";
+}
+
+if ($c ** 2 == 9) {
+    echo "El cuadrado de 3 es 9<br>";
+}
+
+if ($a === $d) {
+    echo "a y d son estrictamente iguales<br>";
+}
+
+if ($a !== $b) {
+    echo "a y b son estrictamente desiguales<br>";
+}
+'''
 # Enviando el código
 ingresa = input("Ingrese: ")
 print(ingresa)
