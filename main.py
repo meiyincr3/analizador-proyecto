@@ -230,11 +230,21 @@ for ($i = 0; $i < $totalNumeros; $i++) {
     }
 }
 '''
+
+code_meiyin = '''
+$mensaje = "Hola, mundo";
+function saludar($nombre) {
+	echo "Hola, " . $nombre;
+}
+saludar("Juan");
+echo $mensaje;
+    '''
+
 # Enviando el código
 #ingresa = input("Ingrese: ")
 #print(ingresa)
 #lexer.input(ingresa)
-lexer.input(code)
+lexer.input(code_meiyin)
 
 
 # Tokenizar
