@@ -116,7 +116,9 @@ tokens = (
   'INTDIVIDE',
   'ARROW',
   'SIMPLEARROW',
-
+  'BOOLEANT',
+  'BOOLEANF',
+  'CADENA',
   # Fin Meiyin Chang
 ) + tuple(reserved.values())
 
@@ -177,6 +179,69 @@ def t_INTEGER(t):
   t.value = int(t.value)
   return t
 
+def t_CADENA(t):
+    r'\'[\w\W\s]*\'|"[\w\W\s]*\"'
+    t.value = str(t.value)
+    return t
+def t_BOOLEANT(t):
+    r'(True)'
+    t.type = reserved.get(t.value, 'BOOLEANT')
+    t.value = bool(t.value)
+    return t
+def t_BOOLEANF(t):
+    r'(False)'
+    t.type = reserved.get(t.value, 'BOOLEANF')
+    t.value = bool(t.value)
+    return t
+def t_NFUNCION(t):
+    r'[a-zA-Z]\w*'
+    t.type = reserved.get(t.value, 'NFUNCION')  # Check for reserved words
+    return t
+def t_IF(t):
+    r'if'
+    return t
+def t_ELSEIF(t):
+    r'elseif'
+    return t
+def t_ELSE(t):
+    r'else'
+    return t
+def t_ARRAY(t):
+    r'array'
+    return t
+def t_SORT(t):
+    r'sort'
+    return t
+def t_WHILE(t):
+    r'while'
+    return t
+def t_FOR(t):
+    r'for'
+    return t
+def t_AND(t):
+    r'(and|\&\&)'
+    return t
+def t_OR(t):
+    r'(or|\|\|)'
+    return t
+
+def t_TRY(t):
+    r'try'
+    return t
+def t_EXCEPTION(t):
+    r'exception'
+    return t
+def t_RETURN(t):
+    r'return'
+    return t
+def t_CATCH(t):
+    r'catch'
+    return t
+
+def t_ECHO(t):
+    r'echo'
+    return t
+
 #Inicio Irving y Meiyin
 def t_COMMENTS(t):
   r'(\/\/.*)|(\/\*(.|\s)*\*\/)|(\#.*)'
@@ -233,9 +298,12 @@ for ($i = 0; $i < $totalNumeros; $i++) {
 
 code_meiyin = '''
 $mensaje = "Hola, mundo";
+$numeros_ejemplo = [10, 5, 7, 21, 3, 15];
 function saludar($nombre) {
 	echo "Hola, " . $nombre;
 }
+
+
 saludar("Juan");
 echo $mensaje;
     '''
