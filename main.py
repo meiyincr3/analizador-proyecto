@@ -116,9 +116,11 @@ tokens = (
   'INTDIVIDE',
   'ARROW',
   'SIMPLEARROW',
-  'BOOLEANT',
-  'BOOLEANF',
-  'CADENA',
+  'TRUE',
+  'FALSE',
+  'STRING',
+  #'LBRACKET',
+  #'RBRACKET'
   # Fin Meiyin Chang
 ) + tuple(reserved.values())
 
@@ -156,6 +158,8 @@ t_MODULE = r'%'
 t_INTDIVIDE = r'//'
 t_ARROW = r'=\>'
 t_SIMPLEARROW = r'-\>'
+#t_LBRACKET = r'\['
+#t_LBRACKET = r'\]'
 # Fin Meiyin Chang
 
 
@@ -179,27 +183,29 @@ def t_INTEGER(t):
   t.value = int(t.value)
   return t
 
-def t_CADENA(t):
-    r'\'[\w\W\s]*\'|"[\w\W\s]*\"'
-    t.value = str(t.value)
-    return t
-def t_BOOLEANT(t):
+def t_STRING(t):
+  r'"[^"]*"'
+  t.value = str(t.value)
+  return t
+
+def t_TRUE(t):
     r'(True)'
-    t.type = reserved.get(t.value, 'BOOLEANT')
+    t.type = reserved.get(t.value, 'TRUE')
     t.value = bool(t.value)
     return t
-def t_BOOLEANF(t):
+
+def t_FALSE(t):
     r'(False)'
-    t.type = reserved.get(t.value, 'BOOLEANF')
+    t.type = reserved.get(t.value, 'FALSE')
     t.value = bool(t.value)
     return t
-def t_NFUNCION(t):
-    r'[a-zA-Z]\w*'
-    t.type = reserved.get(t.value, 'NFUNCION')  # Check for reserved words
-    return t
+
+
+
 def t_IF(t):
     r'if'
     return t
+
 def t_ELSEIF(t):
     r'elseif'
     return t
@@ -237,7 +243,9 @@ def t_RETURN(t):
 def t_CATCH(t):
     r'catch'
     return t
-
+def t_FUNCTION(t):
+    r'function'
+    return t
 def t_ECHO(t):
     r'echo'
     return t
@@ -298,12 +306,9 @@ for ($i = 0; $i < $totalNumeros; $i++) {
 
 code_meiyin = '''
 $mensaje = "Hola, mundo";
-$numeros_ejemplo = [10, 5, 7, 21, 3, 15];
 function saludar($nombre) {
 	echo "Hola, " . $nombre;
 }
-
-
 saludar("Juan");
 echo $mensaje;
     '''
