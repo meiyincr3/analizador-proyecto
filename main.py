@@ -194,29 +194,22 @@ mivar = 3 + 4 * 10.8 + hola
 '''
 
 algoritmoIrving = '''
-$a = 5;
-$b = 2.5;
-$c = 3;
-$d = 5;
+$totalNumeros = 10
 
-if ($a == ($b + $b)) {
-    echo "a igual 5<br>";
+$fibonacci = array();
+$fibonacci[0] = 0;
+$fibonacci[1] = 1;
+
+for ($i = 2; $i < $totalNumeros; $i++) {
+    $fibonacci[$i] = $fibonacci[$i - 1] + $fibonacci[$i - 2];
 }
 
-if ($a - $c == 2) {
-    echo "Resta igual a 2<br>";
-}
-
-if ($c ** 2 == 9) {
-    echo "El cuadrado de 3 es 9<br>";
-}
-
-if ($a === $d) {
-    echo "a y d son estrictamente iguales<br>";
-}
-
-if ($a !== $b) {
-    echo "a y b son estrictamente desiguales<br>";
+// Imprimir la sucesión de Fibonacci
+for ($i = 0; $i < $totalNumeros; $i++) {
+    echo $fibonacci[$i];
+    if ($i < $totalNumeros - 1) {
+        echo ', ';
+    }
 }
 '''
 # Enviando el código
