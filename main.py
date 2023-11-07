@@ -82,8 +82,8 @@ tokens = (
     'INCREMENT',
     'DECREMENT',
     'SEMICOLON',
-    'AND_EQUAL',
-    'DOUBLE_COLON',
+    'ANDEQUAL',
+    'DOUBLECOLON',
   #Fin Diego Martinez
 
   # Inicio Meiyin Chang
@@ -121,8 +121,8 @@ t_EQUALS = r'=='
 t_INCREMENT = r'++'
 t_DECREMENT = r'--'
 t_SEMICOLON = r';'
-t_AND_EQUAL = r'&='
-T_DOUBLE_COLON = r'::'
+t_ANDEQUAL = r'&='
+t_DOUBLECOLON = r'::'
 #Fin Diego Martinez
 
 # Inicio Meiyin Chang
