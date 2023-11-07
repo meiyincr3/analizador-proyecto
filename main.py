@@ -74,6 +74,7 @@ reserved = {
   'extends' : 'EXTENDS',
   'static' : 'STATIC',
   'declare' : 'DECLARE',
+  'namefunction' : 'NAMEFUNCTION',
   #Fin Diego Martinez   
 }
 
@@ -103,6 +104,11 @@ tokens = (
   'SEMICOLON',
   'ANDEQUAL',
   'DOUBLECOLON',
+  'RBRACKET',
+  'LBRACKET',
+  'APOSTROPHE',
+  'COMMA',
+  'DOT',
   #Fin Diego Martinez
 
   # Inicio Meiyin Chang
@@ -119,8 +125,8 @@ tokens = (
   'TRUE',
   'FALSE',
   'STRING',
-  #'LBRACKET',
-  #'RBRACKET'
+  'CURLYLEFTBRACKET',
+  'CURLYRIGHTBRACKET',
   # Fin Meiyin Chang
 ) + tuple(reserved.values())
 
@@ -146,6 +152,11 @@ t_DECREMENT = r'\-\-'
 t_SEMICOLON = r';'
 t_ANDEQUAL = r'&='
 t_DOUBLECOLON = r'::'
+t_LBRACKET = r'\['
+t_RBRACKET = r'\]'
+t_APOSTROPHE = r'\''
+t_COMMA = r','
+t_DOT = r'\.'
 #Fin Diego Martinez
 
 # Inicio Meiyin Chang
@@ -158,8 +169,8 @@ t_MODULE = r'%'
 t_INTDIVIDE = r'//'
 t_ARROW = r'=\>'
 t_SIMPLEARROW = r'-\>'
-#t_LBRACKET = r'\['
-#t_LBRACKET = r'\]'
+t_CURLYLEFTBRACKET = r'{'
+t_CURLYRIGHTBRACKET = r'}'
 # Fin Meiyin Chang
 
 
@@ -243,12 +254,21 @@ def t_RETURN(t):
 def t_CATCH(t):
     r'catch'
     return t
+#Inicio Diego Martinez
 def t_FUNCTION(t):
     r'function'
     return t
+
+def t_NAMEFUNCTION(t):
+    r'([a-zA-Z_]\w*)(?=\()'
+    return t
+
 def t_ECHO(t):
     r'echo'
     return t
+
+
+#Fin Diego Martinez
 
 #Inicio Irving y Meiyin
 def t_COMMENTS(t):
@@ -305,6 +325,7 @@ for ($i = 0; $i < $totalNumeros; $i++) {
 '''
 
 code_meiyin = '''
+#esto es un comentario
 $mensaje = "Hola, mundo";
 function saludar($nombre) {
 	echo "Hola, " . $nombre;
@@ -313,11 +334,27 @@ saludar("Juan");
 echo $mensaje;
     '''
 
+codigoDiego = '''
+// Definir dos números
+$numero1 = 10;
+$numero2 = 20;
+
+// Comprobar cuál número es mayor
+if ($numero1 > $numero2) {
+    echo "El número $numero1 es mayor que el número $numero2";
+} elseif ($numero2 > $numero1) {
+    echo "El número $numero2 es mayor que el número $numero1";
+} else {
+    echo "Ambos números son iguales";
+}
+
+'''
+
 # Enviando el código
 #ingresa = input("Ingrese: ")
 #print(ingresa)
 #lexer.input(ingresa)
-lexer.input(code_meiyin)
+lexer.input(algoritmoIrving)
 
 
 # Tokenizar
