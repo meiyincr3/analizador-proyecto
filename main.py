@@ -3,119 +3,119 @@
 import ply.lex as lex
 
 reserved = {
-    # Inicio Meiyin Chang 
-    #Control Structures
-    'if': 'IF', 
-    'else': 'ELSE', 
-    'elseif':'ELSEIF',
-    'while': 'WHILE', 
-    'for': 'FOR',
-    'foreach':'FOREACH',
-    'switch':'SWITCH',
-     # Fin Meiyin Chang
-     #Inicio Irving Macias
-     'default' : 'DEFAULT',
-     'break' : 'BREAK',
-     'continue' : 'CONTINUE',
-     'goto' : 'GOTO',
-     'endif' : 'ENDIF',
-     #Fin Irving Macias
-     #Inicio Diego Martinez
-    'do': 'DO',
-    'case': 'CASE',
-    'die' : 'DIE',
-    'exit': 'EXIT',
-    'endfor' : 'ENDFOR',
-    'enforeach' : 'ENDFOREACH',
-     #Fin Diego Martinez
+  # Inicio Meiyin Chang 
+  #Control Structures
+  'if': 'IF', 
+  'else': 'ELSE', 
+  'elseif':'ELSEIF',
+  'while': 'WHILE', 
+  'for': 'FOR',
+  'foreach':'FOREACH',
+  'switch':'SWITCH',
+  # Fin Meiyin Chang
+  #Inicio Irving Macias
+  'default' : 'DEFAULT',
+  'break' : 'BREAK',
+  'continue' : 'CONTINUE',
+  'goto' : 'GOTO',
+  'endif' : 'ENDIF',
+  #Fin Irving Macias
+  #Inicio Diego Martinez
+  'do': 'DO',
+  'case': 'CASE',
+  'die' : 'DIE',
+  'exit': 'EXIT',
+  'endfor' : 'ENDFOR',
+  'enforeach' : 'ENDFOREACH',
+  #Fin Diego Martinez
 
 
-    #Data Structures
-    # Inicio Meiyin Chang
-    'array':'ARRAY',
-    'SplStack':'STACK',
-    'SplQueue' : 'QUEUE',
-    'push': 'PUSH',
-    'pop' : 'POP',
-    # Fin Meiyin Chang
-    #Inicio Irving Macias
-    'SplFixedArray': 'FIXEDARRAY',
-    'SplObjectStorage': 'OBJECTSTORAGE',
-    'contains' :'CONTAINS',
-    'attach' : 'attach',
-    #Fin Irving Macias
-    #Inicio Diego Martinez
-    'current' : 'CURRENT',
-    'SplPriorityQueue' : 'PRIORITYQUEUE',
-    'SplMaxHeap' : 'MAXHEAP',
-    'SplMinHeap' : 'MINHEAP',
-    'SplHeap' : 'HEAP',
-     #Fin Diego Martinez
+  #Data Structures
+  # Inicio Meiyin Chang
+  'array':'ARRAY',
+  'SplStack':'STACK',
+  'SplQueue' : 'QUEUE',
+  'push': 'PUSH',
+  'pop' : 'POP',
+  # Fin Meiyin Chang
+  #Inicio Irving Macias
+  'SplFixedArray': 'FIXEDARRAY',
+  'SplObjectStorage': 'OBJECTSTORAGE',
+  'contains' :'CONTAINS',
+  'attach' : 'attach',
+  #Fin Irving Macias
+  #Inicio Diego Martinez
+  'current' : 'CURRENT',
+  'SplPriorityQueue' : 'PRIORITYQUEUE',
+  'SplMaxHeap' : 'MAXHEAP',
+  'SplMinHeap' : 'MINHEAP',
+  'SplHeap' : 'HEAP',
+  #Fin Diego Martinez
 
 
-    #More Words
-    # Inicio Meiyin Chang
-    'and':'AND',
-    'or':'OR',
-    'echo':'ECHO',
-    'class':'CLASS',
-    'function':'FUNCTION',
-    'try':'TRY', 
-     # Fin Meiyin Chang 
-     #Inicio Irving Macias
-     'new' : 'NEW',
-     'public' : 'PUBLIC',
-     'return' : 'RETURN',
-     'xor' : 'XOR',
-     #Fin Irving Macias  
-     #Inicio Diego Martinez
-    'catch':'CATCH',
-    'switch':'SWITCH',
-    'extends' : 'EXTENDS',
-    'static' : 'STATIC',
-    'declare' : 'DECLARE',
-     #Fin Diego Martinez   
-    }
+  #More Words
+  # Inicio Meiyin Chang
+  'and':'AND',
+  'or':'OR',
+  'echo':'ECHO',
+  'class':'CLASS',
+  'function':'FUNCTION',
+  'try':'TRY', 
+  # Fin Meiyin Chang 
+  #Inicio Irving Macias
+  'new' : 'NEW',
+  'public' : 'PUBLIC',
+  'return' : 'RETURN',
+  'xor' : 'XOR',
+  #Fin Irving Macias  
+  #Inicio Diego Martinez
+  'catch':'CATCH',
+  'switch':'SWITCH',
+  'extends' : 'EXTENDS',
+  'static' : 'STATIC',
+  'declare' : 'DECLARE',
+  #Fin Diego Martinez   
+}
 
 
 # Secuencia de tokens
 tokens = (
-  #Inicio Irving Macias
-    'IDENTIFIER',
-    'INTEGER',
-    'FLOAT',
-    'PLUS',
-    'MINUS',
-    'POWERBY',
-    'ASSINGMENT',
-    'IDENTICAL',
-    'NOTIDENTICAL', 
-    'COMMENTS',
+#Inicio Irving Macias
+  'IDENTIFIER',
+  'INTEGER',
+  'FLOAT',
+  'PLUS',
+  'MINUS',
+  'POWERBY',
+  'ASSINGMENT',
+  'IDENTICAL',
+  'NOTIDENTICAL', 
+  'COMMENTS',
   #Fin Irving Macias
 
   #Inicio Diego Martinez
-    'DIVIDE',   
-    'LPAREN',
-    'RPAREN',
-    'EQUALS',
-    'INCREMENT',
-    'DECREMENT',
-    'SEMICOLON',
-    'ANDEQUAL',
-    'DOUBLECOLON',
+  'DIVIDE',   
+  'LPAREN',
+  'RPAREN',
+  'EQUALS',
+  'INCREMENT',
+  'DECREMENT',
+  'SEMICOLON',
+  'ANDEQUAL',
+  'DOUBLECOLON',
   #Fin Diego Martinez
 
   # Inicio Meiyin Chang
-    'TIMES',
-    'GREATERTHAN',
-    'GREATERTHANEQ',
-    'LESSTHAN',
-    'LESSTHANEQ',
-    'COLON',
-    'MODULE',
-    'INTDIVIDE',
-    'ARROW',
-    'SIMPLEARROW',
+  'TIMES',
+  'GREATERTHAN',
+  'GREATERTHANEQ',
+  'LESSTHAN',
+  'LESSTHANEQ',
+  'COLON',
+  'MODULE',
+  'INTDIVIDE',
+  'ARROW',
+  'SIMPLEARROW',
 
   # Fin Meiyin Chang
 )+tuple(reserved.values())
