@@ -71,6 +71,7 @@ tokens = (
     'ASSINGMENT',
     'IDENTICAL',
     'NOTIDENTICAL', 
+    'COMMENTS',
   #Fin Irving Macias
     'DIVIDE',   
     'LPAREN',
@@ -87,6 +88,7 @@ tokens = (
     'INTDIVIDE',
     'ARROW',
     'SIMPLEARROW',
+
   # Fin Meiyin Chang
 )+tuple(reserved.values())
 
@@ -204,7 +206,7 @@ if ($a !== $b) {
 #ingresa = input("Ingrese: ")
 #print(ingresa)
 #lexer.input(ingresa)
-lexer.input(algoritmoIrving)
+lexer.input(code)
 
 
 # Tokenizar
