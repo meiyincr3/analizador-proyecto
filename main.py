@@ -15,6 +15,15 @@ reserved = {
     'do': 'DO',
     'case': 'CASE',
      # Fin Meiyin Chang
+     #Inicio Irving Macias
+     'default' : 'DEFAULT',
+     'break' : 'BREAK',
+     'continue' : 'CONTINUE',
+     'goto' : 'GOTO',
+     'endif' : 'ENDIF',
+     'endfor' : 'ENDFOR',
+     'enforeach' : 'ENDFOREACH',
+     #Fin Irving Macias
     #Data Structures
     # Inicio Meiyin Chang
     'array':'ARRAY',
@@ -24,6 +33,12 @@ reserved = {
     'pop' : 'POP',
     'current' : 'CURRENT',
     # Fin Meiyin Chang
+    #Inicio Irving Macias
+    'SplFixedArray': 'FIXEDARRAY',
+    'SplObjectStorage': 'OBJECTSTORAGE',
+    'contains' :'CONTAINS',
+    'attach' : 'attach',
+    #Fin Irving Macias
     #More Words
     # Inicio Meiyin Chang
     'and':'AND',
@@ -34,7 +49,13 @@ reserved = {
     'try':'TRY',
     'catch':'CATCH',
     'switch':'SWITCH', 
-     # Fin Meiyin Chang      
+     # Fin Meiyin Chang 
+     #Inicio Irving Macias
+     'new' : 'NEW',
+     'public' : 'PUBLIC',
+     'return' : 'RETURN',
+     'xor' : 'XOR',
+     #Fin Irving Macias     
     }
 
 
