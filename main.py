@@ -42,7 +42,7 @@ reserved = {
   'SplFixedArray': 'FIXEDARRAY',
   'SplObjectStorage': 'OBJECTSTORAGE',
   'contains' :'CONTAINS',
-  'attach' : 'attach',
+  'attach' : 'ATTACH',
   #Fin Irving Macias
   #Inicio Diego Martinez
   'current' : 'CURRENT',
@@ -118,17 +118,17 @@ tokens = (
   'SIMPLEARROW',
 
   # Fin Meiyin Chang
-)+tuple(reserved.values())
+) + tuple(reserved.values())
 
 # Expresiones Regulares simples para símbolos
 #Inicio Irving Macias
 t_PLUS = r'\+'
-t_MINUS = r'-'
+t_MINUS = r'\-'
 t_TIMES = r'\*'
 t_POWERBY = r'\*\*'
 t_ASSINGMENT = r'='
 t_IDENTICAL = r'==='
-t_NOTIDENTICAL = r'!=='
+t_NOTIDENTICAL = r'\!=='
 #Fin Irving Macias
 
 
