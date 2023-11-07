@@ -73,10 +73,19 @@ tokens = (
     'NOTIDENTICAL', 
     'COMMENTS',
   #Fin Irving Macias
+
+  #Inicio Diego Martinez
     'DIVIDE',   
     'LPAREN',
     'RPAREN',
     'EQUALS',
+    'INCREMENT',
+    'DECREMENT',
+    'SEMICOLON',
+    'AND_EQUAL',
+    'DOUBLE_COLON',
+  #Fin Diego Martinez
+
   # Inicio Meiyin Chang
     'TIMES',
     'GREATERTHAN',
@@ -104,9 +113,17 @@ t_NOTIDENTICAL = r'!=='
 #Fin Irving Macias
 
 
+#Inicio Diego Martinez
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
+t_DIVIDE = r'/'
 t_EQUALS = r'=='
+t_INCREMENT = r'++'
+t_DECREMENT = r'--'
+t_SEMICOLON = r';'
+t_AND_EQUAL = r'&='
+T_DOUBLE_COLON = r'::'
+#Fin Diego Martinez
 
 # Inicio Meiyin Chang
 t_DIVIDE = r'/'
