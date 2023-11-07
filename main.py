@@ -12,8 +12,6 @@ reserved = {
     'for': 'FOR',
     'foreach':'FOREACH',
     'switch':'SWITCH',
-    'do': 'DO',
-    'case': 'CASE',
      # Fin Meiyin Chang
      #Inicio Irving Macias
      'default' : 'DEFAULT',
@@ -21,9 +19,17 @@ reserved = {
      'continue' : 'CONTINUE',
      'goto' : 'GOTO',
      'endif' : 'ENDIF',
-     'endfor' : 'ENDFOR',
-     'enforeach' : 'ENDFOREACH',
      #Fin Irving Macias
+     #Inicio Diego Martinez
+    'do': 'DO',
+    'case': 'CASE',
+    'die' : 'DIE',
+    'exit': 'EXIT',
+    'endfor' : 'ENDFOR',
+    'enforeach' : 'ENDFOREACH',
+     #Fin Diego Martinez
+
+
     #Data Structures
     # Inicio Meiyin Chang
     'array':'ARRAY',
@@ -31,7 +37,6 @@ reserved = {
     'SplQueue' : 'QUEUE',
     'push': 'PUSH',
     'pop' : 'POP',
-    'current' : 'CURRENT',
     # Fin Meiyin Chang
     #Inicio Irving Macias
     'SplFixedArray': 'FIXEDARRAY',
@@ -39,6 +44,15 @@ reserved = {
     'contains' :'CONTAINS',
     'attach' : 'attach',
     #Fin Irving Macias
+    #Inicio Diego Martinez
+    'current' : 'CURRENT',
+    'SplPriorityQueue' : 'PRIORITYQUEUE',
+    'SplMaxHeap' : 'MAXHEAP',
+    'SplMinHeap' : 'MINHEAP',
+    'SplHeap' : 'HEAP',
+     #Fin Diego Martinez
+
+
     #More Words
     # Inicio Meiyin Chang
     'and':'AND',
@@ -46,16 +60,21 @@ reserved = {
     'echo':'ECHO',
     'class':'CLASS',
     'function':'FUNCTION',
-    'try':'TRY',
-    'catch':'CATCH',
-    'switch':'SWITCH', 
+    'try':'TRY', 
      # Fin Meiyin Chang 
      #Inicio Irving Macias
      'new' : 'NEW',
      'public' : 'PUBLIC',
      'return' : 'RETURN',
      'xor' : 'XOR',
-     #Fin Irving Macias     
+     #Fin Irving Macias  
+     #Inicio Diego Martinez
+    'catch':'CATCH',
+    'switch':'SWITCH',
+    'extends' : 'EXTENDS',
+    'static' : 'STATIC',
+    'declare' : 'DECLARE',
+     #Fin Diego Martinez   
     }
 
 
