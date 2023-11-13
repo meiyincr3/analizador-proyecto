@@ -1,0 +1,217 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    AND
+    ANDEQUAL
+    APOSTROPHE
+    ARRAY
+    ARROW
+    ASSINGMENT
+    ATTACH
+    BREAK
+    CASE
+    CATCH
+    CLASS
+    COLON
+    COMMA
+    COMMENTS
+    CONTAINS
+    CONTINUE
+    CURLYLEFTBRACKET
+    CURLYRIGHTBRACKET
+    CURRENT
+    DECLARE
+    DECREMENT
+    DEFAULT
+    DIE
+    DIVIDE
+    DO
+    DOT
+    DOUBLECOLON
+    ECHO
+    ELSE
+    ELSEIF
+    ENDFOR
+    ENDFOREACH
+    ENDIF
+    EQUALS
+    EXIT
+    EXTENDS
+    FALSE
+    FIXEDARRAY
+    FLOAT
+    FOR
+    FOREACH
+    FUNCTION
+    GOTO
+    GREATERTHAN
+    GREATERTHANEQ
+    HEAP
+    IDENTICAL
+    IDENTIFIER
+    IF
+    INCREMENT
+    INTDIVIDE
+    INTEGER
+    LBRACKET
+    LESSTHAN
+    LESSTHANEQ
+    LPAREN
+    MAXHEAP
+    MINHEAP
+    MINUS
+    MODULE
+    NAMEFUNCTION
+    NEW
+    NOTIDENTICAL
+    OBJECTSTORAGE
+    OR
+    PLUS
+    POP
+    POWERBY
+    PRIORITYQUEUE
+    PUBLIC
+    PUSH
+    QUEUE
+    RBRACKET
+    RETURN
+    RPAREN
+    SEMICOLON
+    SIMPLEARROW
+    STACK
+    STATIC
+    STRING
+    SWITCH
+    TIMES
+    TRUE
+    TRY
+    WHILE
+    XOR
+
+Grammar
+
+Rule 0     S' -> sentencia
+Rule 1     sentencia -> impresion
+Rule 2     sentencia -> asignacion
+Rule 3     sentencia -> mientras
+Rule 4     asignacion -> IDENTIFICADOR IGUAL valor
+Rule 5     impresion -> IMPRESION P_IZQ valores P_DER
+Rule 6     impresion -> IMPRESION P_IZQ P_DER
+Rule 7     mientras -> MIENTRAS P_IZQ VERDADERO P_DER DOSP sentencia
+Rule 8     valores -> valor
+Rule 9     valores -> valor COMA valores
+Rule 10    valor -> ENTERO
+Rule 11    valor -> FLOTANTE
+Rule 12    valor -> IDENTIFICADOR
+
+Terminals, with rules where they appear
+
+AND                  : 
+ANDEQUAL             : 
+APOSTROPHE           : 
+ARRAY                : 
+ARROW                : 
+ASSINGMENT           : 
+ATTACH               : 
+BREAK                : 
+CASE                 : 
+CATCH                : 
+CLASS                : 
+COLON                : 
+COMMA                : 
+COMMENTS             : 
+CONTAINS             : 
+CONTINUE             : 
+CURLYLEFTBRACKET     : 
+CURLYRIGHTBRACKET    : 
+CURRENT              : 
+DECLARE              : 
+DECREMENT            : 
+DEFAULT              : 
+DIE                  : 
+DIVIDE               : 
+DO                   : 
+DOT                  : 
+DOUBLECOLON          : 
+ECHO                 : 
+ELSE                 : 
+ELSEIF               : 
+ENDFOR               : 
+ENDFOREACH           : 
+ENDIF                : 
+EQUALS               : 
+EXIT                 : 
+EXTENDS              : 
+FALSE                : 
+FIXEDARRAY           : 
+FLOAT                : 
+FOR                  : 
+FOREACH              : 
+FUNCTION             : 
+GOTO                 : 
+GREATERTHAN          : 
+GREATERTHANEQ        : 
+HEAP                 : 
+IDENTICAL            : 
+IDENTIFIER           : 
+IF                   : 
+INCREMENT            : 
+INTDIVIDE            : 
+INTEGER              : 
+LBRACKET             : 
+LESSTHAN             : 
+LESSTHANEQ           : 
+LPAREN               : 
+MAXHEAP              : 
+MINHEAP              : 
+MINUS                : 
+MODULE               : 
+NAMEFUNCTION         : 
+NEW                  : 
+NOTIDENTICAL         : 
+OBJECTSTORAGE        : 
+OR                   : 
+PLUS                 : 
+POP                  : 
+POWERBY              : 
+PRIORITYQUEUE        : 
+PUBLIC               : 
+PUSH                 : 
+QUEUE                : 
+RBRACKET             : 
+RETURN               : 
+RPAREN               : 
+SEMICOLON            : 
+SIMPLEARROW          : 
+STACK                : 
+STATIC               : 
+STRING               : 
+SWITCH               : 
+TIMES                : 
+TRUE                 : 
+TRY                  : 
+WHILE                : 
+XOR                  : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+COMA                 : 9
+DOSP                 : 7
+ENTERO               : 10
+FLOTANTE             : 11
+IDENTIFICADOR        : 4 12
+IGUAL                : 4
+IMPRESION            : 5 6
+MIENTRAS             : 7
+P_DER                : 5 6 7
+P_IZQ                : 5 6 7
+VERDADERO            : 7
+asignacion           : 2
+impresion            : 1
+mientras             : 3
+sentencia            : 7 0
+valor                : 4 8 9
+valores              : 5 9
+
