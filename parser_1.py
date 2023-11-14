@@ -17,10 +17,10 @@ def p_print_sinvalor(p):
   "print : PRINT LBRACKET RBRACKET SEMICOLON"
 
 def p_input(p):
-  '''input: FGETS LBRACKET RBRACKET SEMICOLON'''
+  '''input : FGETS LBRACKET RBRACKET SEMICOLON'''
 
 def p_string_ele(p):
-  '''string_ele: STRING'''
+  '''string_ele : STRING'''
 
 def p_values(p):
   '''values : value
