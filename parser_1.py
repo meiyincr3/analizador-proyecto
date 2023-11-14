@@ -1,35 +1,38 @@
 import ply.yacc as sint
 from lexer import tokens
 
-def p_sentencia(p):
-  '''sentencia : impresion
-              | asignacion
+def p_sentence(p):
+  '''sentence : print
+              | assignment
               | mientras'''
 
-def p_asignacion(p):
-  "asignacion : IDENTIFICADOR IGUAL valor"
-
-def p_impresion(p):
-  "impresion : IMPRESION P_IZQ valores P_DER"
+# Inicio Meiyin Chang
+def p_assignment(p):
+  "assignment : DOLLARSIGN IDENTIFIER ASSINGMENT value"
 
 
-def p_impresion_sinvalor(p):
-  "impresion : IMPRESION P_IZQ P_DER"
-
-def p_mientras(p):
-  "mientras : MIENTRAS P_IZQ VERDADERO P_DER DOSP sentencia"
+def p_print(p):
+  "print : print LBRACKET values RBRACKET"
 
 
-def p_valores(p):
-  '''valores : valor
-          | valor COMA valores'''
+def p_print_sinvalor(p):
+  "print : print LBRACKET RBRACKET"
 
 
-def p_valor(p):
-  '''valor : ENTERO
-          | FLOTANTE
-          | IDENTIFICADOR'''
+def p_while(p):
+  "while : WHILE LBRACKET TRUE RBRACKET DOUBLECOLON sentence"
 
+
+def p_values(p):
+  '''values : value
+          | value COMMA values'''
+
+
+def p_value(p):
+  '''value : INTEGER
+          | FLOAT
+          | IDENTIFIER'''
+# Fin  Meiyin Chang
 
 def p_error(p):
   print("Error de sintaxis")
@@ -40,7 +43,7 @@ parser = sint.yacc()
 
 while True:
   try:
-    s = input('esp > ')
+    s = input('prueba > ')
   except EOFError:
     break
   if not s: continue

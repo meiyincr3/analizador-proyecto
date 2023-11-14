@@ -7,14 +7,12 @@ Unused terminals:
     APOSTROPHE
     ARRAY
     ARROW
-    ASSINGMENT
     ATTACH
     BREAK
     CASE
     CATCH
     CLASS
     COLON
-    COMMA
     COMMENTS
     CONTAINS
     CONTINUE
@@ -28,7 +26,6 @@ Unused terminals:
     DIVIDE
     DO
     DOT
-    DOUBLECOLON
     ECHO
     ELSE
     ELSEIF
@@ -40,7 +37,6 @@ Unused terminals:
     EXTENDS
     FALSE
     FIXEDARRAY
-    FLOAT
     FOR
     FOREACH
     FUNCTION
@@ -49,12 +45,9 @@ Unused terminals:
     GREATERTHANEQ
     HEAP
     IDENTICAL
-    IDENTIFIER
     IF
     INCREMENT
     INTDIVIDE
-    INTEGER
-    LBRACKET
     LESSTHAN
     LESSTHANEQ
     LPAREN
@@ -70,11 +63,11 @@ Unused terminals:
     PLUS
     POP
     POWERBY
+    PRINT
     PRIORITYQUEUE
     PUBLIC
     PUSH
     QUEUE
-    RBRACKET
     RETURN
     RPAREN
     SEMICOLON
@@ -84,26 +77,24 @@ Unused terminals:
     STRING
     SWITCH
     TIMES
-    TRUE
     TRY
-    WHILE
     XOR
 
 Grammar
 
-Rule 0     S' -> sentencia
-Rule 1     sentencia -> impresion
-Rule 2     sentencia -> asignacion
-Rule 3     sentencia -> mientras
-Rule 4     asignacion -> IDENTIFICADOR IGUAL valor
-Rule 5     impresion -> IMPRESION P_IZQ valores P_DER
-Rule 6     impresion -> IMPRESION P_IZQ P_DER
-Rule 7     mientras -> MIENTRAS P_IZQ VERDADERO P_DER DOSP sentencia
-Rule 8     valores -> valor
-Rule 9     valores -> valor COMA valores
-Rule 10    valor -> ENTERO
-Rule 11    valor -> FLOTANTE
-Rule 12    valor -> IDENTIFICADOR
+Rule 0     S' -> sentence
+Rule 1     sentence -> print
+Rule 2     sentence -> assignment
+Rule 3     sentence -> mientras
+Rule 4     assignment -> DOLLARSIGN IDENTIFIER ASSINGMENT value
+Rule 5     print -> print LBRACKET values RBRACKET
+Rule 6     print -> print LBRACKET RBRACKET
+Rule 7     while -> WHILE LBRACKET TRUE RBRACKET DOUBLECOLON sentence
+Rule 8     values -> value
+Rule 9     values -> value COMMA values
+Rule 10    value -> INTEGER
+Rule 11    value -> FLOAT
+Rule 12    value -> IDENTIFIER
 
 Terminals, with rules where they appear
 
@@ -112,14 +103,14 @@ ANDEQUAL             :
 APOSTROPHE           : 
 ARRAY                : 
 ARROW                : 
-ASSINGMENT           : 
+ASSINGMENT           : 4
 ATTACH               : 
 BREAK                : 
 CASE                 : 
 CATCH                : 
 CLASS                : 
 COLON                : 
-COMMA                : 
+COMMA                : 9
 COMMENTS             : 
 CONTAINS             : 
 CONTINUE             : 
@@ -132,8 +123,9 @@ DEFAULT              :
 DIE                  : 
 DIVIDE               : 
 DO                   : 
+DOLLARSIGN           : 4
 DOT                  : 
-DOUBLECOLON          : 
+DOUBLECOLON          : 7
 ECHO                 : 
 ELSE                 : 
 ELSEIF               : 
@@ -145,7 +137,7 @@ EXIT                 :
 EXTENDS              : 
 FALSE                : 
 FIXEDARRAY           : 
-FLOAT                : 
+FLOAT                : 11
 FOR                  : 
 FOREACH              : 
 FUNCTION             : 
@@ -154,12 +146,12 @@ GREATERTHAN          :
 GREATERTHANEQ        : 
 HEAP                 : 
 IDENTICAL            : 
-IDENTIFIER           : 
+IDENTIFIER           : 4 12
 IF                   : 
 INCREMENT            : 
 INTDIVIDE            : 
-INTEGER              : 
-LBRACKET             : 
+INTEGER              : 10
+LBRACKET             : 5 6 7
 LESSTHAN             : 
 LESSTHANEQ           : 
 LPAREN               : 
@@ -175,11 +167,12 @@ OR                   :
 PLUS                 : 
 POP                  : 
 POWERBY              : 
+PRINT                : 
 PRIORITYQUEUE        : 
 PUBLIC               : 
 PUSH                 : 
 QUEUE                : 
-RBRACKET             : 
+RBRACKET             : 5 6 7
 RETURN               : 
 RPAREN               : 
 SEMICOLON            : 
@@ -189,29 +182,19 @@ STATIC               :
 STRING               : 
 SWITCH               : 
 TIMES                : 
-TRUE                 : 
+TRUE                 : 7
 TRY                  : 
-WHILE                : 
+WHILE                : 7
 XOR                  : 
 error                : 
 
 Nonterminals, with rules where they appear
 
-COMA                 : 9
-DOSP                 : 7
-ENTERO               : 10
-FLOTANTE             : 11
-IDENTIFICADOR        : 4 12
-IGUAL                : 4
-IMPRESION            : 5 6
-MIENTRAS             : 7
-P_DER                : 5 6 7
-P_IZQ                : 5 6 7
-VERDADERO            : 7
-asignacion           : 2
-impresion            : 1
+assignment           : 2
 mientras             : 3
-sentencia            : 7 0
-valor                : 4 8 9
-valores              : 5 9
+print                : 1 5 6
+sentence             : 7 0
+value                : 4 8 9
+values               : 5 9
+while                : 
 

@@ -61,6 +61,9 @@ reserved = {
   'class':'CLASS',
   'function':'FUNCTION',
   'try':'TRY', 
+  'true':'TRUE',
+  'false':'FALSE',
+  'print' : 'PRINT',
   # Fin Meiyin Chang 
   #Inicio Irving Macias
   'new' : 'NEW',
@@ -109,6 +112,7 @@ tokens = (
   'APOSTROPHE',
   'COMMA',
   'DOT',
+  'DOLLARSIGN',
   #Fin Diego Martinez
 
   # Inicio Meiyin Chang
@@ -122,8 +126,6 @@ tokens = (
   'INTDIVIDE',
   'ARROW',
   'SIMPLEARROW',
-  'TRUE',
-  'FALSE',
   'STRING',
   'CURLYLEFTBRACKET',
   'CURLYRIGHTBRACKET',
@@ -160,6 +162,7 @@ t_DOT = r'\.'
 #Fin Diego Martinez
 
 # Inicio Meiyin Chang
+t_DOLLARSIGN = r'\$'
 t_GREATERTHAN = r'>'
 t_GREATERTHANEQ = r'>='
 t_LESSTHAN = r'<'
