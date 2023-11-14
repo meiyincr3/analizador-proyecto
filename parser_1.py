@@ -3,7 +3,9 @@ from lexer import tokens
 
 def p_sentence(p):
   '''sentence : print
-              | assignment'''
+              | assignment
+              | function
+              | return'''
 
 # Inicio Meiyin Chang
 def p_assignment(p):
@@ -11,7 +13,7 @@ def p_assignment(p):
 
 def p_print(p):
   '''print : PRINT LBRACKET values RBRACKET SEMICOLON
-        | PRINT string_ele SEMICOLON'''
+  '''
 
 def p_print_sinvalor(p):
   "print : PRINT LBRACKET RBRACKET SEMICOLON"
@@ -19,8 +21,6 @@ def p_print_sinvalor(p):
 def p_input(p):
   '''input : FGETS LBRACKET RBRACKET SEMICOLON'''
 
-def p_string_ele(p):
-  '''string_ele : STRING'''
 
 def p_values(p):
   '''values : value
@@ -34,6 +34,7 @@ def p_value(p):
           | FALSE'''
 # Fin  Meiyin Chang
 
+'''
 #Inicio Irving Macias
 def p_array(p):
     "ARRAY : NEW ARRAY LPAREN INTEGER RPAREN"
@@ -47,15 +48,41 @@ def p_stack(p):
 # Ejemplo: $_pila1 -> push(2);
 def p_op_stack(p):
   " op_stack : DOLLARSIGN STRING MINUS GREATERTHAN operad_stack"
-
+'''
 # push:añade, pop:elimina, count:cuenta, current:muestra el valor
-def p_operad_stack(p):
-  ''' operad_stack : PUSH LPAREN values PAREN_DER SEMICOLON 
-                  | POP LPAREN RPAREN SEMICOLON
-                  | COUNT LPAREN RPAREN SEMICOLON
-                  | CURRENT LPAREN RPAREN SEMICOLON
-  '''
+#def p_operad_stack(p):
+  #''' operad_stack : PUSH LPAREN values PAREN_DER SEMICOLON 
+        #          | POP LPAREN RPAREN SEMICOLON
+         #         | COUNT LPAREN RPAREN SEMICOLON
+          #        | CURRENT LPAREN RPAREN SEMICOLON
+  #'''
 #Fin Irving Macias
+
+
+#Inicio Diego Martinez
+
+#FUNCIONES
+#declaracion de una funcion
+def p_function_declaration(p):
+    "function : FUNCTION NAMEFUNCTION LPAREN parameter RPAREN CURLYLEFTBRACKET"
+
+#Declaracion de un parametro
+def p_parameter(p):
+   '''parameter : IDENTIFIER
+                | IDENTIFIER COMMA parameter
+'''
+
+#llamada a una funcion
+def p_function_call(p):
+    "function : NAMEFUNCTION LPAREN parameter RPAREN"
+
+# return 
+def p_return(p):
+  " return : RETURN IDENTIFIER SEMICOLON"
+
+
+#Fin de Diego Martinez
+
 
 def p_error(p):
   print("Error de sintaxis")

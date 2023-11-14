@@ -268,6 +268,9 @@ def t_ECHO(t):
     r'echo'
     return t
 
+def t_PRINT(t):
+    r'print'
+    return t
 
 #Fin Diego Martinez
 
