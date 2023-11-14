@@ -7,27 +7,31 @@ def p_sentence(p):
 
 # Inicio Meiyin Chang
 def p_assignment(p):
-  "assignment : IDENTIFIER ASSINGMENT value SEMICOLON"
-
+  "assignment : IDENTIFIER ASSINGMENT values SEMICOLON"
 
 def p_print(p):
   '''print : PRINT LBRACKET values RBRACKET SEMICOLON
-        | PRINT values SEMICOLON'''
-
+        | PRINT string_ele SEMICOLON'''
 
 def p_print_sinvalor(p):
-  "print : PRINT LBRACKET RBRACKET"
+  "print : PRINT LBRACKET RBRACKET SEMICOLON"
 
+def p_input(p):
+  '''input: FGETS LBRACKET RBRACKET SEMICOLON'''
+
+def p_string_ele(p):
+  '''string_ele: STRING'''
 
 def p_values(p):
   '''values : value
           | value COMMA values'''
 
-
 def p_value(p):
   '''value : INTEGER
           | FLOAT
-          | IDENTIFIER'''
+          | IDENTIFIER
+          | TRUE
+          | FALSE'''
 # Fin  Meiyin Chang
 
 def p_error(p):

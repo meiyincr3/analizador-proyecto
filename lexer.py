@@ -64,6 +64,7 @@ reserved = {
   'true':'TRUE',
   'false':'FALSE',
   'print' : 'PRINT',
+  'fgets' : 'FGETS',
   # Fin Meiyin Chang 
   #Inicio Irving Macias
   'new' : 'NEW',
@@ -80,7 +81,6 @@ reserved = {
   'namefunction' : 'NAMEFUNCTION',
   #Fin Diego Martinez   
 }
-
 
 # Secuencia de tokens
 tokens = (
@@ -199,7 +199,7 @@ def t_INTEGER(t):
 
 def t_STRING(t):
   r'"[^"]*"'
-  t.value = str(t.value)
+  t.type = reserved.get(t.value, "STRING")
   return t
 
 def t_IF(t):
@@ -209,24 +209,31 @@ def t_IF(t):
 def t_ELSEIF(t):
     r'elseif'
     return t
+
 def t_ELSE(t):
     r'else'
     return t
+
 def t_ARRAY(t):
     r'array'
     return t
+
 def t_SORT(t):
     r'sort'
     return t
+
 def t_WHILE(t):
     r'while'
     return t
+
 def t_FOR(t):
     r'for'
     return t
+
 def t_AND(t):
     r'(and|\&\&)'
     return t
+
 def t_OR(t):
     r'(or|\|\|)'
     return t
@@ -234,15 +241,19 @@ def t_OR(t):
 def t_TRY(t):
     r'try'
     return t
+
 def t_EXCEPTION(t):
     r'exception'
     return t
+
 def t_RETURN(t):
     r'return'
     return t
+
 def t_CATCH(t):
     r'catch'
     return t
+
 #Inicio Diego Martinez
 def t_FUNCTION(t):
     r'function'
