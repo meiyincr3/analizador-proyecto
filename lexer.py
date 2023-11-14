@@ -292,6 +292,14 @@ def t_FORMAT(t):
 def t_COMMENTS(t):
   r'(\/\/.*)|(\/\*(.|\s)*\*\/)|(\#.*)'
   return t
+  
+def t_NEW(t):
+    r'new'
+    return t
+
+def t_STACK(t):
+    r'stack'
+    return t
 #Fin Irving y Meiyin
 
 # Expresión regular para reconocer saltos de línea

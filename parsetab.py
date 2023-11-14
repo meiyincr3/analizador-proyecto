@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'AND ANDEQUAL APOSTROPHE ARRAY ARROW ASSINGMENT ATTACH BREAK CASE CATCH CLASS COLON COMMA COMMENTS CONTAINS CONTINUE COUNT CURLYLEFTBRACKET CURLYRIGHTBRACKET CURRENT DECLARE DECREMENT DEFAULT DIE DIVIDE DO DOLLARSIGN DOT DOUBLECOLON ECHO ELSE ELSEIF ENDFOR ENDFOREACH ENDIF EQUALS EXIT EXTENDS FALSE FGETS FIXEDARRAY FLOAT FOR FOREACH FUNCTION GOTO GREATERTHAN GREATERTHANEQ HEAP IDENTICAL IDENTIFIER IF INCREMENT INTDIVIDE INTEGER LBRACKET LESSTHAN LESSTHANEQ LPAREN MAXHEAP MINHEAP MINUS MODULE NAMEFUNCTION NEW NOTIDENTICAL OBJECTSTORAGE OR PLUS POP POWERBY PRINT PRINTF PRIORITYQUEUE PUBLIC PUSH QUEUE RBRACKET RETURN RPAREN SEMICOLON SIMPLEARROW STACK STATIC STRING SWITCH TIMES TRUE TRY WHILE XORsentence : print\n              | printf\n              | assignment\n              | input\n              | function\n              | returnassignment : IDENTIFIER ASSINGMENT values SEMICOLONprint : PRINT LPAREN values RPAREN SEMICOLON\n        | PRINT value SEMICOLONprint : PRINT LPAREN RPAREN SEMICOLONprintf : PRINTF LPAREN values RPAREN SEMICOLONinput : FGETS LPAREN values RPAREN SEMICOLONvalues : value\n          | value COMMA valuesvalue : INTEGER\n          | FLOAT\n          | IDENTIFIER\n          | TRUE\n          | FALSE\n          | STRINGfunction : FUNCTION NAMEFUNCTION LPAREN parameter RPAREN CURLYLEFTBRACKETparameter : IDENTIFIER\n                | IDENTIFIER COMMA parameter\nfunction : NAMEFUNCTION LPAREN parameter RPAREN return : RETURN IDENTIFIER SEMICOLON'
+_lr_signature = 'AND ANDEQUAL APOSTROPHE ARRAY ARROW ASSINGMENT ATTACH BREAK CASE CATCH CLASS COLON COMMA COMMENTS CONTAINS CONTINUE COUNT CURLYLEFTBRACKET CURLYRIGHTBRACKET CURRENT DECLARE DECREMENT DEFAULT DIE DIVIDE DO DOLLARSIGN DOT DOUBLECOLON ECHO ELSE ELSEIF ENDFOR ENDFOREACH ENDIF EQUALS EXIT EXTENDS FALSE FGETS FIXEDARRAY FLOAT FOR FOREACH FORMAT FUNCTION GOTO GREATERTHAN GREATERTHANEQ HEAP IDENTICAL IDENTIFIER IF INCREMENT INTDIVIDE INTEGER LBRACKET LESSTHAN LESSTHANEQ LPAREN MAXHEAP MINHEAP MINUS MODULE NAMEFUNCTION NEW NOTIDENTICAL OBJECTSTORAGE OR PLUS POP POWERBY PRINT PRINTF PRIORITYQUEUE PUBLIC PUSH QUEUE RBRACKET RETURN RPAREN SEMICOLON SIMPLEARROW STACK STATIC STRING SWITCH TIMES TRUE TRY WHILE XORsentence : print\n              | printf\n              | assignment\n              | input\n              | function\n              | return\n              | array\n              | stack\n              | op_stack\n              | operad_stack\n              assignment : IDENTIFIER ASSINGMENT values SEMICOLONprint : PRINT LPAREN values RPAREN SEMICOLON\n        | PRINT value SEMICOLONprint : PRINT LPAREN RPAREN SEMICOLONprintf : PRINTF LPAREN values RPAREN SEMICOLONinput : FGETS LPAREN values RPAREN SEMICOLONvalues : value\n          | value COMMA valuesvalue : INTEGER\n          | FLOAT\n          | IDENTIFIER\n          | TRUE\n          | FALSE\n          | STRINGarray : IDENTIFIER  ASSINGMENT NEW NAMEFUNCTION LPAREN INTEGER RPAREN SEMICOLON stack : NEW NAMEFUNCTION LPAREN RPAREN op_stack : IDENTIFIER MINUS GREATERTHAN operad_stack operad_stack : PUSH LPAREN values RPAREN SEMICOLON \n                  | POP LPAREN RPAREN SEMICOLON\n                  | COUNT LPAREN RPAREN SEMICOLON\n                  | CURRENT LPAREN RPAREN SEMICOLON\n  function : FUNCTION NAMEFUNCTION LPAREN parameter RPAREN CURLYLEFTBRACKETparameter : IDENTIFIER\n                | IDENTIFIER COMMA parameter\nfunction : NAMEFUNCTION LPAREN parameter RPAREN return : RETURN IDENTIFIER SEMICOLON'
     
-_lr_action_items = {'PRINT':([0,],[8,]),'PRINTF':([0,],[9,]),'IDENTIFIER':([0,8,14,15,23,24,25,27,36,42,48,],[10,19,28,19,19,19,19,38,38,19,38,]),'FGETS':([0,],[11,]),'FUNCTION':([0,],[12,]),'NAMEFUNCTION':([0,12,],[13,26,]),'RETURN':([0,],[14,]),'$end':([1,2,3,4,5,6,7,32,39,41,44,47,49,51,52,55,],[0,-1,-2,-3,-4,-5,-6,-9,-25,-10,-7,-24,-8,-11,-12,-21,]),'LPAREN':([8,9,11,13,26,],[15,23,25,27,36,]),'INTEGER':([8,15,23,24,25,42,],[17,17,17,17,17,17,]),'FLOAT':([8,15,23,24,25,42,],[18,18,18,18,18,18,]),'TRUE':([8,15,23,24,25,42,],[20,20,20,20,20,20,]),'FALSE':([8,15,23,24,25,42,],[21,21,21,21,21,21,]),'STRING':([8,15,23,24,25,42,],[22,22,22,22,22,22,]),'ASSINGMENT':([10,],[24,]),'RPAREN':([15,17,18,19,20,21,22,29,31,33,35,37,38,46,50,54,],[30,-15,-16,-17,-18,-19,-20,40,-13,43,45,47,-22,53,-14,-23,]),'SEMICOLON':([16,17,18,19,20,21,22,28,30,31,34,40,43,45,50,],[32,-15,-16,-17,-18,-19,-20,39,41,-13,44,49,51,52,-14,]),'COMMA':([17,18,19,20,21,22,31,38,],[-15,-16,-17,-18,-19,-20,42,48,]),'CURLYLEFTBRACKET':([53,],[55,]),}
+_lr_action_items = {'PRINT':([0,],[12,]),'PRINTF':([0,],[13,]),'IDENTIFIER':([0,12,18,24,32,33,35,37,40,53,64,72,],[14,28,38,28,28,28,28,55,28,55,28,55,]),'FGETS':([0,],[15,]),'FUNCTION':([0,],[16,]),'NAMEFUNCTION':([0,16,19,50,],[17,36,39,67,]),'RETURN':([0,],[18,]),'NEW':([0,33,],[19,50,]),'PUSH':([0,51,],[20,20,]),'POP':([0,51,],[21,21,]),'COUNT':([0,51,],[22,22,]),'CURRENT':([0,51,],[23,23,]),'$end':([1,2,3,4,5,6,7,8,9,10,11,47,56,63,66,68,71,73,75,76,77,78,80,82,85,87,89,],[0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-10,-13,-36,-14,-11,-27,-35,-26,-29,-30,-31,-12,-15,-16,-28,-32,-25,]),'LPAREN':([12,13,15,17,20,21,22,23,36,39,67,],[24,32,35,37,40,41,42,43,53,57,81,]),'INTEGER':([12,24,32,33,35,40,64,81,],[26,26,26,26,26,26,26,86,]),'FLOAT':([12,24,32,33,35,40,64,],[27,27,27,27,27,27,27,]),'TRUE':([12,24,32,33,35,40,64,],[29,29,29,29,29,29,29,]),'FALSE':([12,24,32,33,35,40,64,],[30,30,30,30,30,30,30,]),'STRING':([12,24,32,33,35,40,64,],[31,31,31,31,31,31,31,]),'ASSINGMENT':([14,],[33,]),'MINUS':([14,],[34,]),'RPAREN':([24,26,27,28,29,30,31,41,42,43,44,46,48,52,54,55,57,58,70,79,84,86,],[45,-19,-20,-21,-22,-23,-24,59,60,61,62,-17,65,69,71,-33,73,74,83,-18,-34,88,]),'SEMICOLON':([25,26,27,28,29,30,31,38,45,46,49,59,60,61,62,65,69,74,79,88,],[47,-19,-20,-21,-22,-23,-24,56,63,-17,66,75,76,77,78,80,82,85,-18,89,]),'COMMA':([26,27,28,29,30,31,46,55,],[-19,-20,-21,-22,-23,-24,64,72,]),'GREATERTHAN':([34,],[51,]),'CURLYLEFTBRACKET':([83,],[87,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'sentence':([0,],[1,]),'print':([0,],[2,]),'printf':([0,],[3,]),'assignment':([0,],[4,]),'input':([0,],[5,]),'function':([0,],[6,]),'return':([0,],[7,]),'value':([8,15,23,24,25,42,],[16,31,31,31,31,31,]),'values':([15,23,24,25,42,],[29,33,34,35,50,]),'parameter':([27,36,48,],[37,46,54,]),}
+_lr_goto_items = {'sentence':([0,],[1,]),'print':([0,],[2,]),'printf':([0,],[3,]),'assignment':([0,],[4,]),'input':([0,],[5,]),'function':([0,],[6,]),'return':([0,],[7,]),'array':([0,],[8,]),'stack':([0,],[9,]),'op_stack':([0,],[10,]),'operad_stack':([0,51,],[11,68,]),'value':([12,24,32,33,35,40,64,],[25,46,46,46,46,46,46,]),'values':([24,32,33,35,40,64,],[44,48,49,52,58,79,]),'parameter':([37,53,72,],[54,70,84,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -33,23 +33,34 @@ _lr_productions = [
   ('sentence -> input','sentence',1,'p_sentence','parser_1.py',8),
   ('sentence -> function','sentence',1,'p_sentence','parser_1.py',9),
   ('sentence -> return','sentence',1,'p_sentence','parser_1.py',10),
-  ('assignment -> IDENTIFIER ASSINGMENT values SEMICOLON','assignment',4,'p_assignment','parser_1.py',14),
-  ('print -> PRINT LPAREN values RPAREN SEMICOLON','print',5,'p_print','parser_1.py',17),
-  ('print -> PRINT value SEMICOLON','print',3,'p_print','parser_1.py',18),
-  ('print -> PRINT LPAREN RPAREN SEMICOLON','print',4,'p_print_sinvalor','parser_1.py',21),
-  ('printf -> PRINTF LPAREN values RPAREN SEMICOLON','printf',5,'p_printf_conformato','parser_1.py',24),
-  ('input -> FGETS LPAREN values RPAREN SEMICOLON','input',5,'p_input','parser_1.py',27),
-  ('values -> value','values',1,'p_values','parser_1.py',30),
-  ('values -> value COMMA values','values',3,'p_values','parser_1.py',31),
-  ('value -> INTEGER','value',1,'p_value','parser_1.py',34),
-  ('value -> FLOAT','value',1,'p_value','parser_1.py',35),
-  ('value -> IDENTIFIER','value',1,'p_value','parser_1.py',36),
-  ('value -> TRUE','value',1,'p_value','parser_1.py',37),
-  ('value -> FALSE','value',1,'p_value','parser_1.py',38),
-  ('value -> STRING','value',1,'p_value','parser_1.py',39),
-  ('function -> FUNCTION NAMEFUNCTION LPAREN parameter RPAREN CURLYLEFTBRACKET','function',6,'p_function_declaration','parser_1.py',72),
-  ('parameter -> IDENTIFIER','parameter',1,'p_parameter','parser_1.py',76),
-  ('parameter -> IDENTIFIER COMMA parameter','parameter',3,'p_parameter','parser_1.py',77),
-  ('function -> NAMEFUNCTION LPAREN parameter RPAREN','function',4,'p_function_call','parser_1.py',82),
-  ('return -> RETURN IDENTIFIER SEMICOLON','return',3,'p_return','parser_1.py',86),
+  ('sentence -> array','sentence',1,'p_sentence','parser_1.py',11),
+  ('sentence -> stack','sentence',1,'p_sentence','parser_1.py',12),
+  ('sentence -> op_stack','sentence',1,'p_sentence','parser_1.py',13),
+  ('sentence -> operad_stack','sentence',1,'p_sentence','parser_1.py',14),
+  ('assignment -> IDENTIFIER ASSINGMENT values SEMICOLON','assignment',4,'p_assignment','parser_1.py',19),
+  ('print -> PRINT LPAREN values RPAREN SEMICOLON','print',5,'p_print','parser_1.py',22),
+  ('print -> PRINT value SEMICOLON','print',3,'p_print','parser_1.py',23),
+  ('print -> PRINT LPAREN RPAREN SEMICOLON','print',4,'p_print_sinvalor','parser_1.py',26),
+  ('printf -> PRINTF LPAREN values RPAREN SEMICOLON','printf',5,'p_printf_conformato','parser_1.py',29),
+  ('input -> FGETS LPAREN values RPAREN SEMICOLON','input',5,'p_input','parser_1.py',32),
+  ('values -> value','values',1,'p_values','parser_1.py',35),
+  ('values -> value COMMA values','values',3,'p_values','parser_1.py',36),
+  ('value -> INTEGER','value',1,'p_value','parser_1.py',39),
+  ('value -> FLOAT','value',1,'p_value','parser_1.py',40),
+  ('value -> IDENTIFIER','value',1,'p_value','parser_1.py',41),
+  ('value -> TRUE','value',1,'p_value','parser_1.py',42),
+  ('value -> FALSE','value',1,'p_value','parser_1.py',43),
+  ('value -> STRING','value',1,'p_value','parser_1.py',44),
+  ('array -> IDENTIFIER ASSINGMENT NEW NAMEFUNCTION LPAREN INTEGER RPAREN SEMICOLON','array',8,'p_array','parser_1.py',50),
+  ('stack -> NEW NAMEFUNCTION LPAREN RPAREN','stack',4,'p_stack','parser_1.py',55),
+  ('op_stack -> IDENTIFIER MINUS GREATERTHAN operad_stack','op_stack',4,'p_op_stack','parser_1.py',60),
+  ('operad_stack -> PUSH LPAREN values RPAREN SEMICOLON','operad_stack',5,'p_operad_stack','parser_1.py',64),
+  ('operad_stack -> POP LPAREN RPAREN SEMICOLON','operad_stack',4,'p_operad_stack','parser_1.py',65),
+  ('operad_stack -> COUNT LPAREN RPAREN SEMICOLON','operad_stack',4,'p_operad_stack','parser_1.py',66),
+  ('operad_stack -> CURRENT LPAREN RPAREN SEMICOLON','operad_stack',4,'p_operad_stack','parser_1.py',67),
+  ('function -> FUNCTION NAMEFUNCTION LPAREN parameter RPAREN CURLYLEFTBRACKET','function',6,'p_function_declaration','parser_1.py',77),
+  ('parameter -> IDENTIFIER','parameter',1,'p_parameter','parser_1.py',81),
+  ('parameter -> IDENTIFIER COMMA parameter','parameter',3,'p_parameter','parser_1.py',82),
+  ('function -> NAMEFUNCTION LPAREN parameter RPAREN','function',4,'p_function_call','parser_1.py',87),
+  ('return -> RETURN IDENTIFIER SEMICOLON','return',3,'p_return','parser_1.py',91),
 ]
