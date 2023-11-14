@@ -4,6 +4,7 @@ from lexer import tokens
 def p_sentence(p):
   '''sentence : print
               | assignment
+              | input
               | function
               | return'''
 
@@ -12,15 +13,14 @@ def p_assignment(p):
   "assignment : IDENTIFIER ASSINGMENT values SEMICOLON"
 
 def p_print(p):
-  '''print : PRINT LBRACKET values RBRACKET SEMICOLON
-  '''
+  '''print : PRINT LPAREN values RPAREN SEMICOLON
+        | PRINT value SEMICOLON'''
 
 def p_print_sinvalor(p):
-  "print : PRINT LBRACKET RBRACKET SEMICOLON"
+  "print : PRINT LPAREN RPAREN SEMICOLON"
 
 def p_input(p):
-  '''input : FGETS LBRACKET RBRACKET SEMICOLON'''
-
+  '''input : FGETS LPAREN RPAREN SEMICOLON'''
 
 def p_values(p):
   '''values : value
@@ -31,7 +31,8 @@ def p_value(p):
           | FLOAT
           | IDENTIFIER
           | TRUE
-          | FALSE'''
+          | FALSE
+          | STRING'''
 # Fin  Meiyin Chang
 
 '''

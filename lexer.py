@@ -272,6 +272,11 @@ def t_PRINT(t):
     r'print'
     return t
 
+def t_FGETS(t):
+    r'fgets'
+    return t
+
+
 #Fin Diego Martinez
 
 #Inicio Irving y Meiyin
