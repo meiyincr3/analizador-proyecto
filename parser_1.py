@@ -34,6 +34,29 @@ def p_value(p):
           | FALSE'''
 # Fin  Meiyin Chang
 
+#Inicio Irving Macias
+def p_array(p):
+    "ARRAY : NEW ARRAY LPAREN INTEGER RPAREN"
+  
+
+#Stack methods
+def p_stack(p):
+  " STACK :  NEW STACK LPAREN RPAREN"
+
+# métodos de la pila
+# Ejemplo: $_pila1 -> push(2);
+def p_op_stack(p):
+  " op_stack : DOLLARSIGN STRING MINUS GREATERTHAN operad_stack"
+
+# push:añade, pop:elimina, count:cuenta, current:muestra el valor
+def p_operad_stack(p):
+  ''' operad_stack : PUSH LPAREN values PAREN_DER SEMICOLON 
+                  | POP LPAREN RPAREN SEMICOLON
+                  | COUNT LPAREN RPAREN SEMICOLON
+                  | CURRENT LPAREN RPAREN SEMICOLON
+  '''
+#Fin Irving Macias
+
 def p_error(p):
   print("Error de sintaxis")
 

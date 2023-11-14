@@ -19,6 +19,7 @@ reserved = {
   'continue' : 'CONTINUE',
   'goto' : 'GOTO',
   'endif' : 'ENDIF',
+  "count": "COUNT",
   #Fin Irving Macias
   #Inicio Diego Martinez
   'do': 'DO',
