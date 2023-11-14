@@ -3,24 +3,20 @@ from lexer import tokens
 
 def p_sentence(p):
   '''sentence : print
-              | assignment
-              | mientras'''
+              | assignment'''
 
 # Inicio Meiyin Chang
 def p_assignment(p):
-  "assignment : DOLLARSIGN IDENTIFIER ASSINGMENT value"
+  "assignment : IDENTIFIER ASSINGMENT value SEMICOLON"
 
 
 def p_print(p):
-  "print : print LBRACKET values RBRACKET"
+  '''print : PRINT LBRACKET values RBRACKET SEMICOLON
+        | PRINT values SEMICOLON'''
 
 
 def p_print_sinvalor(p):
-  "print : print LBRACKET RBRACKET"
-
-
-def p_while(p):
-  "while : WHILE LBRACKET TRUE RBRACKET DOUBLECOLON sentence"
+  "print : PRINT LBRACKET RBRACKET"
 
 
 def p_values(p):
@@ -36,7 +32,6 @@ def p_value(p):
 
 def p_error(p):
   print("Error de sintaxis")
-
 
 # Build the parser
 parser = sint.yacc()

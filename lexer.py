@@ -202,20 +202,6 @@ def t_STRING(t):
   t.value = str(t.value)
   return t
 
-def t_TRUE(t):
-    r'(True)'
-    t.type = reserved.get(t.value, 'TRUE')
-    t.value = bool(t.value)
-    return t
-
-def t_FALSE(t):
-    r'(False)'
-    t.type = reserved.get(t.value, 'FALSE')
-    t.value = bool(t.value)
-    return t
-
-
-
 def t_IF(t):
     r'if'
     return t

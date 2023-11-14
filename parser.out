@@ -25,7 +25,9 @@ Unused terminals:
     DIE
     DIVIDE
     DO
+    DOLLARSIGN
     DOT
+    DOUBLECOLON
     ECHO
     ELSE
     ELSEIF
@@ -63,21 +65,21 @@ Unused terminals:
     PLUS
     POP
     POWERBY
-    PRINT
     PRIORITYQUEUE
     PUBLIC
     PUSH
     QUEUE
     RETURN
     RPAREN
-    SEMICOLON
     SIMPLEARROW
     STACK
     STATIC
     STRING
     SWITCH
     TIMES
+    TRUE
     TRY
+    WHILE
     XOR
 
 Grammar
@@ -85,16 +87,15 @@ Grammar
 Rule 0     S' -> sentence
 Rule 1     sentence -> print
 Rule 2     sentence -> assignment
-Rule 3     sentence -> mientras
-Rule 4     assignment -> DOLLARSIGN IDENTIFIER ASSINGMENT value
-Rule 5     print -> print LBRACKET values RBRACKET
-Rule 6     print -> print LBRACKET RBRACKET
-Rule 7     while -> WHILE LBRACKET TRUE RBRACKET DOUBLECOLON sentence
-Rule 8     values -> value
-Rule 9     values -> value COMMA values
-Rule 10    value -> INTEGER
-Rule 11    value -> FLOAT
-Rule 12    value -> IDENTIFIER
+Rule 3     assignment -> IDENTIFIER ASSINGMENT value SEMICOLON
+Rule 4     print -> PRINT LBRACKET values RBRACKET SEMICOLON
+Rule 5     print -> PRINT values SEMICOLON
+Rule 6     print -> PRINT LBRACKET RBRACKET
+Rule 7     values -> value
+Rule 8     values -> value COMMA values
+Rule 9     value -> INTEGER
+Rule 10    value -> FLOAT
+Rule 11    value -> IDENTIFIER
 
 Terminals, with rules where they appear
 
@@ -103,14 +104,14 @@ ANDEQUAL             :
 APOSTROPHE           : 
 ARRAY                : 
 ARROW                : 
-ASSINGMENT           : 4
+ASSINGMENT           : 3
 ATTACH               : 
 BREAK                : 
 CASE                 : 
 CATCH                : 
 CLASS                : 
 COLON                : 
-COMMA                : 9
+COMMA                : 8
 COMMENTS             : 
 CONTAINS             : 
 CONTINUE             : 
@@ -123,9 +124,9 @@ DEFAULT              :
 DIE                  : 
 DIVIDE               : 
 DO                   : 
-DOLLARSIGN           : 4
+DOLLARSIGN           : 
 DOT                  : 
-DOUBLECOLON          : 7
+DOUBLECOLON          : 
 ECHO                 : 
 ELSE                 : 
 ELSEIF               : 
@@ -137,7 +138,7 @@ EXIT                 :
 EXTENDS              : 
 FALSE                : 
 FIXEDARRAY           : 
-FLOAT                : 11
+FLOAT                : 10
 FOR                  : 
 FOREACH              : 
 FUNCTION             : 
@@ -146,12 +147,12 @@ GREATERTHAN          :
 GREATERTHANEQ        : 
 HEAP                 : 
 IDENTICAL            : 
-IDENTIFIER           : 4 12
+IDENTIFIER           : 3 11
 IF                   : 
 INCREMENT            : 
 INTDIVIDE            : 
-INTEGER              : 10
-LBRACKET             : 5 6 7
+INTEGER              : 9
+LBRACKET             : 4 6
 LESSTHAN             : 
 LESSTHANEQ           : 
 LPAREN               : 
@@ -167,34 +168,244 @@ OR                   :
 PLUS                 : 
 POP                  : 
 POWERBY              : 
-PRINT                : 
+PRINT                : 4 5 6
 PRIORITYQUEUE        : 
 PUBLIC               : 
 PUSH                 : 
 QUEUE                : 
-RBRACKET             : 5 6 7
+RBRACKET             : 4 6
 RETURN               : 
 RPAREN               : 
-SEMICOLON            : 
+SEMICOLON            : 3 4 5
 SIMPLEARROW          : 
 STACK                : 
 STATIC               : 
 STRING               : 
 SWITCH               : 
 TIMES                : 
-TRUE                 : 7
+TRUE                 : 
 TRY                  : 
-WHILE                : 7
+WHILE                : 
 XOR                  : 
 error                : 
 
 Nonterminals, with rules where they appear
 
 assignment           : 2
-mientras             : 3
-print                : 1 5 6
-sentence             : 7 0
-value                : 4 8 9
-values               : 5 9
-while                : 
+print                : 1
+sentence             : 0
+value                : 3 7 8
+values               : 4 5 8
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . sentence
+    (1) sentence -> . print
+    (2) sentence -> . assignment
+    (4) print -> . PRINT LBRACKET values RBRACKET SEMICOLON
+    (5) print -> . PRINT values SEMICOLON
+    (6) print -> . PRINT LBRACKET RBRACKET
+    (3) assignment -> . IDENTIFIER ASSINGMENT value SEMICOLON
+
+    PRINT           shift and go to state 4
+    IDENTIFIER      shift and go to state 5
+
+    sentence                       shift and go to state 1
+    print                          shift and go to state 2
+    assignment                     shift and go to state 3
+
+state 1
+
+    (0) S' -> sentence .
+
+
+
+state 2
+
+    (1) sentence -> print .
+
+    $end            reduce using rule 1 (sentence -> print .)
+
+
+state 3
+
+    (2) sentence -> assignment .
+
+    $end            reduce using rule 2 (sentence -> assignment .)
+
+
+state 4
+
+    (4) print -> PRINT . LBRACKET values RBRACKET SEMICOLON
+    (5) print -> PRINT . values SEMICOLON
+    (6) print -> PRINT . LBRACKET RBRACKET
+    (7) values -> . value
+    (8) values -> . value COMMA values
+    (9) value -> . INTEGER
+    (10) value -> . FLOAT
+    (11) value -> . IDENTIFIER
+
+    LBRACKET        shift and go to state 6
+    INTEGER         shift and go to state 9
+    FLOAT           shift and go to state 10
+    IDENTIFIER      shift and go to state 11
+
+    values                         shift and go to state 7
+    value                          shift and go to state 8
+
+state 5
+
+    (3) assignment -> IDENTIFIER . ASSINGMENT value SEMICOLON
+
+    ASSINGMENT      shift and go to state 12
+
+
+state 6
+
+    (4) print -> PRINT LBRACKET . values RBRACKET SEMICOLON
+    (6) print -> PRINT LBRACKET . RBRACKET
+    (7) values -> . value
+    (8) values -> . value COMMA values
+    (9) value -> . INTEGER
+    (10) value -> . FLOAT
+    (11) value -> . IDENTIFIER
+
+    RBRACKET        shift and go to state 14
+    INTEGER         shift and go to state 9
+    FLOAT           shift and go to state 10
+    IDENTIFIER      shift and go to state 11
+
+    values                         shift and go to state 13
+    value                          shift and go to state 8
+
+state 7
+
+    (5) print -> PRINT values . SEMICOLON
+
+    SEMICOLON       shift and go to state 15
+
+
+state 8
+
+    (7) values -> value .
+    (8) values -> value . COMMA values
+
+    SEMICOLON       reduce using rule 7 (values -> value .)
+    RBRACKET        reduce using rule 7 (values -> value .)
+    COMMA           shift and go to state 16
+
+
+state 9
+
+    (9) value -> INTEGER .
+
+    COMMA           reduce using rule 9 (value -> INTEGER .)
+    SEMICOLON       reduce using rule 9 (value -> INTEGER .)
+    RBRACKET        reduce using rule 9 (value -> INTEGER .)
+
+
+state 10
+
+    (10) value -> FLOAT .
+
+    COMMA           reduce using rule 10 (value -> FLOAT .)
+    SEMICOLON       reduce using rule 10 (value -> FLOAT .)
+    RBRACKET        reduce using rule 10 (value -> FLOAT .)
+
+
+state 11
+
+    (11) value -> IDENTIFIER .
+
+    COMMA           reduce using rule 11 (value -> IDENTIFIER .)
+    SEMICOLON       reduce using rule 11 (value -> IDENTIFIER .)
+    RBRACKET        reduce using rule 11 (value -> IDENTIFIER .)
+
+
+state 12
+
+    (3) assignment -> IDENTIFIER ASSINGMENT . value SEMICOLON
+    (9) value -> . INTEGER
+    (10) value -> . FLOAT
+    (11) value -> . IDENTIFIER
+
+    INTEGER         shift and go to state 9
+    FLOAT           shift and go to state 10
+    IDENTIFIER      shift and go to state 11
+
+    value                          shift and go to state 17
+
+state 13
+
+    (4) print -> PRINT LBRACKET values . RBRACKET SEMICOLON
+
+    RBRACKET        shift and go to state 18
+
+
+state 14
+
+    (6) print -> PRINT LBRACKET RBRACKET .
+
+    $end            reduce using rule 6 (print -> PRINT LBRACKET RBRACKET .)
+
+
+state 15
+
+    (5) print -> PRINT values SEMICOLON .
+
+    $end            reduce using rule 5 (print -> PRINT values SEMICOLON .)
+
+
+state 16
+
+    (8) values -> value COMMA . values
+    (7) values -> . value
+    (8) values -> . value COMMA values
+    (9) value -> . INTEGER
+    (10) value -> . FLOAT
+    (11) value -> . IDENTIFIER
+
+    INTEGER         shift and go to state 9
+    FLOAT           shift and go to state 10
+    IDENTIFIER      shift and go to state 11
+
+    value                          shift and go to state 8
+    values                         shift and go to state 19
+
+state 17
+
+    (3) assignment -> IDENTIFIER ASSINGMENT value . SEMICOLON
+
+    SEMICOLON       shift and go to state 20
+
+
+state 18
+
+    (4) print -> PRINT LBRACKET values RBRACKET . SEMICOLON
+
+    SEMICOLON       shift and go to state 21
+
+
+state 19
+
+    (8) values -> value COMMA values .
+
+    SEMICOLON       reduce using rule 8 (values -> value COMMA values .)
+    RBRACKET        reduce using rule 8 (values -> value COMMA values .)
+
+
+state 20
+
+    (3) assignment -> IDENTIFIER ASSINGMENT value SEMICOLON .
+
+    $end            reduce using rule 3 (assignment -> IDENTIFIER ASSINGMENT value SEMICOLON .)
+
+
+state 21
+
+    (4) print -> PRINT LBRACKET values RBRACKET SEMICOLON .
+
+    $end            reduce using rule 4 (print -> PRINT LBRACKET values RBRACKET SEMICOLON .)
 
