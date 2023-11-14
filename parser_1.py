@@ -3,6 +3,7 @@ from lexer import tokens
 
 def p_sentence(p):
   '''sentence : print
+              | printf
               | assignment
               | input
               | function
@@ -19,8 +20,11 @@ def p_print(p):
 def p_print_sinvalor(p):
   "print : PRINT LPAREN RPAREN SEMICOLON"
 
+def p_printf_conformato(p):
+  "printf : PRINTF LPAREN values RPAREN SEMICOLON"
+
 def p_input(p):
-  '''input : FGETS LPAREN RPAREN SEMICOLON'''
+  '''input : FGETS LPAREN values RPAREN SEMICOLON'''
 
 def p_values(p):
   '''values : value
@@ -33,6 +37,7 @@ def p_value(p):
           | TRUE
           | FALSE
           | STRING'''
+  
 # Fin  Meiyin Chang
 
 '''

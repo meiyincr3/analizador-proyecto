@@ -80,28 +80,30 @@ Grammar
 
 Rule 0     S' -> sentence
 Rule 1     sentence -> print
-Rule 2     sentence -> assignment
-Rule 3     sentence -> input
-Rule 4     sentence -> function
-Rule 5     sentence -> return
-Rule 6     assignment -> IDENTIFIER ASSINGMENT values SEMICOLON
-Rule 7     print -> PRINT LPAREN values RPAREN SEMICOLON
-Rule 8     print -> PRINT value SEMICOLON
-Rule 9     print -> PRINT LPAREN RPAREN SEMICOLON
-Rule 10    input -> FGETS LPAREN RPAREN SEMICOLON
-Rule 11    values -> value
-Rule 12    values -> value COMMA values
-Rule 13    value -> INTEGER
-Rule 14    value -> FLOAT
-Rule 15    value -> IDENTIFIER
-Rule 16    value -> TRUE
-Rule 17    value -> FALSE
-Rule 18    value -> STRING
-Rule 19    function -> FUNCTION NAMEFUNCTION LPAREN parameter RPAREN CURLYLEFTBRACKET
-Rule 20    parameter -> IDENTIFIER
-Rule 21    parameter -> IDENTIFIER COMMA parameter
-Rule 22    function -> NAMEFUNCTION LPAREN parameter RPAREN
-Rule 23    return -> RETURN IDENTIFIER SEMICOLON
+Rule 2     sentence -> printf
+Rule 3     sentence -> assignment
+Rule 4     sentence -> input
+Rule 5     sentence -> function
+Rule 6     sentence -> return
+Rule 7     assignment -> IDENTIFIER ASSINGMENT values SEMICOLON
+Rule 8     print -> PRINT LPAREN values RPAREN SEMICOLON
+Rule 9     print -> PRINT value SEMICOLON
+Rule 10    print -> PRINT LPAREN RPAREN SEMICOLON
+Rule 11    printf -> PRINTF LPAREN values RPAREN SEMICOLON
+Rule 12    input -> FGETS LPAREN values RPAREN SEMICOLON
+Rule 13    values -> value
+Rule 14    values -> value COMMA values
+Rule 15    value -> INTEGER
+Rule 16    value -> FLOAT
+Rule 17    value -> IDENTIFIER
+Rule 18    value -> TRUE
+Rule 19    value -> FALSE
+Rule 20    value -> STRING
+Rule 21    function -> FUNCTION NAMEFUNCTION LPAREN parameter RPAREN CURLYLEFTBRACKET
+Rule 22    parameter -> IDENTIFIER
+Rule 23    parameter -> IDENTIFIER COMMA parameter
+Rule 24    function -> NAMEFUNCTION LPAREN parameter RPAREN
+Rule 25    return -> RETURN IDENTIFIER SEMICOLON
 
 Terminals, with rules where they appear
 
@@ -110,19 +112,19 @@ ANDEQUAL             :
 APOSTROPHE           : 
 ARRAY                : 
 ARROW                : 
-ASSINGMENT           : 6
+ASSINGMENT           : 7
 ATTACH               : 
 BREAK                : 
 CASE                 : 
 CATCH                : 
 CLASS                : 
 COLON                : 
-COMMA                : 12 21
+COMMA                : 14 23
 COMMENTS             : 
 CONTAINS             : 
 CONTINUE             : 
 COUNT                : 
-CURLYLEFTBRACKET     : 19
+CURLYLEFTBRACKET     : 21
 CURLYRIGHTBRACKET    : 
 CURRENT              : 
 DECLARE              : 
@@ -143,32 +145,32 @@ ENDIF                :
 EQUALS               : 
 EXIT                 : 
 EXTENDS              : 
-FALSE                : 17
-FGETS                : 10
+FALSE                : 19
+FGETS                : 12
 FIXEDARRAY           : 
-FLOAT                : 14
+FLOAT                : 16
 FOR                  : 
 FOREACH              : 
-FUNCTION             : 19
+FUNCTION             : 21
 GOTO                 : 
 GREATERTHAN          : 
 GREATERTHANEQ        : 
 HEAP                 : 
 IDENTICAL            : 
-IDENTIFIER           : 6 15 20 21 23
+IDENTIFIER           : 7 17 22 23 25
 IF                   : 
 INCREMENT            : 
 INTDIVIDE            : 
-INTEGER              : 13
+INTEGER              : 15
 LBRACKET             : 
 LESSTHAN             : 
 LESSTHANEQ           : 
-LPAREN               : 7 9 10 19 22
+LPAREN               : 8 10 11 12 21 24
 MAXHEAP              : 
 MINHEAP              : 
 MINUS                : 
 MODULE               : 
-NAMEFUNCTION         : 19 22
+NAMEFUNCTION         : 21 24
 NEW                  : 
 NOTIDENTICAL         : 
 OBJECTSTORAGE        : 
@@ -176,22 +178,23 @@ OR                   :
 PLUS                 : 
 POP                  : 
 POWERBY              : 
-PRINT                : 7 8 9
+PRINT                : 8 9 10
+PRINTF               : 11
 PRIORITYQUEUE        : 
 PUBLIC               : 
 PUSH                 : 
 QUEUE                : 
 RBRACKET             : 
-RETURN               : 23
-RPAREN               : 7 9 10 19 22
-SEMICOLON            : 6 7 8 9 10 23
+RETURN               : 25
+RPAREN               : 8 10 11 12 21 24
+SEMICOLON            : 7 8 9 10 11 12 25
 SIMPLEARROW          : 
 STACK                : 
 STATIC               : 
-STRING               : 18
+STRING               : 20
 SWITCH               : 
 TIMES                : 
-TRUE                 : 16
+TRUE                 : 18
 TRY                  : 
 WHILE                : 
 XOR                  : 
@@ -199,15 +202,16 @@ error                :
 
 Nonterminals, with rules where they appear
 
-assignment           : 2
-function             : 4
-input                : 3
-parameter            : 19 21 22
+assignment           : 3
+function             : 5
+input                : 4
+parameter            : 21 23 24
 print                : 1
-return               : 5
+printf               : 2
+return               : 6
 sentence             : 0
-value                : 8 11 12
-values               : 6 7 12
+value                : 9 13 14
+values               : 7 8 11 12 14
 
 Parsing method: LALR
 
@@ -215,32 +219,36 @@ state 0
 
     (0) S' -> . sentence
     (1) sentence -> . print
-    (2) sentence -> . assignment
-    (3) sentence -> . input
-    (4) sentence -> . function
-    (5) sentence -> . return
-    (7) print -> . PRINT LPAREN values RPAREN SEMICOLON
-    (8) print -> . PRINT value SEMICOLON
-    (9) print -> . PRINT LPAREN RPAREN SEMICOLON
-    (6) assignment -> . IDENTIFIER ASSINGMENT values SEMICOLON
-    (10) input -> . FGETS LPAREN RPAREN SEMICOLON
-    (19) function -> . FUNCTION NAMEFUNCTION LPAREN parameter RPAREN CURLYLEFTBRACKET
-    (22) function -> . NAMEFUNCTION LPAREN parameter RPAREN
-    (23) return -> . RETURN IDENTIFIER SEMICOLON
+    (2) sentence -> . printf
+    (3) sentence -> . assignment
+    (4) sentence -> . input
+    (5) sentence -> . function
+    (6) sentence -> . return
+    (8) print -> . PRINT LPAREN values RPAREN SEMICOLON
+    (9) print -> . PRINT value SEMICOLON
+    (10) print -> . PRINT LPAREN RPAREN SEMICOLON
+    (11) printf -> . PRINTF LPAREN values RPAREN SEMICOLON
+    (7) assignment -> . IDENTIFIER ASSINGMENT values SEMICOLON
+    (12) input -> . FGETS LPAREN values RPAREN SEMICOLON
+    (21) function -> . FUNCTION NAMEFUNCTION LPAREN parameter RPAREN CURLYLEFTBRACKET
+    (24) function -> . NAMEFUNCTION LPAREN parameter RPAREN
+    (25) return -> . RETURN IDENTIFIER SEMICOLON
 
-    PRINT           shift and go to state 7
-    IDENTIFIER      shift and go to state 8
-    FGETS           shift and go to state 9
-    FUNCTION        shift and go to state 10
-    NAMEFUNCTION    shift and go to state 11
-    RETURN          shift and go to state 12
+    PRINT           shift and go to state 8
+    PRINTF          shift and go to state 9
+    IDENTIFIER      shift and go to state 10
+    FGETS           shift and go to state 11
+    FUNCTION        shift and go to state 12
+    NAMEFUNCTION    shift and go to state 13
+    RETURN          shift and go to state 14
 
     sentence                       shift and go to state 1
     print                          shift and go to state 2
-    assignment                     shift and go to state 3
-    input                          shift and go to state 4
-    function                       shift and go to state 5
-    return                         shift and go to state 6
+    printf                         shift and go to state 3
+    assignment                     shift and go to state 4
+    input                          shift and go to state 5
+    function                       shift and go to state 6
+    return                         shift and go to state 7
 
 state 1
 
@@ -257,411 +265,490 @@ state 2
 
 state 3
 
-    (2) sentence -> assignment .
+    (2) sentence -> printf .
 
-    $end            reduce using rule 2 (sentence -> assignment .)
+    $end            reduce using rule 2 (sentence -> printf .)
 
 
 state 4
 
-    (3) sentence -> input .
+    (3) sentence -> assignment .
 
-    $end            reduce using rule 3 (sentence -> input .)
+    $end            reduce using rule 3 (sentence -> assignment .)
 
 
 state 5
 
-    (4) sentence -> function .
+    (4) sentence -> input .
 
-    $end            reduce using rule 4 (sentence -> function .)
+    $end            reduce using rule 4 (sentence -> input .)
 
 
 state 6
 
-    (5) sentence -> return .
+    (5) sentence -> function .
 
-    $end            reduce using rule 5 (sentence -> return .)
+    $end            reduce using rule 5 (sentence -> function .)
 
 
 state 7
 
-    (7) print -> PRINT . LPAREN values RPAREN SEMICOLON
-    (8) print -> PRINT . value SEMICOLON
-    (9) print -> PRINT . LPAREN RPAREN SEMICOLON
-    (13) value -> . INTEGER
-    (14) value -> . FLOAT
-    (15) value -> . IDENTIFIER
-    (16) value -> . TRUE
-    (17) value -> . FALSE
-    (18) value -> . STRING
+    (6) sentence -> return .
 
-    LPAREN          shift and go to state 13
-    INTEGER         shift and go to state 15
-    FLOAT           shift and go to state 16
-    IDENTIFIER      shift and go to state 17
-    TRUE            shift and go to state 18
-    FALSE           shift and go to state 19
-    STRING          shift and go to state 20
+    $end            reduce using rule 6 (sentence -> return .)
 
-    value                          shift and go to state 14
 
 state 8
 
-    (6) assignment -> IDENTIFIER . ASSINGMENT values SEMICOLON
+    (8) print -> PRINT . LPAREN values RPAREN SEMICOLON
+    (9) print -> PRINT . value SEMICOLON
+    (10) print -> PRINT . LPAREN RPAREN SEMICOLON
+    (15) value -> . INTEGER
+    (16) value -> . FLOAT
+    (17) value -> . IDENTIFIER
+    (18) value -> . TRUE
+    (19) value -> . FALSE
+    (20) value -> . STRING
 
-    ASSINGMENT      shift and go to state 21
+    LPAREN          shift and go to state 15
+    INTEGER         shift and go to state 17
+    FLOAT           shift and go to state 18
+    IDENTIFIER      shift and go to state 19
+    TRUE            shift and go to state 20
+    FALSE           shift and go to state 21
+    STRING          shift and go to state 22
 
+    value                          shift and go to state 16
 
 state 9
 
-    (10) input -> FGETS . LPAREN RPAREN SEMICOLON
+    (11) printf -> PRINTF . LPAREN values RPAREN SEMICOLON
 
-    LPAREN          shift and go to state 22
+    LPAREN          shift and go to state 23
 
 
 state 10
 
-    (19) function -> FUNCTION . NAMEFUNCTION LPAREN parameter RPAREN CURLYLEFTBRACKET
+    (7) assignment -> IDENTIFIER . ASSINGMENT values SEMICOLON
 
-    NAMEFUNCTION    shift and go to state 23
+    ASSINGMENT      shift and go to state 24
 
 
 state 11
 
-    (22) function -> NAMEFUNCTION . LPAREN parameter RPAREN
+    (12) input -> FGETS . LPAREN values RPAREN SEMICOLON
 
-    LPAREN          shift and go to state 24
+    LPAREN          shift and go to state 25
 
 
 state 12
 
-    (23) return -> RETURN . IDENTIFIER SEMICOLON
+    (21) function -> FUNCTION . NAMEFUNCTION LPAREN parameter RPAREN CURLYLEFTBRACKET
 
-    IDENTIFIER      shift and go to state 25
+    NAMEFUNCTION    shift and go to state 26
 
 
 state 13
 
-    (7) print -> PRINT LPAREN . values RPAREN SEMICOLON
-    (9) print -> PRINT LPAREN . RPAREN SEMICOLON
-    (11) values -> . value
-    (12) values -> . value COMMA values
-    (13) value -> . INTEGER
-    (14) value -> . FLOAT
-    (15) value -> . IDENTIFIER
-    (16) value -> . TRUE
-    (17) value -> . FALSE
-    (18) value -> . STRING
+    (24) function -> NAMEFUNCTION . LPAREN parameter RPAREN
 
-    RPAREN          shift and go to state 27
-    INTEGER         shift and go to state 15
-    FLOAT           shift and go to state 16
-    IDENTIFIER      shift and go to state 17
-    TRUE            shift and go to state 18
-    FALSE           shift and go to state 19
-    STRING          shift and go to state 20
+    LPAREN          shift and go to state 27
 
-    values                         shift and go to state 26
-    value                          shift and go to state 28
 
 state 14
 
-    (8) print -> PRINT value . SEMICOLON
+    (25) return -> RETURN . IDENTIFIER SEMICOLON
 
-    SEMICOLON       shift and go to state 29
+    IDENTIFIER      shift and go to state 28
 
 
 state 15
 
-    (13) value -> INTEGER .
+    (8) print -> PRINT LPAREN . values RPAREN SEMICOLON
+    (10) print -> PRINT LPAREN . RPAREN SEMICOLON
+    (13) values -> . value
+    (14) values -> . value COMMA values
+    (15) value -> . INTEGER
+    (16) value -> . FLOAT
+    (17) value -> . IDENTIFIER
+    (18) value -> . TRUE
+    (19) value -> . FALSE
+    (20) value -> . STRING
 
-    SEMICOLON       reduce using rule 13 (value -> INTEGER .)
-    COMMA           reduce using rule 13 (value -> INTEGER .)
-    RPAREN          reduce using rule 13 (value -> INTEGER .)
+    RPAREN          shift and go to state 30
+    INTEGER         shift and go to state 17
+    FLOAT           shift and go to state 18
+    IDENTIFIER      shift and go to state 19
+    TRUE            shift and go to state 20
+    FALSE           shift and go to state 21
+    STRING          shift and go to state 22
 
+    values                         shift and go to state 29
+    value                          shift and go to state 31
 
 state 16
 
-    (14) value -> FLOAT .
+    (9) print -> PRINT value . SEMICOLON
 
-    SEMICOLON       reduce using rule 14 (value -> FLOAT .)
-    COMMA           reduce using rule 14 (value -> FLOAT .)
-    RPAREN          reduce using rule 14 (value -> FLOAT .)
+    SEMICOLON       shift and go to state 32
 
 
 state 17
 
-    (15) value -> IDENTIFIER .
+    (15) value -> INTEGER .
 
-    SEMICOLON       reduce using rule 15 (value -> IDENTIFIER .)
-    COMMA           reduce using rule 15 (value -> IDENTIFIER .)
-    RPAREN          reduce using rule 15 (value -> IDENTIFIER .)
+    SEMICOLON       reduce using rule 15 (value -> INTEGER .)
+    COMMA           reduce using rule 15 (value -> INTEGER .)
+    RPAREN          reduce using rule 15 (value -> INTEGER .)
 
 
 state 18
 
-    (16) value -> TRUE .
+    (16) value -> FLOAT .
 
-    SEMICOLON       reduce using rule 16 (value -> TRUE .)
-    COMMA           reduce using rule 16 (value -> TRUE .)
-    RPAREN          reduce using rule 16 (value -> TRUE .)
+    SEMICOLON       reduce using rule 16 (value -> FLOAT .)
+    COMMA           reduce using rule 16 (value -> FLOAT .)
+    RPAREN          reduce using rule 16 (value -> FLOAT .)
 
 
 state 19
 
-    (17) value -> FALSE .
+    (17) value -> IDENTIFIER .
 
-    SEMICOLON       reduce using rule 17 (value -> FALSE .)
-    COMMA           reduce using rule 17 (value -> FALSE .)
-    RPAREN          reduce using rule 17 (value -> FALSE .)
+    SEMICOLON       reduce using rule 17 (value -> IDENTIFIER .)
+    COMMA           reduce using rule 17 (value -> IDENTIFIER .)
+    RPAREN          reduce using rule 17 (value -> IDENTIFIER .)
 
 
 state 20
 
-    (18) value -> STRING .
+    (18) value -> TRUE .
 
-    SEMICOLON       reduce using rule 18 (value -> STRING .)
-    COMMA           reduce using rule 18 (value -> STRING .)
-    RPAREN          reduce using rule 18 (value -> STRING .)
+    SEMICOLON       reduce using rule 18 (value -> TRUE .)
+    COMMA           reduce using rule 18 (value -> TRUE .)
+    RPAREN          reduce using rule 18 (value -> TRUE .)
 
 
 state 21
 
-    (6) assignment -> IDENTIFIER ASSINGMENT . values SEMICOLON
-    (11) values -> . value
-    (12) values -> . value COMMA values
-    (13) value -> . INTEGER
-    (14) value -> . FLOAT
-    (15) value -> . IDENTIFIER
-    (16) value -> . TRUE
-    (17) value -> . FALSE
-    (18) value -> . STRING
+    (19) value -> FALSE .
 
-    INTEGER         shift and go to state 15
-    FLOAT           shift and go to state 16
-    IDENTIFIER      shift and go to state 17
-    TRUE            shift and go to state 18
-    FALSE           shift and go to state 19
-    STRING          shift and go to state 20
+    SEMICOLON       reduce using rule 19 (value -> FALSE .)
+    COMMA           reduce using rule 19 (value -> FALSE .)
+    RPAREN          reduce using rule 19 (value -> FALSE .)
 
-    values                         shift and go to state 30
-    value                          shift and go to state 28
 
 state 22
 
-    (10) input -> FGETS LPAREN . RPAREN SEMICOLON
+    (20) value -> STRING .
 
-    RPAREN          shift and go to state 31
+    SEMICOLON       reduce using rule 20 (value -> STRING .)
+    COMMA           reduce using rule 20 (value -> STRING .)
+    RPAREN          reduce using rule 20 (value -> STRING .)
 
 
 state 23
 
-    (19) function -> FUNCTION NAMEFUNCTION . LPAREN parameter RPAREN CURLYLEFTBRACKET
+    (11) printf -> PRINTF LPAREN . values RPAREN SEMICOLON
+    (13) values -> . value
+    (14) values -> . value COMMA values
+    (15) value -> . INTEGER
+    (16) value -> . FLOAT
+    (17) value -> . IDENTIFIER
+    (18) value -> . TRUE
+    (19) value -> . FALSE
+    (20) value -> . STRING
 
-    LPAREN          shift and go to state 32
+    INTEGER         shift and go to state 17
+    FLOAT           shift and go to state 18
+    IDENTIFIER      shift and go to state 19
+    TRUE            shift and go to state 20
+    FALSE           shift and go to state 21
+    STRING          shift and go to state 22
 
+    values                         shift and go to state 33
+    value                          shift and go to state 31
 
 state 24
 
-    (22) function -> NAMEFUNCTION LPAREN . parameter RPAREN
-    (20) parameter -> . IDENTIFIER
-    (21) parameter -> . IDENTIFIER COMMA parameter
+    (7) assignment -> IDENTIFIER ASSINGMENT . values SEMICOLON
+    (13) values -> . value
+    (14) values -> . value COMMA values
+    (15) value -> . INTEGER
+    (16) value -> . FLOAT
+    (17) value -> . IDENTIFIER
+    (18) value -> . TRUE
+    (19) value -> . FALSE
+    (20) value -> . STRING
 
-    IDENTIFIER      shift and go to state 34
+    INTEGER         shift and go to state 17
+    FLOAT           shift and go to state 18
+    IDENTIFIER      shift and go to state 19
+    TRUE            shift and go to state 20
+    FALSE           shift and go to state 21
+    STRING          shift and go to state 22
 
-    parameter                      shift and go to state 33
+    values                         shift and go to state 34
+    value                          shift and go to state 31
 
 state 25
 
-    (23) return -> RETURN IDENTIFIER . SEMICOLON
+    (12) input -> FGETS LPAREN . values RPAREN SEMICOLON
+    (13) values -> . value
+    (14) values -> . value COMMA values
+    (15) value -> . INTEGER
+    (16) value -> . FLOAT
+    (17) value -> . IDENTIFIER
+    (18) value -> . TRUE
+    (19) value -> . FALSE
+    (20) value -> . STRING
 
-    SEMICOLON       shift and go to state 35
+    INTEGER         shift and go to state 17
+    FLOAT           shift and go to state 18
+    IDENTIFIER      shift and go to state 19
+    TRUE            shift and go to state 20
+    FALSE           shift and go to state 21
+    STRING          shift and go to state 22
 
+    values                         shift and go to state 35
+    value                          shift and go to state 31
 
 state 26
 
-    (7) print -> PRINT LPAREN values . RPAREN SEMICOLON
+    (21) function -> FUNCTION NAMEFUNCTION . LPAREN parameter RPAREN CURLYLEFTBRACKET
 
-    RPAREN          shift and go to state 36
+    LPAREN          shift and go to state 36
 
 
 state 27
 
-    (9) print -> PRINT LPAREN RPAREN . SEMICOLON
+    (24) function -> NAMEFUNCTION LPAREN . parameter RPAREN
+    (22) parameter -> . IDENTIFIER
+    (23) parameter -> . IDENTIFIER COMMA parameter
 
-    SEMICOLON       shift and go to state 37
+    IDENTIFIER      shift and go to state 38
 
+    parameter                      shift and go to state 37
 
 state 28
 
-    (11) values -> value .
-    (12) values -> value . COMMA values
-
-    RPAREN          reduce using rule 11 (values -> value .)
-    SEMICOLON       reduce using rule 11 (values -> value .)
-    COMMA           shift and go to state 38
-
-
-state 29
-
-    (8) print -> PRINT value SEMICOLON .
-
-    $end            reduce using rule 8 (print -> PRINT value SEMICOLON .)
-
-
-state 30
-
-    (6) assignment -> IDENTIFIER ASSINGMENT values . SEMICOLON
+    (25) return -> RETURN IDENTIFIER . SEMICOLON
 
     SEMICOLON       shift and go to state 39
 
 
+state 29
+
+    (8) print -> PRINT LPAREN values . RPAREN SEMICOLON
+
+    RPAREN          shift and go to state 40
+
+
+state 30
+
+    (10) print -> PRINT LPAREN RPAREN . SEMICOLON
+
+    SEMICOLON       shift and go to state 41
+
+
 state 31
 
-    (10) input -> FGETS LPAREN RPAREN . SEMICOLON
+    (13) values -> value .
+    (14) values -> value . COMMA values
 
-    SEMICOLON       shift and go to state 40
+    RPAREN          reduce using rule 13 (values -> value .)
+    SEMICOLON       reduce using rule 13 (values -> value .)
+    COMMA           shift and go to state 42
 
 
 state 32
 
-    (19) function -> FUNCTION NAMEFUNCTION LPAREN . parameter RPAREN CURLYLEFTBRACKET
-    (20) parameter -> . IDENTIFIER
-    (21) parameter -> . IDENTIFIER COMMA parameter
+    (9) print -> PRINT value SEMICOLON .
 
-    IDENTIFIER      shift and go to state 34
+    $end            reduce using rule 9 (print -> PRINT value SEMICOLON .)
 
-    parameter                      shift and go to state 41
 
 state 33
 
-    (22) function -> NAMEFUNCTION LPAREN parameter . RPAREN
+    (11) printf -> PRINTF LPAREN values . RPAREN SEMICOLON
 
-    RPAREN          shift and go to state 42
+    RPAREN          shift and go to state 43
 
 
 state 34
 
-    (20) parameter -> IDENTIFIER .
-    (21) parameter -> IDENTIFIER . COMMA parameter
-
-    RPAREN          reduce using rule 20 (parameter -> IDENTIFIER .)
-    COMMA           shift and go to state 43
-
-
-state 35
-
-    (23) return -> RETURN IDENTIFIER SEMICOLON .
-
-    $end            reduce using rule 23 (return -> RETURN IDENTIFIER SEMICOLON .)
-
-
-state 36
-
-    (7) print -> PRINT LPAREN values RPAREN . SEMICOLON
+    (7) assignment -> IDENTIFIER ASSINGMENT values . SEMICOLON
 
     SEMICOLON       shift and go to state 44
 
 
+state 35
+
+    (12) input -> FGETS LPAREN values . RPAREN SEMICOLON
+
+    RPAREN          shift and go to state 45
+
+
+state 36
+
+    (21) function -> FUNCTION NAMEFUNCTION LPAREN . parameter RPAREN CURLYLEFTBRACKET
+    (22) parameter -> . IDENTIFIER
+    (23) parameter -> . IDENTIFIER COMMA parameter
+
+    IDENTIFIER      shift and go to state 38
+
+    parameter                      shift and go to state 46
+
 state 37
 
-    (9) print -> PRINT LPAREN RPAREN SEMICOLON .
+    (24) function -> NAMEFUNCTION LPAREN parameter . RPAREN
 
-    $end            reduce using rule 9 (print -> PRINT LPAREN RPAREN SEMICOLON .)
+    RPAREN          shift and go to state 47
 
 
 state 38
 
-    (12) values -> value COMMA . values
-    (11) values -> . value
-    (12) values -> . value COMMA values
-    (13) value -> . INTEGER
-    (14) value -> . FLOAT
-    (15) value -> . IDENTIFIER
-    (16) value -> . TRUE
-    (17) value -> . FALSE
-    (18) value -> . STRING
+    (22) parameter -> IDENTIFIER .
+    (23) parameter -> IDENTIFIER . COMMA parameter
 
-    INTEGER         shift and go to state 15
-    FLOAT           shift and go to state 16
-    IDENTIFIER      shift and go to state 17
-    TRUE            shift and go to state 18
-    FALSE           shift and go to state 19
-    STRING          shift and go to state 20
+    RPAREN          reduce using rule 22 (parameter -> IDENTIFIER .)
+    COMMA           shift and go to state 48
 
-    value                          shift and go to state 28
-    values                         shift and go to state 45
 
 state 39
 
-    (6) assignment -> IDENTIFIER ASSINGMENT values SEMICOLON .
+    (25) return -> RETURN IDENTIFIER SEMICOLON .
 
-    $end            reduce using rule 6 (assignment -> IDENTIFIER ASSINGMENT values SEMICOLON .)
+    $end            reduce using rule 25 (return -> RETURN IDENTIFIER SEMICOLON .)
 
 
 state 40
 
-    (10) input -> FGETS LPAREN RPAREN SEMICOLON .
+    (8) print -> PRINT LPAREN values RPAREN . SEMICOLON
 
-    $end            reduce using rule 10 (input -> FGETS LPAREN RPAREN SEMICOLON .)
+    SEMICOLON       shift and go to state 49
 
 
 state 41
 
-    (19) function -> FUNCTION NAMEFUNCTION LPAREN parameter . RPAREN CURLYLEFTBRACKET
+    (10) print -> PRINT LPAREN RPAREN SEMICOLON .
 
-    RPAREN          shift and go to state 46
+    $end            reduce using rule 10 (print -> PRINT LPAREN RPAREN SEMICOLON .)
 
 
 state 42
 
-    (22) function -> NAMEFUNCTION LPAREN parameter RPAREN .
+    (14) values -> value COMMA . values
+    (13) values -> . value
+    (14) values -> . value COMMA values
+    (15) value -> . INTEGER
+    (16) value -> . FLOAT
+    (17) value -> . IDENTIFIER
+    (18) value -> . TRUE
+    (19) value -> . FALSE
+    (20) value -> . STRING
 
-    $end            reduce using rule 22 (function -> NAMEFUNCTION LPAREN parameter RPAREN .)
+    INTEGER         shift and go to state 17
+    FLOAT           shift and go to state 18
+    IDENTIFIER      shift and go to state 19
+    TRUE            shift and go to state 20
+    FALSE           shift and go to state 21
+    STRING          shift and go to state 22
 
+    value                          shift and go to state 31
+    values                         shift and go to state 50
 
 state 43
 
-    (21) parameter -> IDENTIFIER COMMA . parameter
-    (20) parameter -> . IDENTIFIER
-    (21) parameter -> . IDENTIFIER COMMA parameter
+    (11) printf -> PRINTF LPAREN values RPAREN . SEMICOLON
 
-    IDENTIFIER      shift and go to state 34
+    SEMICOLON       shift and go to state 51
 
-    parameter                      shift and go to state 47
 
 state 44
 
-    (7) print -> PRINT LPAREN values RPAREN SEMICOLON .
+    (7) assignment -> IDENTIFIER ASSINGMENT values SEMICOLON .
 
-    $end            reduce using rule 7 (print -> PRINT LPAREN values RPAREN SEMICOLON .)
+    $end            reduce using rule 7 (assignment -> IDENTIFIER ASSINGMENT values SEMICOLON .)
 
 
 state 45
 
-    (12) values -> value COMMA values .
+    (12) input -> FGETS LPAREN values RPAREN . SEMICOLON
 
-    RPAREN          reduce using rule 12 (values -> value COMMA values .)
-    SEMICOLON       reduce using rule 12 (values -> value COMMA values .)
+    SEMICOLON       shift and go to state 52
 
 
 state 46
 
-    (19) function -> FUNCTION NAMEFUNCTION LPAREN parameter RPAREN . CURLYLEFTBRACKET
+    (21) function -> FUNCTION NAMEFUNCTION LPAREN parameter . RPAREN CURLYLEFTBRACKET
 
-    CURLYLEFTBRACKET shift and go to state 48
+    RPAREN          shift and go to state 53
 
 
 state 47
 
-    (21) parameter -> IDENTIFIER COMMA parameter .
+    (24) function -> NAMEFUNCTION LPAREN parameter RPAREN .
 
-    RPAREN          reduce using rule 21 (parameter -> IDENTIFIER COMMA parameter .)
+    $end            reduce using rule 24 (function -> NAMEFUNCTION LPAREN parameter RPAREN .)
 
 
 state 48
 
-    (19) function -> FUNCTION NAMEFUNCTION LPAREN parameter RPAREN CURLYLEFTBRACKET .
+    (23) parameter -> IDENTIFIER COMMA . parameter
+    (22) parameter -> . IDENTIFIER
+    (23) parameter -> . IDENTIFIER COMMA parameter
 
-    $end            reduce using rule 19 (function -> FUNCTION NAMEFUNCTION LPAREN parameter RPAREN CURLYLEFTBRACKET .)
+    IDENTIFIER      shift and go to state 38
+
+    parameter                      shift and go to state 54
+
+state 49
+
+    (8) print -> PRINT LPAREN values RPAREN SEMICOLON .
+
+    $end            reduce using rule 8 (print -> PRINT LPAREN values RPAREN SEMICOLON .)
+
+
+state 50
+
+    (14) values -> value COMMA values .
+
+    RPAREN          reduce using rule 14 (values -> value COMMA values .)
+    SEMICOLON       reduce using rule 14 (values -> value COMMA values .)
+
+
+state 51
+
+    (11) printf -> PRINTF LPAREN values RPAREN SEMICOLON .
+
+    $end            reduce using rule 11 (printf -> PRINTF LPAREN values RPAREN SEMICOLON .)
+
+
+state 52
+
+    (12) input -> FGETS LPAREN values RPAREN SEMICOLON .
+
+    $end            reduce using rule 12 (input -> FGETS LPAREN values RPAREN SEMICOLON .)
+
+
+state 53
+
+    (21) function -> FUNCTION NAMEFUNCTION LPAREN parameter RPAREN . CURLYLEFTBRACKET
+
+    CURLYLEFTBRACKET shift and go to state 55
+
+
+state 54
+
+    (23) parameter -> IDENTIFIER COMMA parameter .
+
+    RPAREN          reduce using rule 23 (parameter -> IDENTIFIER COMMA parameter .)
+
+
+state 55
+
+    (21) function -> FUNCTION NAMEFUNCTION LPAREN parameter RPAREN CURLYLEFTBRACKET .
+
+    $end            reduce using rule 21 (function -> FUNCTION NAMEFUNCTION LPAREN parameter RPAREN CURLYLEFTBRACKET .)
 

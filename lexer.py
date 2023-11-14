@@ -64,6 +64,7 @@ reserved = {
   'try':'TRY', 
   'true':'TRUE',
   'false':'FALSE',
+  'printf' : 'PRINTF',
   'print' : 'PRINT',
   'fgets' : 'FGETS',
   # Fin Meiyin Chang 
@@ -130,6 +131,7 @@ tokens = (
   'STRING',
   'CURLYLEFTBRACKET',
   'CURLYRIGHTBRACKET',
+  'FORMAT',
   # Fin Meiyin Chang
 ) + tuple(reserved.values())
 
@@ -268,6 +270,10 @@ def t_ECHO(t):
     r'echo'
     return t
 
+def t_PRINTF(t):
+    r'printf'
+    return t
+
 def t_PRINT(t):
     r'print'
     return t
@@ -275,6 +281,9 @@ def t_PRINT(t):
 def t_FGETS(t):
     r'fgets'
     return t
+
+def t_FORMAT(t):
+   r'%s|%d|%f'
 
 
 #Fin Diego Martinez
