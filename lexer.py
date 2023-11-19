@@ -34,7 +34,7 @@ reserved = {
   #Data Structures
   # Inicio Meiyin Chang
   'array':'ARRAY',
-  'SplStack':'STACK',
+  'stack':'STACK',
   'SplQueue' : 'QUEUE',
   'push': 'PUSH',
   'pop' : 'POP',
@@ -262,8 +262,8 @@ def t_FUNCTION(t):
     r'function'
     return t
 
-def t_NAMEFUNCTION(t):
-    r'([a-zA-Z_]\w*)(?=\()'
+def t_STACK(t):
+    r'stack'
     return t
 
 def t_ECHO(t):
@@ -282,6 +282,10 @@ def t_FGETS(t):
     r'fgets'
     return t
 
+def t_NAMEFUNCTION(t):
+    r'([a-zA-Z_]\w*)(?=\()'
+    return t
+
 def t_FORMAT(t):
    r'%s|%d|%f'
 
@@ -297,9 +301,7 @@ def t_NEW(t):
     r'new'
     return t
 
-def t_STACK(t):
-    r'stack'
-    return t
+
 #Fin Irving y Meiyin
 
 # Expresión regular para reconocer saltos de línea
@@ -365,6 +367,11 @@ codigoDiego = '''
 $numero1 = 10;
 $numero2 = 20;
 
+// Ejemplo de uso:
+$stack = new stack();
+
+$fibonacci = array();
+
 // Comprobar cuál número es mayor
 if ($numero1 > $numero2) {
     echo "El número $numero1 es mayor que el número $numero2";
@@ -380,7 +387,7 @@ if ($numero1 > $numero2) {
 #ingresa = input("Ingrese: ")
 #print(ingresa)
 #lexer.input(ingresa)
-lexer.input(algoritmoIrving)
+lexer.input(codigoDiego)
 
 
 # Tokenizar
