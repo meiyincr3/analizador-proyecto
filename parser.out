@@ -2,7 +2,6 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
 Unused terminals:
 
-    AND
     ANDEQUAL
     APOSTROPHE
     ARROW
@@ -10,12 +9,12 @@ Unused terminals:
     BREAK
     CASE
     CATCH
+    CHAIN
     CLASS
     COLON
     COMMENTS
     CONTAINS
     CONTINUE
-    CURLYRIGHTBRACKET
     DECLARE
     DECREMENT
     DEFAULT
@@ -25,12 +24,9 @@ Unused terminals:
     DOLLARSIGN
     DOT
     DOUBLECOLON
-    ELSE
-    ELSEIF
     ENDFOR
     ENDFOREACH
     ENDIF
-    EQUALS
     EXIT
     EXTENDS
     FIXEDARRAY
@@ -38,21 +34,15 @@ Unused terminals:
     FOREACH
     FORMAT
     GOTO
-    GREATERTHANEQ
     HEAP
-    IDENTICAL
-    IF
     INCREMENT
     INTDIVIDE
     LBRACKET
-    LESSTHAN
-    LESSTHANEQ
     MAXHEAP
     MINHEAP
     MODULE
     NOTIDENTICAL
     OBJECTSTORAGE
-    OR
     PLUS
     POWERBY
     PRIORITYQUEUE
@@ -64,7 +54,6 @@ Unused terminals:
     SWITCH
     TIMES
     TRY
-    WHILE
     XOR
 
 Grammar
@@ -81,57 +70,80 @@ Rule 8     sentence -> array
 Rule 9     sentence -> stack
 Rule 10    sentence -> op_stack
 Rule 11    sentence -> operad_stack
-Rule 12    assignment -> IDENTIFIER ASSINGMENT values SEMICOLON
-Rule 13    print -> PRINT LPAREN values RPAREN SEMICOLON
-Rule 14    print -> PRINT value SEMICOLON
-Rule 15    print -> PRINT LPAREN RPAREN SEMICOLON
-Rule 16    printf -> PRINTF LPAREN values RPAREN SEMICOLON
-Rule 17    input -> FGETS LPAREN values RPAREN SEMICOLON
-Rule 18    values -> value
-Rule 19    values -> value COMMA values
-Rule 20    value -> INTEGER
-Rule 21    value -> FLOAT
-Rule 22    value -> IDENTIFIER
-Rule 23    value -> TRUE
-Rule 24    value -> FALSE
-Rule 25    value -> STRING
-Rule 26    echo -> ECHO STRING SEMICOLON
-Rule 27    array -> IDENTIFIER ASSINGMENT ARRAY LPAREN INTEGER RPAREN SEMICOLON
-Rule 28    stack -> IDENTIFIER ASSINGMENT NEW STACK LPAREN RPAREN SEMICOLON
-Rule 29    op_stack -> IDENTIFIER MINUS GREATERTHAN operad_stack
-Rule 30    operad_stack -> PUSH LPAREN values RPAREN SEMICOLON
-Rule 31    operad_stack -> POP LPAREN RPAREN SEMICOLON
-Rule 32    operad_stack -> COUNT LPAREN RPAREN SEMICOLON
-Rule 33    operad_stack -> CURRENT LPAREN RPAREN SEMICOLON
-Rule 34    function -> FUNCTION NAMEFUNCTION LPAREN parameter RPAREN CURLYLEFTBRACKET
-Rule 35    parameter -> IDENTIFIER
-Rule 36    parameter -> IDENTIFIER COMMA parameter
-Rule 37    function -> NAMEFUNCTION LPAREN parameter RPAREN SEMICOLON
-Rule 38    function -> IDENTIFIER ASSINGMENT NAMEFUNCTION LPAREN parameter RPAREN SEMICOLON
-Rule 39    return -> RETURN IDENTIFIER SEMICOLON
+Rule 12    sentence -> if
+Rule 13    sentence -> elseif
+Rule 14    sentence -> else
+Rule 15    sentence -> while
+Rule 16    assignment -> IDENTIFIER ASSINGMENT values SEMICOLON
+Rule 17    print -> PRINT LPAREN values RPAREN SEMICOLON
+Rule 18    print -> PRINT value SEMICOLON
+Rule 19    print -> PRINT LPAREN RPAREN SEMICOLON
+Rule 20    printf -> PRINTF LPAREN values RPAREN SEMICOLON
+Rule 21    input -> FGETS LPAREN values RPAREN SEMICOLON
+Rule 22    values -> value
+Rule 23    values -> value COMMA values
+Rule 24    value -> INTEGER
+Rule 25    value -> FLOAT
+Rule 26    value -> IDENTIFIER
+Rule 27    value -> TRUE
+Rule 28    value -> FALSE
+Rule 29    value -> STRING
+Rule 30    sign -> IDENTICAL
+Rule 31    sign -> EQUALS
+Rule 32    sign -> GREATERTHAN
+Rule 33    sign -> GREATERTHANEQ
+Rule 34    sign -> LESSTHAN
+Rule 35    sign -> LESSTHANEQ
+Rule 36    operator -> AND
+Rule 37    operator -> OR
+Rule 38    echo -> ECHO STRING SEMICOLON
+Rule 39    while -> WHILE LPAREN conditions RPAREN CURLYLEFTBRACKET
+Rule 40    array -> IDENTIFIER ASSINGMENT ARRAY LPAREN INTEGER RPAREN SEMICOLON
+Rule 41    stack -> IDENTIFIER ASSINGMENT NEW STACK LPAREN RPAREN SEMICOLON
+Rule 42    op_stack -> IDENTIFIER MINUS GREATERTHAN operad_stack
+Rule 43    operad_stack -> PUSH LPAREN values RPAREN SEMICOLON
+Rule 44    operad_stack -> POP LPAREN RPAREN SEMICOLON
+Rule 45    operad_stack -> COUNT LPAREN RPAREN SEMICOLON
+Rule 46    operad_stack -> CURRENT LPAREN RPAREN SEMICOLON
+Rule 47    function -> FUNCTION NAMEFUNCTION LPAREN parameter RPAREN CURLYLEFTBRACKET
+Rule 48    parameter -> IDENTIFIER
+Rule 49    parameter -> IDENTIFIER COMMA parameter
+Rule 50    function -> NAMEFUNCTION LPAREN parameter RPAREN SEMICOLON
+Rule 51    function -> IDENTIFIER ASSINGMENT NAMEFUNCTION LPAREN parameter RPAREN SEMICOLON
+Rule 52    return -> RETURN IDENTIFIER SEMICOLON
+Rule 53    if -> IF LPAREN conditions RPAREN CURLYLEFTBRACKET
+Rule 54    condition -> IDENTIFIER
+Rule 55    condition -> IDENTIFIER sign value
+Rule 56    conditions -> condition
+Rule 57    conditions -> condition operator conditions
+Rule 58    elseif -> ELSEIF LPAREN condition RPAREN CURLYLEFTBRACKET
+Rule 59    elseif -> CURLYRIGHTBRACKET ELSEIF LPAREN condition RPAREN CURLYLEFTBRACKET
+Rule 60    else -> ELSE CURLYLEFTBRACKET
+Rule 61    else -> CURLYRIGHTBRACKET ELSE CURLYLEFTBRACKET
 
 Terminals, with rules where they appear
 
-AND                  : 
+AND                  : 36
 ANDEQUAL             : 
 APOSTROPHE           : 
-ARRAY                : 27
+ARRAY                : 40
 ARROW                : 
-ASSINGMENT           : 12 27 28 38
+ASSINGMENT           : 16 40 41 51
 ATTACH               : 
 BREAK                : 
 CASE                 : 
 CATCH                : 
+CHAIN                : 
 CLASS                : 
 COLON                : 
-COMMA                : 19 36
+COMMA                : 23 49
 COMMENTS             : 
 CONTAINS             : 
 CONTINUE             : 
-COUNT                : 32
-CURLYLEFTBRACKET     : 34
-CURLYRIGHTBRACKET    : 
-CURRENT              : 33
+COUNT                : 45
+CURLYLEFTBRACKET     : 39 47 53 58 59 60 61
+CURLYRIGHTBRACKET    : 59 61
+CURRENT              : 46
 DECLARE              : 
 DECREMENT            : 
 DEFAULT              : 
@@ -141,68 +153,68 @@ DO                   :
 DOLLARSIGN           : 
 DOT                  : 
 DOUBLECOLON          : 
-ECHO                 : 26
-ELSE                 : 
-ELSEIF               : 
+ECHO                 : 38
+ELSE                 : 60 61
+ELSEIF               : 58 59
 ENDFOR               : 
 ENDFOREACH           : 
 ENDIF                : 
-EQUALS               : 
+EQUALS               : 31
 EXIT                 : 
 EXTENDS              : 
-FALSE                : 24
-FGETS                : 17
+FALSE                : 28
+FGETS                : 21
 FIXEDARRAY           : 
-FLOAT                : 21
+FLOAT                : 25
 FOR                  : 
 FOREACH              : 
 FORMAT               : 
-FUNCTION             : 34
+FUNCTION             : 47
 GOTO                 : 
-GREATERTHAN          : 29
-GREATERTHANEQ        : 
+GREATERTHAN          : 32 42
+GREATERTHANEQ        : 33
 HEAP                 : 
-IDENTICAL            : 
-IDENTIFIER           : 12 22 27 28 29 35 36 38 39
-IF                   : 
+IDENTICAL            : 30
+IDENTIFIER           : 16 26 40 41 42 48 49 51 52 54 55
+IF                   : 53
 INCREMENT            : 
 INTDIVIDE            : 
-INTEGER              : 20 27
+INTEGER              : 24 40
 LBRACKET             : 
-LESSTHAN             : 
-LESSTHANEQ           : 
-LPAREN               : 13 15 16 17 27 28 30 31 32 33 34 37 38
+LESSTHAN             : 34
+LESSTHANEQ           : 35
+LPAREN               : 17 19 20 21 39 40 41 43 44 45 46 47 50 51 53 58 59
 MAXHEAP              : 
 MINHEAP              : 
-MINUS                : 29
+MINUS                : 42
 MODULE               : 
-NAMEFUNCTION         : 34 37 38
-NEW                  : 28
+NAMEFUNCTION         : 47 50 51
+NEW                  : 41
 NOTIDENTICAL         : 
 OBJECTSTORAGE        : 
-OR                   : 
+OR                   : 37
 PLUS                 : 
-POP                  : 31
+POP                  : 44
 POWERBY              : 
-PRINT                : 13 14 15
-PRINTF               : 16
+PRINT                : 17 18 19
+PRINTF               : 20
 PRIORITYQUEUE        : 
 PUBLIC               : 
-PUSH                 : 30
+PUSH                 : 43
 QUEUE                : 
 RBRACKET             : 
-RETURN               : 39
-RPAREN               : 13 15 16 17 27 28 30 31 32 33 34 37 38
-SEMICOLON            : 12 13 14 15 16 17 26 27 28 30 31 32 33 37 38 39
+RETURN               : 52
+RPAREN               : 17 19 20 21 39 40 41 43 44 45 46 47 50 51 53 58 59
+SEMICOLON            : 16 17 18 19 20 21 38 40 41 43 44 45 46 50 51 52
 SIMPLEARROW          : 
-STACK                : 28
+STACK                : 41
 STATIC               : 
-STRING               : 25 26
+STRING               : 29 38
 SWITCH               : 
 TIMES                : 
-TRUE                 : 23
+TRUE                 : 27
 TRY                  : 
-WHILE                : 
+WHILE                : 39
 XOR                  : 
 error                : 
 
@@ -210,19 +222,27 @@ Nonterminals, with rules where they appear
 
 array                : 8
 assignment           : 3
+condition            : 56 57 58 59
+conditions           : 39 53 57
 echo                 : 7
+else                 : 14
+elseif               : 13
 function             : 5
+if                   : 12
 input                : 4
 op_stack             : 10
-operad_stack         : 11 29
-parameter            : 34 36 37 38
+operad_stack         : 11 42
+operator             : 57
+parameter            : 47 49 50 51
 print                : 1
 printf               : 2
 return               : 6
 sentence             : 0
+sign                 : 55
 stack                : 9
-value                : 14 18 19
-values               : 12 13 16 17 19 30
+value                : 18 22 23 55
+values               : 16 17 20 21 23 43
+while                : 15
 
 Parsing method: LALR
 
@@ -240,37 +260,52 @@ state 0
     (9) sentence -> . stack
     (10) sentence -> . op_stack
     (11) sentence -> . operad_stack
-    (13) print -> . PRINT LPAREN values RPAREN SEMICOLON
-    (14) print -> . PRINT value SEMICOLON
-    (15) print -> . PRINT LPAREN RPAREN SEMICOLON
-    (16) printf -> . PRINTF LPAREN values RPAREN SEMICOLON
-    (12) assignment -> . IDENTIFIER ASSINGMENT values SEMICOLON
-    (17) input -> . FGETS LPAREN values RPAREN SEMICOLON
-    (34) function -> . FUNCTION NAMEFUNCTION LPAREN parameter RPAREN CURLYLEFTBRACKET
-    (37) function -> . NAMEFUNCTION LPAREN parameter RPAREN SEMICOLON
-    (38) function -> . IDENTIFIER ASSINGMENT NAMEFUNCTION LPAREN parameter RPAREN SEMICOLON
-    (39) return -> . RETURN IDENTIFIER SEMICOLON
-    (26) echo -> . ECHO STRING SEMICOLON
-    (27) array -> . IDENTIFIER ASSINGMENT ARRAY LPAREN INTEGER RPAREN SEMICOLON
-    (28) stack -> . IDENTIFIER ASSINGMENT NEW STACK LPAREN RPAREN SEMICOLON
-    (29) op_stack -> . IDENTIFIER MINUS GREATERTHAN operad_stack
-    (30) operad_stack -> . PUSH LPAREN values RPAREN SEMICOLON
-    (31) operad_stack -> . POP LPAREN RPAREN SEMICOLON
-    (32) operad_stack -> . COUNT LPAREN RPAREN SEMICOLON
-    (33) operad_stack -> . CURRENT LPAREN RPAREN SEMICOLON
+    (12) sentence -> . if
+    (13) sentence -> . elseif
+    (14) sentence -> . else
+    (15) sentence -> . while
+    (17) print -> . PRINT LPAREN values RPAREN SEMICOLON
+    (18) print -> . PRINT value SEMICOLON
+    (19) print -> . PRINT LPAREN RPAREN SEMICOLON
+    (20) printf -> . PRINTF LPAREN values RPAREN SEMICOLON
+    (16) assignment -> . IDENTIFIER ASSINGMENT values SEMICOLON
+    (21) input -> . FGETS LPAREN values RPAREN SEMICOLON
+    (47) function -> . FUNCTION NAMEFUNCTION LPAREN parameter RPAREN CURLYLEFTBRACKET
+    (50) function -> . NAMEFUNCTION LPAREN parameter RPAREN SEMICOLON
+    (51) function -> . IDENTIFIER ASSINGMENT NAMEFUNCTION LPAREN parameter RPAREN SEMICOLON
+    (52) return -> . RETURN IDENTIFIER SEMICOLON
+    (38) echo -> . ECHO STRING SEMICOLON
+    (40) array -> . IDENTIFIER ASSINGMENT ARRAY LPAREN INTEGER RPAREN SEMICOLON
+    (41) stack -> . IDENTIFIER ASSINGMENT NEW STACK LPAREN RPAREN SEMICOLON
+    (42) op_stack -> . IDENTIFIER MINUS GREATERTHAN operad_stack
+    (43) operad_stack -> . PUSH LPAREN values RPAREN SEMICOLON
+    (44) operad_stack -> . POP LPAREN RPAREN SEMICOLON
+    (45) operad_stack -> . COUNT LPAREN RPAREN SEMICOLON
+    (46) operad_stack -> . CURRENT LPAREN RPAREN SEMICOLON
+    (53) if -> . IF LPAREN conditions RPAREN CURLYLEFTBRACKET
+    (58) elseif -> . ELSEIF LPAREN condition RPAREN CURLYLEFTBRACKET
+    (59) elseif -> . CURLYRIGHTBRACKET ELSEIF LPAREN condition RPAREN CURLYLEFTBRACKET
+    (60) else -> . ELSE CURLYLEFTBRACKET
+    (61) else -> . CURLYRIGHTBRACKET ELSE CURLYLEFTBRACKET
+    (39) while -> . WHILE LPAREN conditions RPAREN CURLYLEFTBRACKET
 
-    PRINT           shift and go to state 13
-    PRINTF          shift and go to state 14
-    IDENTIFIER      shift and go to state 15
-    FGETS           shift and go to state 16
-    FUNCTION        shift and go to state 17
-    NAMEFUNCTION    shift and go to state 18
-    RETURN          shift and go to state 19
-    ECHO            shift and go to state 20
-    PUSH            shift and go to state 21
-    POP             shift and go to state 22
-    COUNT           shift and go to state 23
-    CURRENT         shift and go to state 24
+    PRINT           shift and go to state 17
+    PRINTF          shift and go to state 18
+    IDENTIFIER      shift and go to state 19
+    FGETS           shift and go to state 20
+    FUNCTION        shift and go to state 21
+    NAMEFUNCTION    shift and go to state 22
+    RETURN          shift and go to state 23
+    ECHO            shift and go to state 24
+    PUSH            shift and go to state 25
+    POP             shift and go to state 26
+    COUNT           shift and go to state 27
+    CURRENT         shift and go to state 28
+    IF              shift and go to state 29
+    ELSEIF          shift and go to state 30
+    CURLYRIGHTBRACKET shift and go to state 31
+    ELSE            shift and go to state 32
+    WHILE           shift and go to state 33
 
     sentence                       shift and go to state 1
     print                          shift and go to state 2
@@ -284,6 +319,10 @@ state 0
     stack                          shift and go to state 10
     op_stack                       shift and go to state 11
     operad_stack                   shift and go to state 12
+    if                             shift and go to state 13
+    elseif                         shift and go to state 14
+    else                           shift and go to state 15
+    while                          shift and go to state 16
 
 state 1
 
@@ -370,765 +409,1170 @@ state 12
 
 state 13
 
-    (13) print -> PRINT . LPAREN values RPAREN SEMICOLON
-    (14) print -> PRINT . value SEMICOLON
-    (15) print -> PRINT . LPAREN RPAREN SEMICOLON
-    (20) value -> . INTEGER
-    (21) value -> . FLOAT
-    (22) value -> . IDENTIFIER
-    (23) value -> . TRUE
-    (24) value -> . FALSE
-    (25) value -> . STRING
+    (12) sentence -> if .
 
-    LPAREN          shift and go to state 25
-    INTEGER         shift and go to state 27
-    FLOAT           shift and go to state 28
-    IDENTIFIER      shift and go to state 29
-    TRUE            shift and go to state 30
-    FALSE           shift and go to state 31
-    STRING          shift and go to state 32
+    $end            reduce using rule 12 (sentence -> if .)
 
-    value                          shift and go to state 26
 
 state 14
 
-    (16) printf -> PRINTF . LPAREN values RPAREN SEMICOLON
+    (13) sentence -> elseif .
 
-    LPAREN          shift and go to state 33
+    $end            reduce using rule 13 (sentence -> elseif .)
 
 
 state 15
 
-    (12) assignment -> IDENTIFIER . ASSINGMENT values SEMICOLON
-    (38) function -> IDENTIFIER . ASSINGMENT NAMEFUNCTION LPAREN parameter RPAREN SEMICOLON
-    (27) array -> IDENTIFIER . ASSINGMENT ARRAY LPAREN INTEGER RPAREN SEMICOLON
-    (28) stack -> IDENTIFIER . ASSINGMENT NEW STACK LPAREN RPAREN SEMICOLON
-    (29) op_stack -> IDENTIFIER . MINUS GREATERTHAN operad_stack
+    (14) sentence -> else .
 
-    ASSINGMENT      shift and go to state 34
-    MINUS           shift and go to state 35
+    $end            reduce using rule 14 (sentence -> else .)
 
 
 state 16
 
-    (17) input -> FGETS . LPAREN values RPAREN SEMICOLON
+    (15) sentence -> while .
 
-    LPAREN          shift and go to state 36
+    $end            reduce using rule 15 (sentence -> while .)
 
 
 state 17
 
-    (34) function -> FUNCTION . NAMEFUNCTION LPAREN parameter RPAREN CURLYLEFTBRACKET
+    (17) print -> PRINT . LPAREN values RPAREN SEMICOLON
+    (18) print -> PRINT . value SEMICOLON
+    (19) print -> PRINT . LPAREN RPAREN SEMICOLON
+    (24) value -> . INTEGER
+    (25) value -> . FLOAT
+    (26) value -> . IDENTIFIER
+    (27) value -> . TRUE
+    (28) value -> . FALSE
+    (29) value -> . STRING
 
-    NAMEFUNCTION    shift and go to state 37
+    LPAREN          shift and go to state 34
+    INTEGER         shift and go to state 36
+    FLOAT           shift and go to state 37
+    IDENTIFIER      shift and go to state 38
+    TRUE            shift and go to state 39
+    FALSE           shift and go to state 40
+    STRING          shift and go to state 41
 
+    value                          shift and go to state 35
 
 state 18
 
-    (37) function -> NAMEFUNCTION . LPAREN parameter RPAREN SEMICOLON
-
-    LPAREN          shift and go to state 38
-
-
-state 19
-
-    (39) return -> RETURN . IDENTIFIER SEMICOLON
-
-    IDENTIFIER      shift and go to state 39
-
-
-state 20
-
-    (26) echo -> ECHO . STRING SEMICOLON
-
-    STRING          shift and go to state 40
-
-
-state 21
-
-    (30) operad_stack -> PUSH . LPAREN values RPAREN SEMICOLON
-
-    LPAREN          shift and go to state 41
-
-
-state 22
-
-    (31) operad_stack -> POP . LPAREN RPAREN SEMICOLON
+    (20) printf -> PRINTF . LPAREN values RPAREN SEMICOLON
 
     LPAREN          shift and go to state 42
 
 
+state 19
+
+    (16) assignment -> IDENTIFIER . ASSINGMENT values SEMICOLON
+    (51) function -> IDENTIFIER . ASSINGMENT NAMEFUNCTION LPAREN parameter RPAREN SEMICOLON
+    (40) array -> IDENTIFIER . ASSINGMENT ARRAY LPAREN INTEGER RPAREN SEMICOLON
+    (41) stack -> IDENTIFIER . ASSINGMENT NEW STACK LPAREN RPAREN SEMICOLON
+    (42) op_stack -> IDENTIFIER . MINUS GREATERTHAN operad_stack
+
+    ASSINGMENT      shift and go to state 43
+    MINUS           shift and go to state 44
+
+
+state 20
+
+    (21) input -> FGETS . LPAREN values RPAREN SEMICOLON
+
+    LPAREN          shift and go to state 45
+
+
+state 21
+
+    (47) function -> FUNCTION . NAMEFUNCTION LPAREN parameter RPAREN CURLYLEFTBRACKET
+
+    NAMEFUNCTION    shift and go to state 46
+
+
+state 22
+
+    (50) function -> NAMEFUNCTION . LPAREN parameter RPAREN SEMICOLON
+
+    LPAREN          shift and go to state 47
+
+
 state 23
 
-    (32) operad_stack -> COUNT . LPAREN RPAREN SEMICOLON
+    (52) return -> RETURN . IDENTIFIER SEMICOLON
 
-    LPAREN          shift and go to state 43
+    IDENTIFIER      shift and go to state 48
 
 
 state 24
 
-    (33) operad_stack -> CURRENT . LPAREN RPAREN SEMICOLON
+    (38) echo -> ECHO . STRING SEMICOLON
 
-    LPAREN          shift and go to state 44
+    STRING          shift and go to state 49
 
 
 state 25
 
-    (13) print -> PRINT LPAREN . values RPAREN SEMICOLON
-    (15) print -> PRINT LPAREN . RPAREN SEMICOLON
-    (18) values -> . value
-    (19) values -> . value COMMA values
-    (20) value -> . INTEGER
-    (21) value -> . FLOAT
-    (22) value -> . IDENTIFIER
-    (23) value -> . TRUE
-    (24) value -> . FALSE
-    (25) value -> . STRING
+    (43) operad_stack -> PUSH . LPAREN values RPAREN SEMICOLON
 
-    RPAREN          shift and go to state 46
-    INTEGER         shift and go to state 27
-    FLOAT           shift and go to state 28
-    IDENTIFIER      shift and go to state 29
-    TRUE            shift and go to state 30
-    FALSE           shift and go to state 31
-    STRING          shift and go to state 32
+    LPAREN          shift and go to state 50
 
-    values                         shift and go to state 45
-    value                          shift and go to state 47
 
 state 26
 
-    (14) print -> PRINT value . SEMICOLON
+    (44) operad_stack -> POP . LPAREN RPAREN SEMICOLON
 
-    SEMICOLON       shift and go to state 48
+    LPAREN          shift and go to state 51
 
 
 state 27
 
-    (20) value -> INTEGER .
+    (45) operad_stack -> COUNT . LPAREN RPAREN SEMICOLON
 
-    SEMICOLON       reduce using rule 20 (value -> INTEGER .)
-    COMMA           reduce using rule 20 (value -> INTEGER .)
-    RPAREN          reduce using rule 20 (value -> INTEGER .)
+    LPAREN          shift and go to state 52
 
 
 state 28
 
-    (21) value -> FLOAT .
+    (46) operad_stack -> CURRENT . LPAREN RPAREN SEMICOLON
 
-    SEMICOLON       reduce using rule 21 (value -> FLOAT .)
-    COMMA           reduce using rule 21 (value -> FLOAT .)
-    RPAREN          reduce using rule 21 (value -> FLOAT .)
+    LPAREN          shift and go to state 53
 
 
 state 29
 
-    (22) value -> IDENTIFIER .
+    (53) if -> IF . LPAREN conditions RPAREN CURLYLEFTBRACKET
 
-    SEMICOLON       reduce using rule 22 (value -> IDENTIFIER .)
-    COMMA           reduce using rule 22 (value -> IDENTIFIER .)
-    RPAREN          reduce using rule 22 (value -> IDENTIFIER .)
+    LPAREN          shift and go to state 54
 
 
 state 30
 
-    (23) value -> TRUE .
+    (58) elseif -> ELSEIF . LPAREN condition RPAREN CURLYLEFTBRACKET
 
-    SEMICOLON       reduce using rule 23 (value -> TRUE .)
-    COMMA           reduce using rule 23 (value -> TRUE .)
-    RPAREN          reduce using rule 23 (value -> TRUE .)
+    LPAREN          shift and go to state 55
 
 
 state 31
 
-    (24) value -> FALSE .
+    (59) elseif -> CURLYRIGHTBRACKET . ELSEIF LPAREN condition RPAREN CURLYLEFTBRACKET
+    (61) else -> CURLYRIGHTBRACKET . ELSE CURLYLEFTBRACKET
 
-    SEMICOLON       reduce using rule 24 (value -> FALSE .)
-    COMMA           reduce using rule 24 (value -> FALSE .)
-    RPAREN          reduce using rule 24 (value -> FALSE .)
+    ELSEIF          shift and go to state 56
+    ELSE            shift and go to state 57
 
 
 state 32
 
-    (25) value -> STRING .
+    (60) else -> ELSE . CURLYLEFTBRACKET
 
-    SEMICOLON       reduce using rule 25 (value -> STRING .)
-    COMMA           reduce using rule 25 (value -> STRING .)
-    RPAREN          reduce using rule 25 (value -> STRING .)
+    CURLYLEFTBRACKET shift and go to state 58
 
 
 state 33
 
-    (16) printf -> PRINTF LPAREN . values RPAREN SEMICOLON
-    (18) values -> . value
-    (19) values -> . value COMMA values
-    (20) value -> . INTEGER
-    (21) value -> . FLOAT
-    (22) value -> . IDENTIFIER
-    (23) value -> . TRUE
-    (24) value -> . FALSE
-    (25) value -> . STRING
+    (39) while -> WHILE . LPAREN conditions RPAREN CURLYLEFTBRACKET
 
-    INTEGER         shift and go to state 27
-    FLOAT           shift and go to state 28
-    IDENTIFIER      shift and go to state 29
-    TRUE            shift and go to state 30
-    FALSE           shift and go to state 31
-    STRING          shift and go to state 32
+    LPAREN          shift and go to state 59
 
-    values                         shift and go to state 49
-    value                          shift and go to state 47
 
 state 34
 
-    (12) assignment -> IDENTIFIER ASSINGMENT . values SEMICOLON
-    (38) function -> IDENTIFIER ASSINGMENT . NAMEFUNCTION LPAREN parameter RPAREN SEMICOLON
-    (27) array -> IDENTIFIER ASSINGMENT . ARRAY LPAREN INTEGER RPAREN SEMICOLON
-    (28) stack -> IDENTIFIER ASSINGMENT . NEW STACK LPAREN RPAREN SEMICOLON
-    (18) values -> . value
-    (19) values -> . value COMMA values
-    (20) value -> . INTEGER
-    (21) value -> . FLOAT
-    (22) value -> . IDENTIFIER
-    (23) value -> . TRUE
-    (24) value -> . FALSE
-    (25) value -> . STRING
+    (17) print -> PRINT LPAREN . values RPAREN SEMICOLON
+    (19) print -> PRINT LPAREN . RPAREN SEMICOLON
+    (22) values -> . value
+    (23) values -> . value COMMA values
+    (24) value -> . INTEGER
+    (25) value -> . FLOAT
+    (26) value -> . IDENTIFIER
+    (27) value -> . TRUE
+    (28) value -> . FALSE
+    (29) value -> . STRING
 
-    NAMEFUNCTION    shift and go to state 51
-    ARRAY           shift and go to state 52
-    NEW             shift and go to state 53
-    INTEGER         shift and go to state 27
-    FLOAT           shift and go to state 28
-    IDENTIFIER      shift and go to state 29
-    TRUE            shift and go to state 30
-    FALSE           shift and go to state 31
-    STRING          shift and go to state 32
+    RPAREN          shift and go to state 61
+    INTEGER         shift and go to state 36
+    FLOAT           shift and go to state 37
+    IDENTIFIER      shift and go to state 38
+    TRUE            shift and go to state 39
+    FALSE           shift and go to state 40
+    STRING          shift and go to state 41
 
-    values                         shift and go to state 50
-    value                          shift and go to state 47
+    values                         shift and go to state 60
+    value                          shift and go to state 62
 
 state 35
 
-    (29) op_stack -> IDENTIFIER MINUS . GREATERTHAN operad_stack
+    (18) print -> PRINT value . SEMICOLON
 
-    GREATERTHAN     shift and go to state 54
+    SEMICOLON       shift and go to state 63
 
 
 state 36
 
-    (17) input -> FGETS LPAREN . values RPAREN SEMICOLON
-    (18) values -> . value
-    (19) values -> . value COMMA values
-    (20) value -> . INTEGER
-    (21) value -> . FLOAT
-    (22) value -> . IDENTIFIER
-    (23) value -> . TRUE
-    (24) value -> . FALSE
-    (25) value -> . STRING
+    (24) value -> INTEGER .
 
-    INTEGER         shift and go to state 27
-    FLOAT           shift and go to state 28
-    IDENTIFIER      shift and go to state 29
-    TRUE            shift and go to state 30
-    FALSE           shift and go to state 31
-    STRING          shift and go to state 32
+    SEMICOLON       reduce using rule 24 (value -> INTEGER .)
+    COMMA           reduce using rule 24 (value -> INTEGER .)
+    RPAREN          reduce using rule 24 (value -> INTEGER .)
+    AND             reduce using rule 24 (value -> INTEGER .)
+    OR              reduce using rule 24 (value -> INTEGER .)
 
-    values                         shift and go to state 55
-    value                          shift and go to state 47
 
 state 37
 
-    (34) function -> FUNCTION NAMEFUNCTION . LPAREN parameter RPAREN CURLYLEFTBRACKET
+    (25) value -> FLOAT .
 
-    LPAREN          shift and go to state 56
+    SEMICOLON       reduce using rule 25 (value -> FLOAT .)
+    COMMA           reduce using rule 25 (value -> FLOAT .)
+    RPAREN          reduce using rule 25 (value -> FLOAT .)
+    AND             reduce using rule 25 (value -> FLOAT .)
+    OR              reduce using rule 25 (value -> FLOAT .)
 
 
 state 38
 
-    (37) function -> NAMEFUNCTION LPAREN . parameter RPAREN SEMICOLON
-    (35) parameter -> . IDENTIFIER
-    (36) parameter -> . IDENTIFIER COMMA parameter
+    (26) value -> IDENTIFIER .
 
-    IDENTIFIER      shift and go to state 58
+    SEMICOLON       reduce using rule 26 (value -> IDENTIFIER .)
+    COMMA           reduce using rule 26 (value -> IDENTIFIER .)
+    RPAREN          reduce using rule 26 (value -> IDENTIFIER .)
+    AND             reduce using rule 26 (value -> IDENTIFIER .)
+    OR              reduce using rule 26 (value -> IDENTIFIER .)
 
-    parameter                      shift and go to state 57
 
 state 39
 
-    (39) return -> RETURN IDENTIFIER . SEMICOLON
+    (27) value -> TRUE .
 
-    SEMICOLON       shift and go to state 59
+    SEMICOLON       reduce using rule 27 (value -> TRUE .)
+    COMMA           reduce using rule 27 (value -> TRUE .)
+    RPAREN          reduce using rule 27 (value -> TRUE .)
+    AND             reduce using rule 27 (value -> TRUE .)
+    OR              reduce using rule 27 (value -> TRUE .)
 
 
 state 40
 
-    (26) echo -> ECHO STRING . SEMICOLON
+    (28) value -> FALSE .
 
-    SEMICOLON       shift and go to state 60
+    SEMICOLON       reduce using rule 28 (value -> FALSE .)
+    COMMA           reduce using rule 28 (value -> FALSE .)
+    RPAREN          reduce using rule 28 (value -> FALSE .)
+    AND             reduce using rule 28 (value -> FALSE .)
+    OR              reduce using rule 28 (value -> FALSE .)
 
 
 state 41
 
-    (30) operad_stack -> PUSH LPAREN . values RPAREN SEMICOLON
-    (18) values -> . value
-    (19) values -> . value COMMA values
-    (20) value -> . INTEGER
-    (21) value -> . FLOAT
-    (22) value -> . IDENTIFIER
-    (23) value -> . TRUE
-    (24) value -> . FALSE
-    (25) value -> . STRING
+    (29) value -> STRING .
 
-    INTEGER         shift and go to state 27
-    FLOAT           shift and go to state 28
-    IDENTIFIER      shift and go to state 29
-    TRUE            shift and go to state 30
-    FALSE           shift and go to state 31
-    STRING          shift and go to state 32
+    SEMICOLON       reduce using rule 29 (value -> STRING .)
+    COMMA           reduce using rule 29 (value -> STRING .)
+    RPAREN          reduce using rule 29 (value -> STRING .)
+    AND             reduce using rule 29 (value -> STRING .)
+    OR              reduce using rule 29 (value -> STRING .)
 
-    values                         shift and go to state 61
-    value                          shift and go to state 47
 
 state 42
 
-    (31) operad_stack -> POP LPAREN . RPAREN SEMICOLON
+    (20) printf -> PRINTF LPAREN . values RPAREN SEMICOLON
+    (22) values -> . value
+    (23) values -> . value COMMA values
+    (24) value -> . INTEGER
+    (25) value -> . FLOAT
+    (26) value -> . IDENTIFIER
+    (27) value -> . TRUE
+    (28) value -> . FALSE
+    (29) value -> . STRING
 
-    RPAREN          shift and go to state 62
+    INTEGER         shift and go to state 36
+    FLOAT           shift and go to state 37
+    IDENTIFIER      shift and go to state 38
+    TRUE            shift and go to state 39
+    FALSE           shift and go to state 40
+    STRING          shift and go to state 41
 
+    values                         shift and go to state 64
+    value                          shift and go to state 62
 
 state 43
 
-    (32) operad_stack -> COUNT LPAREN . RPAREN SEMICOLON
+    (16) assignment -> IDENTIFIER ASSINGMENT . values SEMICOLON
+    (51) function -> IDENTIFIER ASSINGMENT . NAMEFUNCTION LPAREN parameter RPAREN SEMICOLON
+    (40) array -> IDENTIFIER ASSINGMENT . ARRAY LPAREN INTEGER RPAREN SEMICOLON
+    (41) stack -> IDENTIFIER ASSINGMENT . NEW STACK LPAREN RPAREN SEMICOLON
+    (22) values -> . value
+    (23) values -> . value COMMA values
+    (24) value -> . INTEGER
+    (25) value -> . FLOAT
+    (26) value -> . IDENTIFIER
+    (27) value -> . TRUE
+    (28) value -> . FALSE
+    (29) value -> . STRING
 
-    RPAREN          shift and go to state 63
+    NAMEFUNCTION    shift and go to state 66
+    ARRAY           shift and go to state 67
+    NEW             shift and go to state 68
+    INTEGER         shift and go to state 36
+    FLOAT           shift and go to state 37
+    IDENTIFIER      shift and go to state 38
+    TRUE            shift and go to state 39
+    FALSE           shift and go to state 40
+    STRING          shift and go to state 41
 
+    values                         shift and go to state 65
+    value                          shift and go to state 62
 
 state 44
 
-    (33) operad_stack -> CURRENT LPAREN . RPAREN SEMICOLON
+    (42) op_stack -> IDENTIFIER MINUS . GREATERTHAN operad_stack
 
-    RPAREN          shift and go to state 64
+    GREATERTHAN     shift and go to state 69
 
 
 state 45
 
-    (13) print -> PRINT LPAREN values . RPAREN SEMICOLON
+    (21) input -> FGETS LPAREN . values RPAREN SEMICOLON
+    (22) values -> . value
+    (23) values -> . value COMMA values
+    (24) value -> . INTEGER
+    (25) value -> . FLOAT
+    (26) value -> . IDENTIFIER
+    (27) value -> . TRUE
+    (28) value -> . FALSE
+    (29) value -> . STRING
 
-    RPAREN          shift and go to state 65
+    INTEGER         shift and go to state 36
+    FLOAT           shift and go to state 37
+    IDENTIFIER      shift and go to state 38
+    TRUE            shift and go to state 39
+    FALSE           shift and go to state 40
+    STRING          shift and go to state 41
 
+    values                         shift and go to state 70
+    value                          shift and go to state 62
 
 state 46
 
-    (15) print -> PRINT LPAREN RPAREN . SEMICOLON
-
-    SEMICOLON       shift and go to state 66
-
-
-state 47
-
-    (18) values -> value .
-    (19) values -> value . COMMA values
-
-    RPAREN          reduce using rule 18 (values -> value .)
-    SEMICOLON       reduce using rule 18 (values -> value .)
-    COMMA           shift and go to state 67
-
-
-state 48
-
-    (14) print -> PRINT value SEMICOLON .
-
-    $end            reduce using rule 14 (print -> PRINT value SEMICOLON .)
-
-
-state 49
-
-    (16) printf -> PRINTF LPAREN values . RPAREN SEMICOLON
-
-    RPAREN          shift and go to state 68
-
-
-state 50
-
-    (12) assignment -> IDENTIFIER ASSINGMENT values . SEMICOLON
-
-    SEMICOLON       shift and go to state 69
-
-
-state 51
-
-    (38) function -> IDENTIFIER ASSINGMENT NAMEFUNCTION . LPAREN parameter RPAREN SEMICOLON
-
-    LPAREN          shift and go to state 70
-
-
-state 52
-
-    (27) array -> IDENTIFIER ASSINGMENT ARRAY . LPAREN INTEGER RPAREN SEMICOLON
+    (47) function -> FUNCTION NAMEFUNCTION . LPAREN parameter RPAREN CURLYLEFTBRACKET
 
     LPAREN          shift and go to state 71
 
 
-state 53
+state 47
 
-    (28) stack -> IDENTIFIER ASSINGMENT NEW . STACK LPAREN RPAREN SEMICOLON
+    (50) function -> NAMEFUNCTION LPAREN . parameter RPAREN SEMICOLON
+    (48) parameter -> . IDENTIFIER
+    (49) parameter -> . IDENTIFIER COMMA parameter
 
-    STACK           shift and go to state 72
+    IDENTIFIER      shift and go to state 73
 
+    parameter                      shift and go to state 72
 
-state 54
+state 48
 
-    (29) op_stack -> IDENTIFIER MINUS GREATERTHAN . operad_stack
-    (30) operad_stack -> . PUSH LPAREN values RPAREN SEMICOLON
-    (31) operad_stack -> . POP LPAREN RPAREN SEMICOLON
-    (32) operad_stack -> . COUNT LPAREN RPAREN SEMICOLON
-    (33) operad_stack -> . CURRENT LPAREN RPAREN SEMICOLON
+    (52) return -> RETURN IDENTIFIER . SEMICOLON
 
-    PUSH            shift and go to state 21
-    POP             shift and go to state 22
-    COUNT           shift and go to state 23
-    CURRENT         shift and go to state 24
-
-    operad_stack                   shift and go to state 73
-
-state 55
-
-    (17) input -> FGETS LPAREN values . RPAREN SEMICOLON
-
-    RPAREN          shift and go to state 74
+    SEMICOLON       shift and go to state 74
 
 
-state 56
+state 49
 
-    (34) function -> FUNCTION NAMEFUNCTION LPAREN . parameter RPAREN CURLYLEFTBRACKET
-    (35) parameter -> . IDENTIFIER
-    (36) parameter -> . IDENTIFIER COMMA parameter
+    (38) echo -> ECHO STRING . SEMICOLON
 
-    IDENTIFIER      shift and go to state 58
-
-    parameter                      shift and go to state 75
-
-state 57
-
-    (37) function -> NAMEFUNCTION LPAREN parameter . RPAREN SEMICOLON
-
-    RPAREN          shift and go to state 76
+    SEMICOLON       shift and go to state 75
 
 
-state 58
+state 50
 
-    (35) parameter -> IDENTIFIER .
-    (36) parameter -> IDENTIFIER . COMMA parameter
+    (43) operad_stack -> PUSH LPAREN . values RPAREN SEMICOLON
+    (22) values -> . value
+    (23) values -> . value COMMA values
+    (24) value -> . INTEGER
+    (25) value -> . FLOAT
+    (26) value -> . IDENTIFIER
+    (27) value -> . TRUE
+    (28) value -> . FALSE
+    (29) value -> . STRING
 
-    RPAREN          reduce using rule 35 (parameter -> IDENTIFIER .)
-    COMMA           shift and go to state 77
+    INTEGER         shift and go to state 36
+    FLOAT           shift and go to state 37
+    IDENTIFIER      shift and go to state 38
+    TRUE            shift and go to state 39
+    FALSE           shift and go to state 40
+    STRING          shift and go to state 41
+
+    values                         shift and go to state 76
+    value                          shift and go to state 62
+
+state 51
+
+    (44) operad_stack -> POP LPAREN . RPAREN SEMICOLON
+
+    RPAREN          shift and go to state 77
 
 
-state 59
+state 52
 
-    (39) return -> RETURN IDENTIFIER SEMICOLON .
-
-    $end            reduce using rule 39 (return -> RETURN IDENTIFIER SEMICOLON .)
-
-
-state 60
-
-    (26) echo -> ECHO STRING SEMICOLON .
-
-    $end            reduce using rule 26 (echo -> ECHO STRING SEMICOLON .)
-
-
-state 61
-
-    (30) operad_stack -> PUSH LPAREN values . RPAREN SEMICOLON
+    (45) operad_stack -> COUNT LPAREN . RPAREN SEMICOLON
 
     RPAREN          shift and go to state 78
 
 
-state 62
+state 53
 
-    (31) operad_stack -> POP LPAREN RPAREN . SEMICOLON
+    (46) operad_stack -> CURRENT LPAREN . RPAREN SEMICOLON
 
-    SEMICOLON       shift and go to state 79
-
-
-state 63
-
-    (32) operad_stack -> COUNT LPAREN RPAREN . SEMICOLON
-
-    SEMICOLON       shift and go to state 80
+    RPAREN          shift and go to state 79
 
 
-state 64
+state 54
 
-    (33) operad_stack -> CURRENT LPAREN RPAREN . SEMICOLON
+    (53) if -> IF LPAREN . conditions RPAREN CURLYLEFTBRACKET
+    (56) conditions -> . condition
+    (57) conditions -> . condition operator conditions
+    (54) condition -> . IDENTIFIER
+    (55) condition -> . IDENTIFIER sign value
 
-    SEMICOLON       shift and go to state 81
+    IDENTIFIER      shift and go to state 82
 
+    conditions                     shift and go to state 80
+    condition                      shift and go to state 81
 
-state 65
+state 55
 
-    (13) print -> PRINT LPAREN values RPAREN . SEMICOLON
+    (58) elseif -> ELSEIF LPAREN . condition RPAREN CURLYLEFTBRACKET
+    (54) condition -> . IDENTIFIER
+    (55) condition -> . IDENTIFIER sign value
 
-    SEMICOLON       shift and go to state 82
+    IDENTIFIER      shift and go to state 82
 
+    condition                      shift and go to state 83
 
-state 66
+state 56
 
-    (15) print -> PRINT LPAREN RPAREN SEMICOLON .
+    (59) elseif -> CURLYRIGHTBRACKET ELSEIF . LPAREN condition RPAREN CURLYLEFTBRACKET
 
-    $end            reduce using rule 15 (print -> PRINT LPAREN RPAREN SEMICOLON .)
-
-
-state 67
-
-    (19) values -> value COMMA . values
-    (18) values -> . value
-    (19) values -> . value COMMA values
-    (20) value -> . INTEGER
-    (21) value -> . FLOAT
-    (22) value -> . IDENTIFIER
-    (23) value -> . TRUE
-    (24) value -> . FALSE
-    (25) value -> . STRING
-
-    INTEGER         shift and go to state 27
-    FLOAT           shift and go to state 28
-    IDENTIFIER      shift and go to state 29
-    TRUE            shift and go to state 30
-    FALSE           shift and go to state 31
-    STRING          shift and go to state 32
-
-    value                          shift and go to state 47
-    values                         shift and go to state 83
-
-state 68
-
-    (16) printf -> PRINTF LPAREN values RPAREN . SEMICOLON
-
-    SEMICOLON       shift and go to state 84
+    LPAREN          shift and go to state 84
 
 
-state 69
+state 57
 
-    (12) assignment -> IDENTIFIER ASSINGMENT values SEMICOLON .
+    (61) else -> CURLYRIGHTBRACKET ELSE . CURLYLEFTBRACKET
 
-    $end            reduce using rule 12 (assignment -> IDENTIFIER ASSINGMENT values SEMICOLON .)
-
-
-state 70
-
-    (38) function -> IDENTIFIER ASSINGMENT NAMEFUNCTION LPAREN . parameter RPAREN SEMICOLON
-    (35) parameter -> . IDENTIFIER
-    (36) parameter -> . IDENTIFIER COMMA parameter
-
-    IDENTIFIER      shift and go to state 58
-
-    parameter                      shift and go to state 85
-
-state 71
-
-    (27) array -> IDENTIFIER ASSINGMENT ARRAY LPAREN . INTEGER RPAREN SEMICOLON
-
-    INTEGER         shift and go to state 86
+    CURLYLEFTBRACKET shift and go to state 85
 
 
-state 72
+state 58
 
-    (28) stack -> IDENTIFIER ASSINGMENT NEW STACK . LPAREN RPAREN SEMICOLON
+    (60) else -> ELSE CURLYLEFTBRACKET .
 
-    LPAREN          shift and go to state 87
-
-
-state 73
-
-    (29) op_stack -> IDENTIFIER MINUS GREATERTHAN operad_stack .
-
-    $end            reduce using rule 29 (op_stack -> IDENTIFIER MINUS GREATERTHAN operad_stack .)
+    $end            reduce using rule 60 (else -> ELSE CURLYLEFTBRACKET .)
 
 
-state 74
+state 59
 
-    (17) input -> FGETS LPAREN values RPAREN . SEMICOLON
+    (39) while -> WHILE LPAREN . conditions RPAREN CURLYLEFTBRACKET
+    (56) conditions -> . condition
+    (57) conditions -> . condition operator conditions
+    (54) condition -> . IDENTIFIER
+    (55) condition -> . IDENTIFIER sign value
+
+    IDENTIFIER      shift and go to state 82
+
+    conditions                     shift and go to state 86
+    condition                      shift and go to state 81
+
+state 60
+
+    (17) print -> PRINT LPAREN values . RPAREN SEMICOLON
+
+    RPAREN          shift and go to state 87
+
+
+state 61
+
+    (19) print -> PRINT LPAREN RPAREN . SEMICOLON
 
     SEMICOLON       shift and go to state 88
 
 
+state 62
+
+    (22) values -> value .
+    (23) values -> value . COMMA values
+
+    RPAREN          reduce using rule 22 (values -> value .)
+    SEMICOLON       reduce using rule 22 (values -> value .)
+    COMMA           shift and go to state 89
+
+
+state 63
+
+    (18) print -> PRINT value SEMICOLON .
+
+    $end            reduce using rule 18 (print -> PRINT value SEMICOLON .)
+
+
+state 64
+
+    (20) printf -> PRINTF LPAREN values . RPAREN SEMICOLON
+
+    RPAREN          shift and go to state 90
+
+
+state 65
+
+    (16) assignment -> IDENTIFIER ASSINGMENT values . SEMICOLON
+
+    SEMICOLON       shift and go to state 91
+
+
+state 66
+
+    (51) function -> IDENTIFIER ASSINGMENT NAMEFUNCTION . LPAREN parameter RPAREN SEMICOLON
+
+    LPAREN          shift and go to state 92
+
+
+state 67
+
+    (40) array -> IDENTIFIER ASSINGMENT ARRAY . LPAREN INTEGER RPAREN SEMICOLON
+
+    LPAREN          shift and go to state 93
+
+
+state 68
+
+    (41) stack -> IDENTIFIER ASSINGMENT NEW . STACK LPAREN RPAREN SEMICOLON
+
+    STACK           shift and go to state 94
+
+
+state 69
+
+    (42) op_stack -> IDENTIFIER MINUS GREATERTHAN . operad_stack
+    (43) operad_stack -> . PUSH LPAREN values RPAREN SEMICOLON
+    (44) operad_stack -> . POP LPAREN RPAREN SEMICOLON
+    (45) operad_stack -> . COUNT LPAREN RPAREN SEMICOLON
+    (46) operad_stack -> . CURRENT LPAREN RPAREN SEMICOLON
+
+    PUSH            shift and go to state 25
+    POP             shift and go to state 26
+    COUNT           shift and go to state 27
+    CURRENT         shift and go to state 28
+
+    operad_stack                   shift and go to state 95
+
+state 70
+
+    (21) input -> FGETS LPAREN values . RPAREN SEMICOLON
+
+    RPAREN          shift and go to state 96
+
+
+state 71
+
+    (47) function -> FUNCTION NAMEFUNCTION LPAREN . parameter RPAREN CURLYLEFTBRACKET
+    (48) parameter -> . IDENTIFIER
+    (49) parameter -> . IDENTIFIER COMMA parameter
+
+    IDENTIFIER      shift and go to state 73
+
+    parameter                      shift and go to state 97
+
+state 72
+
+    (50) function -> NAMEFUNCTION LPAREN parameter . RPAREN SEMICOLON
+
+    RPAREN          shift and go to state 98
+
+
+state 73
+
+    (48) parameter -> IDENTIFIER .
+    (49) parameter -> IDENTIFIER . COMMA parameter
+
+    RPAREN          reduce using rule 48 (parameter -> IDENTIFIER .)
+    COMMA           shift and go to state 99
+
+
+state 74
+
+    (52) return -> RETURN IDENTIFIER SEMICOLON .
+
+    $end            reduce using rule 52 (return -> RETURN IDENTIFIER SEMICOLON .)
+
+
 state 75
 
-    (34) function -> FUNCTION NAMEFUNCTION LPAREN parameter . RPAREN CURLYLEFTBRACKET
+    (38) echo -> ECHO STRING SEMICOLON .
 
-    RPAREN          shift and go to state 89
+    $end            reduce using rule 38 (echo -> ECHO STRING SEMICOLON .)
 
 
 state 76
 
-    (37) function -> NAMEFUNCTION LPAREN parameter RPAREN . SEMICOLON
+    (43) operad_stack -> PUSH LPAREN values . RPAREN SEMICOLON
 
-    SEMICOLON       shift and go to state 90
+    RPAREN          shift and go to state 100
 
 
 state 77
 
-    (36) parameter -> IDENTIFIER COMMA . parameter
-    (35) parameter -> . IDENTIFIER
-    (36) parameter -> . IDENTIFIER COMMA parameter
+    (44) operad_stack -> POP LPAREN RPAREN . SEMICOLON
 
-    IDENTIFIER      shift and go to state 58
+    SEMICOLON       shift and go to state 101
 
-    parameter                      shift and go to state 91
 
 state 78
 
-    (30) operad_stack -> PUSH LPAREN values RPAREN . SEMICOLON
+    (45) operad_stack -> COUNT LPAREN RPAREN . SEMICOLON
 
-    SEMICOLON       shift and go to state 92
+    SEMICOLON       shift and go to state 102
 
 
 state 79
 
-    (31) operad_stack -> POP LPAREN RPAREN SEMICOLON .
+    (46) operad_stack -> CURRENT LPAREN RPAREN . SEMICOLON
 
-    $end            reduce using rule 31 (operad_stack -> POP LPAREN RPAREN SEMICOLON .)
+    SEMICOLON       shift and go to state 103
 
 
 state 80
 
-    (32) operad_stack -> COUNT LPAREN RPAREN SEMICOLON .
+    (53) if -> IF LPAREN conditions . RPAREN CURLYLEFTBRACKET
 
-    $end            reduce using rule 32 (operad_stack -> COUNT LPAREN RPAREN SEMICOLON .)
+    RPAREN          shift and go to state 104
 
 
 state 81
 
-    (33) operad_stack -> CURRENT LPAREN RPAREN SEMICOLON .
+    (56) conditions -> condition .
+    (57) conditions -> condition . operator conditions
+    (36) operator -> . AND
+    (37) operator -> . OR
 
-    $end            reduce using rule 33 (operad_stack -> CURRENT LPAREN RPAREN SEMICOLON .)
+    RPAREN          reduce using rule 56 (conditions -> condition .)
+    AND             shift and go to state 106
+    OR              shift and go to state 107
 
+    operator                       shift and go to state 105
 
 state 82
 
-    (13) print -> PRINT LPAREN values RPAREN SEMICOLON .
+    (54) condition -> IDENTIFIER .
+    (55) condition -> IDENTIFIER . sign value
+    (30) sign -> . IDENTICAL
+    (31) sign -> . EQUALS
+    (32) sign -> . GREATERTHAN
+    (33) sign -> . GREATERTHANEQ
+    (34) sign -> . LESSTHAN
+    (35) sign -> . LESSTHANEQ
 
-    $end            reduce using rule 13 (print -> PRINT LPAREN values RPAREN SEMICOLON .)
+    AND             reduce using rule 54 (condition -> IDENTIFIER .)
+    OR              reduce using rule 54 (condition -> IDENTIFIER .)
+    RPAREN          reduce using rule 54 (condition -> IDENTIFIER .)
+    IDENTICAL       shift and go to state 109
+    EQUALS          shift and go to state 110
+    GREATERTHAN     shift and go to state 111
+    GREATERTHANEQ   shift and go to state 112
+    LESSTHAN        shift and go to state 113
+    LESSTHANEQ      shift and go to state 114
 
+    sign                           shift and go to state 108
 
 state 83
 
-    (19) values -> value COMMA values .
+    (58) elseif -> ELSEIF LPAREN condition . RPAREN CURLYLEFTBRACKET
 
-    RPAREN          reduce using rule 19 (values -> value COMMA values .)
-    SEMICOLON       reduce using rule 19 (values -> value COMMA values .)
+    RPAREN          shift and go to state 115
 
 
 state 84
 
-    (16) printf -> PRINTF LPAREN values RPAREN SEMICOLON .
+    (59) elseif -> CURLYRIGHTBRACKET ELSEIF LPAREN . condition RPAREN CURLYLEFTBRACKET
+    (54) condition -> . IDENTIFIER
+    (55) condition -> . IDENTIFIER sign value
 
-    $end            reduce using rule 16 (printf -> PRINTF LPAREN values RPAREN SEMICOLON .)
+    IDENTIFIER      shift and go to state 82
 
+    condition                      shift and go to state 116
 
 state 85
 
-    (38) function -> IDENTIFIER ASSINGMENT NAMEFUNCTION LPAREN parameter . RPAREN SEMICOLON
+    (61) else -> CURLYRIGHTBRACKET ELSE CURLYLEFTBRACKET .
 
-    RPAREN          shift and go to state 93
+    $end            reduce using rule 61 (else -> CURLYRIGHTBRACKET ELSE CURLYLEFTBRACKET .)
 
 
 state 86
 
-    (27) array -> IDENTIFIER ASSINGMENT ARRAY LPAREN INTEGER . RPAREN SEMICOLON
+    (39) while -> WHILE LPAREN conditions . RPAREN CURLYLEFTBRACKET
 
-    RPAREN          shift and go to state 94
+    RPAREN          shift and go to state 117
 
 
 state 87
 
-    (28) stack -> IDENTIFIER ASSINGMENT NEW STACK LPAREN . RPAREN SEMICOLON
+    (17) print -> PRINT LPAREN values RPAREN . SEMICOLON
 
-    RPAREN          shift and go to state 95
+    SEMICOLON       shift and go to state 118
 
 
 state 88
 
-    (17) input -> FGETS LPAREN values RPAREN SEMICOLON .
+    (19) print -> PRINT LPAREN RPAREN SEMICOLON .
 
-    $end            reduce using rule 17 (input -> FGETS LPAREN values RPAREN SEMICOLON .)
+    $end            reduce using rule 19 (print -> PRINT LPAREN RPAREN SEMICOLON .)
 
 
 state 89
 
-    (34) function -> FUNCTION NAMEFUNCTION LPAREN parameter RPAREN . CURLYLEFTBRACKET
+    (23) values -> value COMMA . values
+    (22) values -> . value
+    (23) values -> . value COMMA values
+    (24) value -> . INTEGER
+    (25) value -> . FLOAT
+    (26) value -> . IDENTIFIER
+    (27) value -> . TRUE
+    (28) value -> . FALSE
+    (29) value -> . STRING
 
-    CURLYLEFTBRACKET shift and go to state 96
+    INTEGER         shift and go to state 36
+    FLOAT           shift and go to state 37
+    IDENTIFIER      shift and go to state 38
+    TRUE            shift and go to state 39
+    FALSE           shift and go to state 40
+    STRING          shift and go to state 41
 
+    value                          shift and go to state 62
+    values                         shift and go to state 119
 
 state 90
 
-    (37) function -> NAMEFUNCTION LPAREN parameter RPAREN SEMICOLON .
+    (20) printf -> PRINTF LPAREN values RPAREN . SEMICOLON
 
-    $end            reduce using rule 37 (function -> NAMEFUNCTION LPAREN parameter RPAREN SEMICOLON .)
+    SEMICOLON       shift and go to state 120
 
 
 state 91
 
-    (36) parameter -> IDENTIFIER COMMA parameter .
+    (16) assignment -> IDENTIFIER ASSINGMENT values SEMICOLON .
 
-    RPAREN          reduce using rule 36 (parameter -> IDENTIFIER COMMA parameter .)
+    $end            reduce using rule 16 (assignment -> IDENTIFIER ASSINGMENT values SEMICOLON .)
 
 
 state 92
 
-    (30) operad_stack -> PUSH LPAREN values RPAREN SEMICOLON .
+    (51) function -> IDENTIFIER ASSINGMENT NAMEFUNCTION LPAREN . parameter RPAREN SEMICOLON
+    (48) parameter -> . IDENTIFIER
+    (49) parameter -> . IDENTIFIER COMMA parameter
 
-    $end            reduce using rule 30 (operad_stack -> PUSH LPAREN values RPAREN SEMICOLON .)
+    IDENTIFIER      shift and go to state 73
 
+    parameter                      shift and go to state 121
 
 state 93
 
-    (38) function -> IDENTIFIER ASSINGMENT NAMEFUNCTION LPAREN parameter RPAREN . SEMICOLON
+    (40) array -> IDENTIFIER ASSINGMENT ARRAY LPAREN . INTEGER RPAREN SEMICOLON
 
-    SEMICOLON       shift and go to state 97
+    INTEGER         shift and go to state 122
 
 
 state 94
 
-    (27) array -> IDENTIFIER ASSINGMENT ARRAY LPAREN INTEGER RPAREN . SEMICOLON
+    (41) stack -> IDENTIFIER ASSINGMENT NEW STACK . LPAREN RPAREN SEMICOLON
 
-    SEMICOLON       shift and go to state 98
+    LPAREN          shift and go to state 123
 
 
 state 95
 
-    (28) stack -> IDENTIFIER ASSINGMENT NEW STACK LPAREN RPAREN . SEMICOLON
+    (42) op_stack -> IDENTIFIER MINUS GREATERTHAN operad_stack .
 
-    SEMICOLON       shift and go to state 99
+    $end            reduce using rule 42 (op_stack -> IDENTIFIER MINUS GREATERTHAN operad_stack .)
 
 
 state 96
 
-    (34) function -> FUNCTION NAMEFUNCTION LPAREN parameter RPAREN CURLYLEFTBRACKET .
+    (21) input -> FGETS LPAREN values RPAREN . SEMICOLON
 
-    $end            reduce using rule 34 (function -> FUNCTION NAMEFUNCTION LPAREN parameter RPAREN CURLYLEFTBRACKET .)
+    SEMICOLON       shift and go to state 124
 
 
 state 97
 
-    (38) function -> IDENTIFIER ASSINGMENT NAMEFUNCTION LPAREN parameter RPAREN SEMICOLON .
+    (47) function -> FUNCTION NAMEFUNCTION LPAREN parameter . RPAREN CURLYLEFTBRACKET
 
-    $end            reduce using rule 38 (function -> IDENTIFIER ASSINGMENT NAMEFUNCTION LPAREN parameter RPAREN SEMICOLON .)
+    RPAREN          shift and go to state 125
 
 
 state 98
 
-    (27) array -> IDENTIFIER ASSINGMENT ARRAY LPAREN INTEGER RPAREN SEMICOLON .
+    (50) function -> NAMEFUNCTION LPAREN parameter RPAREN . SEMICOLON
 
-    $end            reduce using rule 27 (array -> IDENTIFIER ASSINGMENT ARRAY LPAREN INTEGER RPAREN SEMICOLON .)
+    SEMICOLON       shift and go to state 126
 
 
 state 99
 
-    (28) stack -> IDENTIFIER ASSINGMENT NEW STACK LPAREN RPAREN SEMICOLON .
+    (49) parameter -> IDENTIFIER COMMA . parameter
+    (48) parameter -> . IDENTIFIER
+    (49) parameter -> . IDENTIFIER COMMA parameter
 
-    $end            reduce using rule 28 (stack -> IDENTIFIER ASSINGMENT NEW STACK LPAREN RPAREN SEMICOLON .)
+    IDENTIFIER      shift and go to state 73
+
+    parameter                      shift and go to state 127
+
+state 100
+
+    (43) operad_stack -> PUSH LPAREN values RPAREN . SEMICOLON
+
+    SEMICOLON       shift and go to state 128
+
+
+state 101
+
+    (44) operad_stack -> POP LPAREN RPAREN SEMICOLON .
+
+    $end            reduce using rule 44 (operad_stack -> POP LPAREN RPAREN SEMICOLON .)
+
+
+state 102
+
+    (45) operad_stack -> COUNT LPAREN RPAREN SEMICOLON .
+
+    $end            reduce using rule 45 (operad_stack -> COUNT LPAREN RPAREN SEMICOLON .)
+
+
+state 103
+
+    (46) operad_stack -> CURRENT LPAREN RPAREN SEMICOLON .
+
+    $end            reduce using rule 46 (operad_stack -> CURRENT LPAREN RPAREN SEMICOLON .)
+
+
+state 104
+
+    (53) if -> IF LPAREN conditions RPAREN . CURLYLEFTBRACKET
+
+    CURLYLEFTBRACKET shift and go to state 129
+
+
+state 105
+
+    (57) conditions -> condition operator . conditions
+    (56) conditions -> . condition
+    (57) conditions -> . condition operator conditions
+    (54) condition -> . IDENTIFIER
+    (55) condition -> . IDENTIFIER sign value
+
+    IDENTIFIER      shift and go to state 82
+
+    condition                      shift and go to state 81
+    conditions                     shift and go to state 130
+
+state 106
+
+    (36) operator -> AND .
+
+    IDENTIFIER      reduce using rule 36 (operator -> AND .)
+
+
+state 107
+
+    (37) operator -> OR .
+
+    IDENTIFIER      reduce using rule 37 (operator -> OR .)
+
+
+state 108
+
+    (55) condition -> IDENTIFIER sign . value
+    (24) value -> . INTEGER
+    (25) value -> . FLOAT
+    (26) value -> . IDENTIFIER
+    (27) value -> . TRUE
+    (28) value -> . FALSE
+    (29) value -> . STRING
+
+    INTEGER         shift and go to state 36
+    FLOAT           shift and go to state 37
+    IDENTIFIER      shift and go to state 38
+    TRUE            shift and go to state 39
+    FALSE           shift and go to state 40
+    STRING          shift and go to state 41
+
+    value                          shift and go to state 131
+
+state 109
+
+    (30) sign -> IDENTICAL .
+
+    INTEGER         reduce using rule 30 (sign -> IDENTICAL .)
+    FLOAT           reduce using rule 30 (sign -> IDENTICAL .)
+    IDENTIFIER      reduce using rule 30 (sign -> IDENTICAL .)
+    TRUE            reduce using rule 30 (sign -> IDENTICAL .)
+    FALSE           reduce using rule 30 (sign -> IDENTICAL .)
+    STRING          reduce using rule 30 (sign -> IDENTICAL .)
+
+
+state 110
+
+    (31) sign -> EQUALS .
+
+    INTEGER         reduce using rule 31 (sign -> EQUALS .)
+    FLOAT           reduce using rule 31 (sign -> EQUALS .)
+    IDENTIFIER      reduce using rule 31 (sign -> EQUALS .)
+    TRUE            reduce using rule 31 (sign -> EQUALS .)
+    FALSE           reduce using rule 31 (sign -> EQUALS .)
+    STRING          reduce using rule 31 (sign -> EQUALS .)
+
+
+state 111
+
+    (32) sign -> GREATERTHAN .
+
+    INTEGER         reduce using rule 32 (sign -> GREATERTHAN .)
+    FLOAT           reduce using rule 32 (sign -> GREATERTHAN .)
+    IDENTIFIER      reduce using rule 32 (sign -> GREATERTHAN .)
+    TRUE            reduce using rule 32 (sign -> GREATERTHAN .)
+    FALSE           reduce using rule 32 (sign -> GREATERTHAN .)
+    STRING          reduce using rule 32 (sign -> GREATERTHAN .)
+
+
+state 112
+
+    (33) sign -> GREATERTHANEQ .
+
+    INTEGER         reduce using rule 33 (sign -> GREATERTHANEQ .)
+    FLOAT           reduce using rule 33 (sign -> GREATERTHANEQ .)
+    IDENTIFIER      reduce using rule 33 (sign -> GREATERTHANEQ .)
+    TRUE            reduce using rule 33 (sign -> GREATERTHANEQ .)
+    FALSE           reduce using rule 33 (sign -> GREATERTHANEQ .)
+    STRING          reduce using rule 33 (sign -> GREATERTHANEQ .)
+
+
+state 113
+
+    (34) sign -> LESSTHAN .
+
+    INTEGER         reduce using rule 34 (sign -> LESSTHAN .)
+    FLOAT           reduce using rule 34 (sign -> LESSTHAN .)
+    IDENTIFIER      reduce using rule 34 (sign -> LESSTHAN .)
+    TRUE            reduce using rule 34 (sign -> LESSTHAN .)
+    FALSE           reduce using rule 34 (sign -> LESSTHAN .)
+    STRING          reduce using rule 34 (sign -> LESSTHAN .)
+
+
+state 114
+
+    (35) sign -> LESSTHANEQ .
+
+    INTEGER         reduce using rule 35 (sign -> LESSTHANEQ .)
+    FLOAT           reduce using rule 35 (sign -> LESSTHANEQ .)
+    IDENTIFIER      reduce using rule 35 (sign -> LESSTHANEQ .)
+    TRUE            reduce using rule 35 (sign -> LESSTHANEQ .)
+    FALSE           reduce using rule 35 (sign -> LESSTHANEQ .)
+    STRING          reduce using rule 35 (sign -> LESSTHANEQ .)
+
+
+state 115
+
+    (58) elseif -> ELSEIF LPAREN condition RPAREN . CURLYLEFTBRACKET
+
+    CURLYLEFTBRACKET shift and go to state 132
+
+
+state 116
+
+    (59) elseif -> CURLYRIGHTBRACKET ELSEIF LPAREN condition . RPAREN CURLYLEFTBRACKET
+
+    RPAREN          shift and go to state 133
+
+
+state 117
+
+    (39) while -> WHILE LPAREN conditions RPAREN . CURLYLEFTBRACKET
+
+    CURLYLEFTBRACKET shift and go to state 134
+
+
+state 118
+
+    (17) print -> PRINT LPAREN values RPAREN SEMICOLON .
+
+    $end            reduce using rule 17 (print -> PRINT LPAREN values RPAREN SEMICOLON .)
+
+
+state 119
+
+    (23) values -> value COMMA values .
+
+    RPAREN          reduce using rule 23 (values -> value COMMA values .)
+    SEMICOLON       reduce using rule 23 (values -> value COMMA values .)
+
+
+state 120
+
+    (20) printf -> PRINTF LPAREN values RPAREN SEMICOLON .
+
+    $end            reduce using rule 20 (printf -> PRINTF LPAREN values RPAREN SEMICOLON .)
+
+
+state 121
+
+    (51) function -> IDENTIFIER ASSINGMENT NAMEFUNCTION LPAREN parameter . RPAREN SEMICOLON
+
+    RPAREN          shift and go to state 135
+
+
+state 122
+
+    (40) array -> IDENTIFIER ASSINGMENT ARRAY LPAREN INTEGER . RPAREN SEMICOLON
+
+    RPAREN          shift and go to state 136
+
+
+state 123
+
+    (41) stack -> IDENTIFIER ASSINGMENT NEW STACK LPAREN . RPAREN SEMICOLON
+
+    RPAREN          shift and go to state 137
+
+
+state 124
+
+    (21) input -> FGETS LPAREN values RPAREN SEMICOLON .
+
+    $end            reduce using rule 21 (input -> FGETS LPAREN values RPAREN SEMICOLON .)
+
+
+state 125
+
+    (47) function -> FUNCTION NAMEFUNCTION LPAREN parameter RPAREN . CURLYLEFTBRACKET
+
+    CURLYLEFTBRACKET shift and go to state 138
+
+
+state 126
+
+    (50) function -> NAMEFUNCTION LPAREN parameter RPAREN SEMICOLON .
+
+    $end            reduce using rule 50 (function -> NAMEFUNCTION LPAREN parameter RPAREN SEMICOLON .)
+
+
+state 127
+
+    (49) parameter -> IDENTIFIER COMMA parameter .
+
+    RPAREN          reduce using rule 49 (parameter -> IDENTIFIER COMMA parameter .)
+
+
+state 128
+
+    (43) operad_stack -> PUSH LPAREN values RPAREN SEMICOLON .
+
+    $end            reduce using rule 43 (operad_stack -> PUSH LPAREN values RPAREN SEMICOLON .)
+
+
+state 129
+
+    (53) if -> IF LPAREN conditions RPAREN CURLYLEFTBRACKET .
+
+    $end            reduce using rule 53 (if -> IF LPAREN conditions RPAREN CURLYLEFTBRACKET .)
+
+
+state 130
+
+    (57) conditions -> condition operator conditions .
+
+    RPAREN          reduce using rule 57 (conditions -> condition operator conditions .)
+
+
+state 131
+
+    (55) condition -> IDENTIFIER sign value .
+
+    AND             reduce using rule 55 (condition -> IDENTIFIER sign value .)
+    OR              reduce using rule 55 (condition -> IDENTIFIER sign value .)
+    RPAREN          reduce using rule 55 (condition -> IDENTIFIER sign value .)
+
+
+state 132
+
+    (58) elseif -> ELSEIF LPAREN condition RPAREN CURLYLEFTBRACKET .
+
+    $end            reduce using rule 58 (elseif -> ELSEIF LPAREN condition RPAREN CURLYLEFTBRACKET .)
+
+
+state 133
+
+    (59) elseif -> CURLYRIGHTBRACKET ELSEIF LPAREN condition RPAREN . CURLYLEFTBRACKET
+
+    CURLYLEFTBRACKET shift and go to state 139
+
+
+state 134
+
+    (39) while -> WHILE LPAREN conditions RPAREN CURLYLEFTBRACKET .
+
+    $end            reduce using rule 39 (while -> WHILE LPAREN conditions RPAREN CURLYLEFTBRACKET .)
+
+
+state 135
+
+    (51) function -> IDENTIFIER ASSINGMENT NAMEFUNCTION LPAREN parameter RPAREN . SEMICOLON
+
+    SEMICOLON       shift and go to state 140
+
+
+state 136
+
+    (40) array -> IDENTIFIER ASSINGMENT ARRAY LPAREN INTEGER RPAREN . SEMICOLON
+
+    SEMICOLON       shift and go to state 141
+
+
+state 137
+
+    (41) stack -> IDENTIFIER ASSINGMENT NEW STACK LPAREN RPAREN . SEMICOLON
+
+    SEMICOLON       shift and go to state 142
+
+
+state 138
+
+    (47) function -> FUNCTION NAMEFUNCTION LPAREN parameter RPAREN CURLYLEFTBRACKET .
+
+    $end            reduce using rule 47 (function -> FUNCTION NAMEFUNCTION LPAREN parameter RPAREN CURLYLEFTBRACKET .)
+
+
+state 139
+
+    (59) elseif -> CURLYRIGHTBRACKET ELSEIF LPAREN condition RPAREN CURLYLEFTBRACKET .
+
+    $end            reduce using rule 59 (elseif -> CURLYRIGHTBRACKET ELSEIF LPAREN condition RPAREN CURLYLEFTBRACKET .)
+
+
+state 140
+
+    (51) function -> IDENTIFIER ASSINGMENT NAMEFUNCTION LPAREN parameter RPAREN SEMICOLON .
+
+    $end            reduce using rule 51 (function -> IDENTIFIER ASSINGMENT NAMEFUNCTION LPAREN parameter RPAREN SEMICOLON .)
+
+
+state 141
+
+    (40) array -> IDENTIFIER ASSINGMENT ARRAY LPAREN INTEGER RPAREN SEMICOLON .
+
+    $end            reduce using rule 40 (array -> IDENTIFIER ASSINGMENT ARRAY LPAREN INTEGER RPAREN SEMICOLON .)
+
+
+state 142
+
+    (41) stack -> IDENTIFIER ASSINGMENT NEW STACK LPAREN RPAREN SEMICOLON .
+
+    $end            reduce using rule 41 (stack -> IDENTIFIER ASSINGMENT NEW STACK LPAREN RPAREN SEMICOLON .)
 

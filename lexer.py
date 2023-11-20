@@ -97,6 +97,7 @@ tokens = (
   'IDENTICAL',
   'NOTIDENTICAL', 
   'COMMENTS',
+  'CHAIN',
   #Fin Irving Macias
 
   #Inicio Diego Martinez
@@ -289,6 +290,10 @@ def t_NAMEFUNCTION(t):
 def t_FORMAT(t):
    r'%s|%d|%f'
 
+def t_CHAIN(t):
+    r'([a-zA-Z0-9_]?[a-zA-Z0-9_]+)'
+    t.type = reserved.get(t.value, 'CHAIN')
+    return t
 
 #Fin Diego Martinez
 
@@ -379,8 +384,13 @@ if ($numero1 > $numero2) {
     echo "El número $numero2 es mayor que el número $numero1";
 } else {
     echo "Ambos números son iguales";
-}
-
+} &&
+||
+or
+and
+->
+HOLA
+name()
 '''
 
 # Enviando el código

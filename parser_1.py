@@ -13,6 +13,9 @@ def p_sentence(p):
               | stack
               | op_stack
               | operad_stack
+              | if
+              | elseif
+              | else
               '''
 
 # Inicio Meiyin Chang
@@ -34,7 +37,7 @@ def p_input(p):
 
 def p_values(p):
   '''values : value
-          | value COMMA values'''
+            | value COMMA values'''
 
 def p_value(p):
   '''value : INTEGER
@@ -44,8 +47,23 @@ def p_value(p):
           | FALSE
           | STRING'''
   
+def p_sign(p):
+  '''sign : IDENTICAL
+          | EQUALS
+          | GREATERTHAN
+          | GREATERTHANEQ
+          | LESSTHAN
+          | LESSTHANEQ
+'''
+
+def p_operator(p):
+  '''operator : AND
+              | OR
+'''
+  
 def p_echo(p):
   '''echo : ECHO STRING SEMICOLON'''
+
   
 # Fin  Meiyin Chang
 
@@ -104,10 +122,9 @@ def p_function_call(p):
 # return 
 def p_return(p):
   " return : RETURN IDENTIFIER SEMICOLON"
-# return $resultado;
+#return $resultado;
 
-
-code = '''
+''' EJEMPLO DE UNA FUNCION
 function sumar($numero1, $numero2) {
     $resultado = $numero1 + $numero2;
     return $resultado;
@@ -118,7 +135,62 @@ $valor1 = 5;
 $valor2 = 3;
 $suma = sumar($valor1, $valor2);
 echo "La suma de $valor1 y $valor2 es: $suma"; // Esto imprimirá "La suma de 5 y 3 es: 8"
-    '''
+'''
+
+#ESTRUCTURAS DE CONTROL
+def p_if_declaration(p):
+    "if : IF LPAREN conditions RPAREN CURLYLEFTBRACKET"
+# if ($numero > 0) {
+
+#Declaracion de una condicion
+def p_condition(p):
+   '''condition : IDENTIFIER
+                | IDENTIFIER sign value'''
+# $numero > 0
+
+def p_conditions(p):
+   '''conditions : condition
+                | condition operator conditions'''
+
+def p_elseif_declaration(p):
+    '''elseif : ELSEIF LPAREN condition RPAREN CURLYLEFTBRACKET
+              | CURLYRIGHTBRACKET ELSEIF LPAREN condition RPAREN CURLYLEFTBRACKET'''
+
+def p_else_declaration(p):
+    '''else : ELSE CURLYLEFTBRACKET
+            | CURLYRIGHTBRACKET ELSE CURLYLEFTBRACKET'''
+
+
+''' EJEMPLO DE IF, ELSEIF, ELSE
+$hora = 14;
+if ($hora < 12) {
+    echo "Buenos días.";
+} elseif ($hora < 18) {
+    echo "Buenas tardes.";
+} else {
+    echo "Buenas noches.";
+}
+
+$edad = 25;
+$genero = "masculino";
+
+if ($edad >= 18 && $genero == "masculino") {
+    echo "Eres un hombre mayor de edad.";
+} else {
+    echo "No cumples con las condiciones.";
+}
+
+if ($c || $d) {
+'''
+code_meiyin = '''
+#esto es un comentario
+$mensaje = "Hola, mundo";
+function saludar($nombre) {
+	echo "Hola, " . $nombre;
+}
+saludar("Juan");
+echo $mensaje;
+'''
 
 #Fin de Diego Martinez
 
@@ -140,6 +212,7 @@ parser = sint.yacc()
 while True:
   try:
     s = input('prueba > ')
+    #s = code_meiyin
   except EOFError:
     break
   if not s: continue
