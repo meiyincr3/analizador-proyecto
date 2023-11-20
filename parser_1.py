@@ -50,7 +50,13 @@ def p_value(p):
           | TRUE
           | FALSE
           | STRING'''
-  
+
+def p_item(p): 
+  '''item: value
+          | stack
+          | array
+          | queue
+  '''
 def p_sign(p):
   '''sign : IDENTICAL
           | EQUALS
@@ -78,18 +84,49 @@ def p_array(p):
   # $array =  new holiboli(232);
   # $array = array(232);
 
+## Array= array items=items Arrow=ARROW item=sentece cadena=
+def p_itemsSeparteByComMas(p):
+    'items : item repite_items'
+
+def p_repite_itemsSeparteByComMas(p):
+    ''' repite_items : COMMA item
+                        | COMMA item repite_items
+    '''
+
+def p_array_associative(p):
+    "array : DOLLARSIGN CHAIN ASSINGMENT ARRAY LPAREN item ARROW item RPAREN SEMICOLON"
+  # $oracion = array(a7itemalguno => 12)
+
+def p_array_parentesis(p):
+    "array : DOLLARSIGN CHAIN ASSINGMENT ARRAY LPAREN items RPAREN SEMICOLON"
+
+
+#para array con asignacion con ARROW
+def p_itemsArrayloassociative(p):
+    " itemsARROW : item ARROW item repite_items_f"
+
+
+def p_repite_itemsSeparate_arrow(p):
+    ''' repite_items_f : COMMA item ARROW item
+                      | COMMA item ARROW item repite_items
+    '''
+
+def p_array_associative(p):
+    "array : DOLLARSIGN CHAIN ASSINGMENT ARRAY LPAREN itemsARROW RPAREN SEMICOLON"
+## queue 
+def p_queue(p):
+  " queue : NEW QUEUE LPAREN RPAREN "
 
 #Stack methods
 def p_stack(p):
     "stack : IDENTIFIER ASSINGMENT NEW STACK LPAREN RPAREN SEMICOLON"
   # $stack = new stack();
 
-# métodos de la pila
-# Ejemplo: $_pila1 -> push(2);
+
 def p_op_stack(p):
   " op_stack : IDENTIFIER MINUS GREATERTHAN operad_stack"
 
-# push:añade, pop:elimina, count:cuenta, current:muestra el valor
+# push:añade, pop:elimina, count:cuenta, current:muestra el item
 def p_operad_stack(p):
   '''operad_stack : PUSH LPAREN values RPAREN SEMICOLON 
                   | POP LPAREN RPAREN SEMICOLON
