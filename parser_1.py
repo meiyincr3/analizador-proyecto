@@ -52,7 +52,7 @@ def p_value(p):
           | STRING'''
 
 def p_item(p): 
-  '''item: value
+  '''item : value
           | stack
           | array
           | queue
@@ -111,7 +111,7 @@ def p_repite_itemsSeparate_arrow(p):
                       | COMMA item ARROW item repite_items
     '''
 
-def p_array_associative(p):
+def p_array_associative2(p):
     "array : DOLLARSIGN CHAIN ASSINGMENT ARRAY LPAREN itemsARROW RPAREN SEMICOLON"
 ## queue 
 def p_queue(p):
@@ -244,15 +244,13 @@ if ($edad >= 18 && $genero == "masculino") {
 
 if ($c || $d) {
 '''
-code_meiyin = '''
-#esto es un comentario
+code_meiyin = '''#esto es un comentario
 $mensaje = "Hola, mundo";
 function saludar($nombre) {
 	echo "Hola, " . $nombre;
 }
 saludar("Juan");
-echo $mensaje;
-'''
+echo $mensaje;'''
 
 #Fin de Diego Martinez
 
