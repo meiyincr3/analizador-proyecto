@@ -16,6 +16,10 @@ def p_sentence(p):
               | if
               | elseif
               | else
+              | do
+              | die
+              | exit
+              | foreach
               '''
 
 # Inicio Meiyin Chang
@@ -63,6 +67,7 @@ def p_operator(p):
   
 def p_echo(p):
   '''echo : ECHO STRING SEMICOLON'''
+
 
   
 # Fin  Meiyin Chang
@@ -160,6 +165,26 @@ def p_else_declaration(p):
     '''else : ELSE CURLYLEFTBRACKET
             | CURLYRIGHTBRACKET ELSE CURLYLEFTBRACKET'''
 
+#DO
+def p_do(p):
+    "do : DO CURLYLEFTBRACKET"
+
+#DIE Y EXIT
+def p_die(p):
+   '''die : DIE LPAREN STRING RPAREN SEMICOLON'''
+
+def p_exit(p):
+   '''exit : EXIT LPAREN STRING RPAREN SEMICOLON'''
+
+#foreach
+def p_foreach(p):
+   '''foreach : FOREACH LPAREN IDENTIFIER CHAIN IDENTIFIER RPAREN CURLYLEFTBRACKET'''
+
+'''
+foreach ($frutas as $fruta) {
+    echo $fruta . "<br>";
+}
+'''
 
 ''' EJEMPLO DE IF, ELSEIF, ELSE
 $hora = 14;

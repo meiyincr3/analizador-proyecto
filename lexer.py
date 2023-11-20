@@ -230,6 +230,10 @@ def t_WHILE(t):
     r'while'
     return t
 
+def t_FOREACH(t):
+    r'foreach'
+    return t
+
 def t_FOR(t):
     r'for'
     return t
@@ -265,6 +269,19 @@ def t_FUNCTION(t):
 
 def t_STACK(t):
     r'stack'
+    return t
+
+def t_DO(t):
+    r'do'
+    return t
+
+
+def t_DIE(t):
+    r'die'
+    return t
+
+def t_EXIT(t):
+    r'exit'
     return t
 
 def t_ECHO(t):
