@@ -20,6 +20,7 @@ def p_sentence(p):
               | die
               | exit
               | foreach
+              | while
               '''
 
 # Inicio Meiyin Chang
@@ -74,7 +75,19 @@ def p_operator(p):
 def p_echo(p):
   '''echo : ECHO STRING SEMICOLON'''
 
+#ESTRUCTURAS DE CONTROL
+'''
+$contador = 1;
 
+while ($contador <= 5) {
+    echo "El contador es: $contador <br>";
+    $contador++;
+}
+'''
+
+def p_while_declaration(p):
+    '''while : WHILE LPAREN conditions RPAREN CURLYLEFTBRACKET
+        | CURLYRIGHTBRACKET WHILE LPAREN conditions RPAREN SEMICOLON'''
   
 # Fin  Meiyin Chang
 
@@ -111,7 +124,7 @@ def p_repite_itemsSeparate_arrow(p):
                       | COMMA item ARROW item repite_items
     '''
 
-def p_array_associative2(p):
+def p_array_associative(p):
     "array : DOLLARSIGN CHAIN ASSINGMENT ARRAY LPAREN itemsARROW RPAREN SEMICOLON"
 ## queue 
 def p_queue(p):
@@ -244,13 +257,15 @@ if ($edad >= 18 && $genero == "masculino") {
 
 if ($c || $d) {
 '''
-code_meiyin = '''#esto es un comentario
+code_meiyin = '''
+#esto es un comentario
 $mensaje = "Hola, mundo";
 function saludar($nombre) {
 	echo "Hola, " . $nombre;
 }
 saludar("Juan");
-echo $mensaje;'''
+echo $mensaje;
+'''
 
 #Fin de Diego Martinez
 
