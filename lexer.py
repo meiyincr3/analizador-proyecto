@@ -2,329 +2,184 @@
 
 import ply.lex as lex
 
-reserved = {
-  # Inicio Meiyin Chang 
-  #Control Structures
+reservadas = {
+  # Inicio Meiyin Chang
+  'print': 'PRINT',
+  'switch':'SWITCH',
+  'case': 'CASE',
+  'SplStack':'STACK',
+  'push' : 'PUSH',
+  'pop' : 'POP',
+  'rewind' : 'REWIND',
+  'valid' : 'VALID',
+  'current' : 'CURRENT',
+  'next' : 'NEXT',
+  'foreach' : 'FOREACH',
+  'as' : 'AS',
+  # Fin Meiyin Chang 
+
+  # Inicio Diego Martinez
+  'function' : 'FUNCTION', 
   'if': 'IF', 
-  'else': 'ELSE', 
+  'else': 'ELSE',
+  'SplQueue' : 'QUEUE',
+  'new': 'NEW',
+  'enqueue': 'ENQUEUE',
+  'dequeue': 'DEQUEUE',
+  'count': 'COUNT',
+  'valid': 'VALID',
   'elseif':'ELSEIF',
+  'return' : 'RETURN',
+  'namefunction' : 'NAMEFUNCTION',
+  # Fin Diego Martinez
+
+  # Inicio Irving Macias
+  'echo' :'ECHO',
   'while': 'WHILE', 
   'for': 'FOR',
-  'foreach':'FOREACH',
-  'switch':'SWITCH',
-  # Fin Meiyin Chang
-  #Inicio Irving Macias
-  'default' : 'DEFAULT',
-  'break' : 'BREAK',
-  'continue' : 'CONTINUE',
-  'goto' : 'GOTO',
-  'endif' : 'ENDIF',
-  "count": "COUNT",
-  #Fin Irving Macias
-  #Inicio Diego Martinez
-  'do': 'DO',
-  'case': 'CASE',
-  'die' : 'DIE',
-  'exit': 'EXIT',
-  'endfor' : 'ENDFOR',
-  'enforeach' : 'ENDFOREACH',
-  #Fin Diego Martinez
-
-
-  #Data Structures
-  # Inicio Meiyin Chang
   'array':'ARRAY',
-  'stack':'STACK',
-  'SplQueue' : 'QUEUE',
-  'push': 'PUSH',
-  'pop' : 'POP',
-  # Fin Meiyin Chang
-  #Inicio Irving Macias
-  'SplFixedArray': 'FIXEDARRAY',
-  'SplObjectStorage': 'OBJECTSTORAGE',
-  'contains' :'CONTAINS',
-  'attach' : 'ATTACH',
-  #Fin Irving Macias
-  #Inicio Diego Martinez
-  'current' : 'CURRENT',
-  'SplPriorityQueue' : 'PRIORITYQUEUE',
-  'SplMaxHeap' : 'MAXHEAP',
-  'SplMinHeap' : 'MINHEAP',
-  'SplHeap' : 'HEAP',
-  #Fin Diego Martinez
+  'break' : 'BREAK',
+  'default': 'DEFAULT',
+  # Fin Irving Macias
 
-
-  #More Words
-  # Inicio Meiyin Chang
-  'and':'AND',
-  'or':'OR',
-  'echo':'ECHO',
-  'class':'CLASS',
-  'function':'FUNCTION',
-  'try':'TRY', 
-  'true':'TRUE',
-  'false':'FALSE',
-  'printf' : 'PRINTF',
-  'print' : 'PRINT',
-  'fgets' : 'FGETS',
-  # Fin Meiyin Chang 
-  #Inicio Irving Macias
-  'new' : 'NEW',
-  'public' : 'PUBLIC',
-  'return' : 'RETURN',
-  'xor' : 'XOR',
-  #Fin Irving Macias  
-  #Inicio Diego Martinez
-  'catch':'CATCH',
-  'switch':'SWITCH',
-  'extends' : 'EXTENDS',
-  'static' : 'STATIC',
-  'declare' : 'DECLARE',
-  'namefunction' : 'NAMEFUNCTION',
-  #Fin Diego Martinez   
 }
 
 # Secuencia de tokens
 tokens = (
-#Inicio Irving Macias
-  'IDENTIFIER',
-  'INTEGER',
-  'FLOAT',
-  'PLUS',
-  'MINUS',
-  'POWERBY',
-  'ASSINGMENT',
-  'IDENTICAL',
-  'NOTIDENTICAL', 
-  'COMMENTS',
-  'CHAIN',
+ #Inicio Irving Macias
+  'IDENTIFICADOR',
+  'ENTERO',
+  'FLOTANTE',
+  'SUMA',
+  'RESTA',
+  'POTENCIA',
+  'ASIGNACION',
+  'IDENTICO',
+  'NOIDENTICO', 
+  'COMA',
+  'PUNTO',
   #Fin Irving Macias
 
   #Inicio Diego Martinez
-  'DIVIDE',   
-  'LPAREN',
-  'RPAREN',
-  'EQUALS',
-  'INCREMENT',
-  'DECREMENT',
-  'SEMICOLON',
-  'ANDEQUAL',
-  'DOUBLECOLON',
-  'RBRACKET',
-  'LBRACKET',
-  'APOSTROPHE',
-  'COMMA',
-  'DOT',
-  'DOLLARSIGN',
+  'PARENIZ',
+  'PARENDER',
+  'ASIGNAR',
+  'INCREMENTO',
+  'DECREMENTO',
+  'PUNTOCOMA',
+  'ANDEQUAL', #BITWISE AND ASSIGNMENT
+  'OPERADOR',
+  'LLAVEIZ',
+  'LLAVEDER',
+  'MULT',
+  'MAYORQUE',
+  'MAYORIGUALQUE',
   #Fin Diego Martinez
 
   # Inicio Meiyin Chang
-  'TIMES',
-  'GREATERTHAN',
-  'GREATERTHANEQ',
-  'LESSTHAN',
-  'LESSTHANEQ',
-  'COLON',
-  'MODULE',
-  'INTDIVIDE',
-  'ARROW',
-  'SIMPLEARROW',
-  'STRING',
-  'CURLYLEFTBRACKET',
-  'CURLYRIGHTBRACKET',
-  'FORMAT',
+  'IGUAL',
+  'MENORQUE',
+  'MENORIGUALQUE',
+  'DOSPUNTOS',
+  'COMENTARIO',
+  'MODULO',
+  'DIVISIONENTERA',
+  'BOOLEAN',
+  'CADENA',
+  'AND',
+  'OR',
+  'FLECHASIMPLE',
+  'CORCHETEIZ',
+  'CORCHETEDER',
+  'DIVISION', 
+  'SIGNOID',
   # Fin Meiyin Chang
-) + tuple(reserved.values())
+ ) + tuple(reservadas.values())
 
 # Expresiones Regulares simples para símbolos
 #Inicio Irving Macias
-t_PLUS = r'\+'
-t_MINUS = r'\-'
-t_TIMES = r'\*'
-t_POWERBY = r'\*\*'
-t_ASSINGMENT = r'='
-t_IDENTICAL = r'==='
-t_NOTIDENTICAL = r'\!=='
+t_SUMA = r'\+'
+t_RESTA = r'\-'
+t_MULT = r'\*'
+t_POTENCIA = r'\*\*'
+t_ASIGNAR = r'='
+t_IDENTICO = r'==='
+t_NOIDENTICO = r'\!=='
+t_LLAVEIZ = r'\{'
+t_LLAVEDER = r'\}'
 #Fin Irving Macias
 
-
 #Inicio Diego Martinez
-t_LPAREN = r'\('
-t_RPAREN = r'\)'
-t_DIVIDE = r'\/'
-t_EQUALS = r'=='
-t_INCREMENT = r'\+\+'
-t_DECREMENT = r'\-\-'
-t_SEMICOLON = r';'
+t_PARENIZ = r'\('
+t_PARENDER = r'\)'
+t_DIVISION = r'\/'
+t_IGUAL = r'=='
+t_INCREMENTO = r'\+\+'
+t_DECREMENTO = r'\-\-'
+t_PUNTOCOMA = r';'
 t_ANDEQUAL = r'&='
-t_DOUBLECOLON = r'::'
-t_LBRACKET = r'\['
-t_RBRACKET = r'\]'
-t_APOSTROPHE = r'\''
-t_COMMA = r','
-t_DOT = r'\.'
+t_COMA = r','
+t_PUNTO = r'\.'
+t_CORCHETEIZ = r'\['
+t_CORCHETEDER = r'\]'
 #Fin Diego Martinez
 
 # Inicio Meiyin Chang
-t_DOLLARSIGN = r'\$'
-t_GREATERTHAN = r'>'
-t_GREATERTHANEQ = r'>='
-t_LESSTHAN = r'<'
-t_LESSTHANEQ = r'<='
-t_COLON = r':'
-t_MODULE = r'%'
-t_INTDIVIDE = r'//'
-t_ARROW = r'=\>'
-t_SIMPLEARROW = r'-\>'
-t_CURLYLEFTBRACKET = r'{'
-t_CURLYRIGHTBRACKET = r'}'
+t_MAYORQUE = r'>'
+t_MAYORIGUALQUE = r'>='
+t_MENORQUE = r'<'
+t_MENORIGUALQUE = r'<='
+t_DOSPUNTOS = r':'
+t_MODULO = r'%'
+t_DIVISIONENTERA = r'//'
+t_FLECHASIMPLE = r'\-\>'
+t_AND = r'&&'
+t_OR = r'\|\|'
+t_SIGNOID = r'\$'
 # Fin Meiyin Chang
-
-
-#t_FLOTANTE = r'\d+\.\d+'
 
 #Si se repiten caracteres es mejor utilizar una funcion
 # Expresión regular para números, incluye cast
-# Inicio Meiyin Chang
-def t_IDENTIFIER(t):
-  r'\$[a-zA-Z_]\w*'
-  t.type = reserved.get(t.value,'IDENTIFIER')
-  return t
 
-def t_FLOAT(t):
+# Inicio Meiyin Chang
+
+
+def t_OPERADOR(t):
+    r'and|or|AND|OR'
+    return t
+
+def t_BOOLEAN(t):
+    r'True|False'
+    return t
+
+
+def t_FLOTANTE(t):
   r'\d+\.\d+'
   return t
 
-
-def t_INTEGER(t):
+def t_ENTERO(t):
   r'\d+'
   t.value = int(t.value)
   return t
 
-def t_STRING(t):
-  r'"[^"]*"'
-  t.type = reserved.get(t.value, "STRING")
-  return t
-
-def t_IF(t):
-    r'if'
+def t_CADENA(t):
+    r'("[^"]*"|\'[^\']*\')'
+    t.type = reservadas.get(t.value, "CADENA")
     return t
 
-def t_ELSEIF(t):
-    r'elseif'
-    return t
-
-def t_ELSE(t):
-    r'else'
-    return t
-
-def t_ARRAY(t):
-    r'array'
-    return t
-
-def t_SORT(t):
-    r'sort'
-    return t
-
-def t_WHILE(t):
-    r'while'
-    return t
-
-def t_FOREACH(t):
-    r'foreach'
-    return t
-
-def t_FOR(t):
-    r'for'
-    return t
-
-def t_AND(t):
-    r'(and|\&\&)'
-    return t
-
-def t_OR(t):
-    r'(or|\|\|)'
-    return t
-
-def t_TRY(t):
-    r'try'
-    return t
-
-def t_EXCEPTION(t):
-    r'exception'
-    return t
-
-def t_RETURN(t):
-    r'return'
-    return t
-
-def t_CATCH(t):
-    r'catch'
-    return t
-
-#Inicio Diego Martinez
-def t_FUNCTION(t):
-    r'function'
-    return t
-
-def t_STACK(t):
-    r'stack'
-    return t
-
-def t_DO(t):
-    r'do'
-    return t
-
-
-def t_DIE(t):
-    r'die'
-    return t
-
-def t_EXIT(t):
-    r'exit'
-    return t
-
-def t_ECHO(t):
-    r'echo'
-    return t
-
-def t_PRINTF(t):
-    r'printf'
-    return t
-
-def t_PRINT(t):
-    r'print'
-    return t
-
-def t_FGETS(t):
-    r'fgets'
+def t_COMENTARIO(t):
+    r'(\/\/.*)|(\/\*(.|\s)*\*\/)|(\#.*)'
     return t
 
 def t_NAMEFUNCTION(t):
     r'([a-zA-Z_]\w*)(?=\()'
+    t.type = reservadas.get(t.value, "NAMEFUNCTION")
     return t
 
-def t_FORMAT(t):
-   r'%s|%d|%f'
-
-def t_CHAIN(t):
-    r'([a-zA-Z0-9_]?[a-zA-Z0-9_]+)'
-    t.type = reserved.get(t.value, 'CHAIN')
-    return t
-
-#Fin Diego Martinez
-
-#Inicio Irving y Meiyin
-def t_COMMENTS(t):
-  r'(\/\/.*)|(\/\*(.|\s)*\*\/)|(\#.*)'
+def t_IDENTIFICADOR(t):
+  r'\$?[a-zA-Z_]\w*'
+  t.type = reservadas.get(t.value,'IDENTIFICADOR')
   return t
-  
-def t_NEW(t):
-    r'new'
-    return t
-
-
-#Fin Irving y Meiyin
 
 # Expresión regular para reconocer saltos de línea
 def t_newline(t):
@@ -350,11 +205,11 @@ lexer = lex.lex()
 code = '''if 4 > var:
 if 4 % 2:
 if 4 // 2:
-mivar = 3 + 4 * 10.8 + hola
+mivar = 3 + 4 * 10.8 + "hola"
   + -20 * 7 
 '''
 
-algoritmoIrving = '''
+codei = '''
 $totalNumeros = 10
 
 $fibonacci = array();
@@ -375,7 +230,6 @@ for ($i = 0; $i < $totalNumeros; $i++) {
 '''
 
 code_meiyin = '''
-#esto es un comentario
 $mensaje = "Hola, mundo";
 function saludar($nombre) {
 	echo "Hola, " . $nombre;
@@ -384,18 +238,18 @@ saludar("Juan");
 echo $mensaje;
     '''
 
-codigoDiego = '''
+codeDiego = '''
 // Definir dos números
 $numero1 = 10;
 $numero2 = 20;
 
 // Ejemplo de uso:
-$stack = new stack();
+$stack = new splstack();
 
 $fibonacci = array();
 
 // Comprobar cuál número es mayor
-if ($numero1 > $numero2) {
+if ($numero1 > $numero2 and  $numero1 > $numero2) {
     echo "El número $numero1 es mayor que el número $numero2";
 } elseif ($numero2 > $numero1) {
     echo "El número $numero2 es mayor que el número $numero1";
@@ -408,14 +262,15 @@ and
 ->
 HOLA
 name()
+while ($contador <= 5) {
 '''
 
 # Enviando el código
 #ingresa = input("Ingrese: ")
 #print(ingresa)
 #lexer.input(ingresa)
-lexer.input(codigoDiego)
-
+lexer.input(codeDiego)
+#lexer.input(codei)
 
 # Tokenizar
 for token in lexer:
