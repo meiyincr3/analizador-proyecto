@@ -40,7 +40,8 @@ def p_comentario(p):
                   | LLAVEDER
 	'''
 
-
+#def p_input(p):
+# '''input : PARENIZ values PARENDER SEMICOLON'''
 
 def p_valores(p):
   '''valores : valor
@@ -277,7 +278,7 @@ def p_stackPush(p):
   ''' stack : IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ valor PARENDER PUNTOCOMA'''
 
 def p_stackPop(p):
-  ''' stack : IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ PARENDER PUNTOCOMA'''
+  ''' stack : IDENTIFICADOR FLECHASIMPLE POP PARENIZ PARENDER PUNTOCOMA'''
 
 def p_stack(p):
   ''' stack : IDENTIFICADOR ASIGNAR NEW STACK PARENIZ PARENDER PUNTOCOMA'''
@@ -405,6 +406,7 @@ def analisis_sintactico(data):
 
 
 print("Analisis sintactico terminado... :)")
+
 
 '''
 while True:
