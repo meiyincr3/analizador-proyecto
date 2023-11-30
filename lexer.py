@@ -2,6 +2,8 @@
 
 import ply.lex as lex
 
+resultado_lexico = []
+
 reservadas = {
   # Inicio Meiyin Chang
   'print': 'PRINT',
@@ -198,6 +200,28 @@ def t_error(t):
   )
   t.lexer.skip(1)
 
+# Build the lexer object
+
+def analisis_lexico(data):
+    global resultado_lexema
+    validador = lex()
+    validador.input(data)
+
+    resultado_lexico.clear()
+    # Tokenize
+    while True:
+        tok = validador.token()
+        if not tok:
+            break  # No more input
+        # print(tok)
+        estado = "Linea: {:4} Tipo: {:16} Valor: {:16} Posicion: {:4}".format(str(tok.lineno), str(tok.type),
+                                                                          str(tok.value), str(tok.lexpos))
+        resultado_lexico.append(estado)
+    return resultado_lexico
+
+print("Análisis lexico terminado... :)")
+
+"""
 # Construye el lexer
 lexer = lex.lex()
 
@@ -275,3 +299,5 @@ lexer.input(codeDiego)
 # Tokenizar
 for token in lexer:
   print(token)
+
+"""

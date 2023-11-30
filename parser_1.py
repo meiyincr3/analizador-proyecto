@@ -333,6 +333,32 @@ def p_error(p):
 # Build the parser
 parser = sint.yacc()
 
+def analisis_sintactico(data):
+    linea = 0
+    global resultado_sintactico
+    resultado_sintactico.clear()
+    print(resultado_sintactico)
+
+    for item in data.splitlines():
+        linea += 1
+        # print("item: ", item)
+        if item:
+            gram = parser.parse(item)
+            # print("gram: ", gram)
+            if gram is None:
+                resultado_sintactico.append("Linea: " + str(linea) + "  Info: No hay errores!")
+            else:
+                resultado_sintactico.append("Linea: " + str(linea) + "  Info: " + str(gram))
+        else:
+            print("data vacia")
+
+    print("result: ", resultado_sintactico)
+    return resultado_sintactico
+
+
+print("Analisis sintactico terminado... :)")
+
+'''
 while True:
   try:
     s = input('prueba > ')
@@ -342,3 +368,4 @@ while True:
   if not s: continue
   result = parser.parse(s)
   print(result)
+  '''
