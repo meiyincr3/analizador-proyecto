@@ -64,7 +64,6 @@ def p_incrementoDecremento(p):
                           | RESTA ENTERO
   '''
 
-
 def p_operadores(p):
    '''operadores : OPERADOR
 	         | AND
@@ -262,8 +261,9 @@ def p_stackValido(p):
 
 
 
-#QUEUE
+
 #INICIO DIEGO MARTINEZ
+#QUEUE
 
 # $queue = new SplQueue();
 def p_queue(p):
@@ -305,6 +305,9 @@ def p_colaValido(p):
   " queue : IDENTIFICADOR FLECHASIMPLE VALID PARENIZ PARENDER"
 
 #FIN DIEGO
+
+
+
 #Inicio Irving
 #ARRAY
 def p_array(p):
