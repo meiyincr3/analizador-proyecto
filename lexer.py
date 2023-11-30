@@ -119,9 +119,7 @@ t_IGUAL = r'=='
 t_INCREMENTO = r'\+\+'
 t_DECREMENTO = r'\-\-'
 t_PUNTOCOMA = r';'
-t_ANDEQUAL = r'&='
 t_COMA = r','
-t_PUNTO = r'\.'
 t_CORCHETEIZ = r'\['
 t_CORCHETEDER = r'\]'
 #Fin Diego Martinez
@@ -137,7 +135,6 @@ t_DIVISIONENTERA = r'//'
 t_FLECHASIMPLE = r'\-\>'
 t_AND = r'&&'
 t_OR = r'\|\|'
-t_SIGNOID = r'\$'
 # Fin Meiyin Chang
 
 #Si se repiten caracteres es mejor utilizar una funcion
