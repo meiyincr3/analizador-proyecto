@@ -23,6 +23,7 @@ def p_bloque(p):
                 | comparaciones
                 | operaciones
                 | comentario
+                | longitud
                 '''
     
 def p_impresion(p):
@@ -30,16 +31,17 @@ def p_impresion(p):
                 | echo
                 | input
                 '''
-    
+
+def p_comentario(p):
+	''' comentario : COMENTARIO
+                  | LLAVEDER
+	'''
+
 def p_funciones(p):
     '''funciones : funcion
                 | return
                '''
     
-def p_comentario(p):
-	''' comentario : COMENTARIO
-                  | LLAVEDER
-	'''
 
 #def p_input(p):
 # '''input : PARENIZ values PARENDER SEMICOLON'''
@@ -50,6 +52,7 @@ def p_valores(p):
 
 def p_numero(p):
   '''NUMERO : ENTERO
+            | RESTA ENTERO
             | FLOTANTE
   '''
 def p_valor(p):
@@ -58,6 +61,7 @@ def p_valor(p):
 	         | BOOLEAN
              | IDENTIFICADOR
 	'''
+   
 def p_comparadorNum(p):
 	''' comparadorNum : MAYORQUE
 					| MAYORIGUALQUE
@@ -98,6 +102,9 @@ def p_operadores(p):
 	         | OR
 	'''
 
+def p_longitud(p):
+   '''longitud : IDENTIFICADOR ASIGNAR STRLEN PARENIZ valor PARENDER PUNTOCOMA'''
+
 # Operaciones aritmeticas
 
 def p_operaciones(p):
@@ -123,7 +130,7 @@ def p_operadorAritmetico(p):
 def p_asignacion(p):
     '''asignacion : IDENTIFICADOR ASIGNAR valor PUNTOCOMA'''
 
-#INICIO MEIYIN CHANG
+# Inicio Meiyin
 # Impresion
 def p_print(p):
   '''print : PRINT PARENIZ valores PARENDER PUNTOCOMA
@@ -399,11 +406,6 @@ def p_error(p):
         resultado = "Error sintactico: {}".format(p)
         print(resultado)
     resultado_sintactico.append(resultado)
-
-
-def p_empty(p):
-    'empty :'
-    pass
 
 
 code = '''

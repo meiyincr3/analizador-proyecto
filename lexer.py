@@ -19,6 +19,7 @@ reservadas = {
   'foreach' : 'FOREACH',
   'as' : 'AS',
   'fgets': 'FGETS',
+  
   # Fin Meiyin Chang 
 
   # Inicio Diego Martinez
@@ -43,6 +44,7 @@ reservadas = {
   'array':'ARRAY',
   'break' : 'BREAK',
   'default': 'DEFAULT',
+  'strlen' : 'STRLEN',
   # Fin Irving Macias
 
 }
@@ -56,11 +58,9 @@ tokens = (
   'SUMA',
   'RESTA',
   'POTENCIA',
-  'ASIGNACION',
   'IDENTICO',
   'NOIDENTICO', 
   'COMA',
-  'PUNTO',
   #Fin Irving Macias
 
   #Inicio Diego Martinez
@@ -70,13 +70,13 @@ tokens = (
   'INCREMENTO',
   'DECREMENTO',
   'PUNTOCOMA',
-  'ANDEQUAL', #BITWISE AND ASSIGNMENT
   'OPERADOR',
   'LLAVEIZ',
   'LLAVEDER',
   'MULT',
   'MAYORQUE',
   'MAYORIGUALQUE',
+  'FLUJOS',
   #Fin Diego Martinez
 
   # Inicio Meiyin Chang
@@ -95,8 +95,6 @@ tokens = (
   'CORCHETEIZ',
   'CORCHETEDER',
   'DIVISION', 
-  'SIGNOID',
-  'FLUJOS',
   # Fin Meiyin Chang
  ) + tuple(reservadas.values())
 
@@ -176,7 +174,7 @@ def t_CADENA(t):
     return t
 
 def t_COMENTARIO(t):
-    r'(\/\/.*)|(\/\*(.|\s)*\*\/)|(\#.*)'
+    r'(\/\/.*)|(\#.*)'
     return t
 
 def t_NAMEFUNCTION(t):

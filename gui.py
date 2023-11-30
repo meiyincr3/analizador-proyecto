@@ -136,11 +136,18 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         QMetaObject.connectSlotsByName(MainWindow)
+
+        fondo_ventana = QColor(110, 89, 149)
+        palette_ventana = QPalette()
+        palette_ventana.setColor(QPalette.Window, fondo_ventana)
+        MainWindow.setPalette(palette_ventana)
+
+
     # setupUi
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"Proyecto LP", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"Analizador PHP", None))
         self.bt_archivo.setText(QCoreApplication.translate("MainWindow", u"Cargar archivo", None))
         self.bt_limpiar.setText(QCoreApplication.translate("MainWindow", u"Limpiar", None))
         self.bt_lexico.setText(QCoreApplication.translate("MainWindow", u"Analisis lexico", None))
