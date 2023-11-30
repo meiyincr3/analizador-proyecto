@@ -28,6 +28,7 @@ def p_bloque(p):
 def p_impresion(p):
     '''impresion : print
                 | echo
+                | input
                 '''
     
 def p_funciones(p):
@@ -130,6 +131,10 @@ def p_print(p):
 
 def p_print_sinvalor(p):
   "print : PRINT PARENIZ PARENDER PUNTOCOMA"
+
+def p_input(p):
+  "input : IDENTIFICADOR ASIGNAR FGETS PARENIZ FLUJOS PARENDER PUNTOCOMA"
+#$numeroString = fgets(STDIN);
 
 # Fin Meiyin Chang
 

@@ -18,6 +18,7 @@ reservadas = {
   'next' : 'NEXT',
   'foreach' : 'FOREACH',
   'as' : 'AS',
+  'fgets': 'FGETS',
   # Fin Meiyin Chang 
 
   # Inicio Diego Martinez
@@ -95,6 +96,7 @@ tokens = (
   'CORCHETEDER',
   'DIVISION', 
   'SIGNOID',
+  'FLUJOS',
   # Fin Meiyin Chang
  ) + tuple(reservadas.values())
 
@@ -152,6 +154,10 @@ def t_OPERADOR(t):
 
 def t_BOOLEAN(t):
     r'True|False'
+    return t
+
+def t_FLUJOS(t):
+    r'STDIN'
     return t
 
 
