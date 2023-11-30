@@ -23,8 +23,12 @@ def p_operadorAritmetico(p):
 						  | MODULO
 						  | POTENCIA
 	'''
-    
-  #INICIO MEIYIN CHANG
+
+# Asignacion
+def p_asignacion(p):
+    '''asignacion : IDENTIFICADOR ASIGNAR valor PUNTOCOMA'''
+
+#INICIO MEIYIN CHANG
 # Impresion
 def p_print(p):
   '''print : PRINT PARENIZ valores PARENDER PUNTOCOMA
@@ -35,8 +39,47 @@ def p_print_sinvalor(p):
 
 # Fin Meiyin Chang
 
-#-------------ESTRUCTURAS DE CONTROL-----------------------
 
+
+
+#INICIO DE DIEGO
+#FUNCIONES
+#declaracion de una funcion
+def p_declaracion_funcion(p):
+    "funcion : FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ"
+# function sumar($numero1, $numero2) {
+
+
+#Declaracion de un parametro
+def p_parametro(p):
+   '''parametro : IDENTIFICADOR
+                | IDENTIFICADOR COMA parametro
+'''
+
+#llamada a una funcion
+def p_llamada_funcion(p):
+    ''' funcion : NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA
+                | IDENTIFICADOR ASIGNAR NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA
+'''
+
+# sumar($valor1, $valor2);
+# $suma = sumar($valor1, $valor2);
+
+
+# return 
+def p_return(p):
+  " return : RETURN IDENTIFICADOR PUNTOCOMA"
+#return $resultado;
+
+#FIN DE DIEGO
+
+
+
+
+
+
+
+#-------------ESTRUCTURAS DE CONTROL-----------------------
 def p_estructurasControl(p):
   '''estructurasControl : while
                         | for
@@ -45,7 +88,7 @@ def p_estructurasControl(p):
                         | switch
   '''
 
-
+#Inicio Meiyin
 def p_foreach(p):
   ''' foreach : FOREACH PARENIZ IDENTIFICADOR AS IDENTIFICADOR PARENDER LLAVEIZ'''
 #foreach ($numeros as $numero) {
@@ -66,10 +109,31 @@ def p_casos(p):
 def p_caso(p):
   ''' caso : CASE valor DOSPUNTOS echo BREAK PUNTOCOMA
   '''
+#Fin Meiyin
+
+
+
+
+#INICIO DE DIEGO
+def p_if(p):
+  ''' if : IF PARENIZ comparaciones PARENDER LLAVEIZ
+          | IF PARENIZ IDENTIFICADOR PARENDER LLAVEIZ 
+  '''
+#if ($edad >= 18) {
+#if ($esAdmin) { 
+
+
+#FIN DE DIEGO
+
+
+#------------------------------------------------------
+
+
+
+
+
 
 #----------------ESTRUCTURA DE DATOS--------------------
-
-# $queue = new SplQueue(); 
 def p_estructurasDeDatos(p):
   '''estructurasDeDatos : queue
                   | stack
@@ -109,6 +173,55 @@ def p_stackValido(p):
 
 # Fin Meiyin
 
+
+
+
+#QUEUE
+#INICIO DIEGO MARTINEZ
+
+# $queue = new SplQueue();
+def p_queue(p):
+  " queue : IDENTIFICADOR ASIGNAR NEW QUEUE PARENIZ PARENDER PUNTOCOMA"  
+
+#Añadir elementos a la cola
+# $queue->enqueue('1');
+def p_colaAnadir(p):
+  " queue : IDENTIFICADOR FLECHASIMPLE ENQUEUE PARENIZ valor PARENDER PUNTOCOMA"
+
+#Muestra el número de elementos de la cola(3)
+# $queue->count();
+def p_colaContar(p):
+  " queue : IDENTIFICADOR FLECHASIMPLE COUNT PARENIZ PARENDER PUNTOCOMA"
+
+#Saca de la cola el primer elemento y lo muestra
+# $queue->dequeue();
+def p_colaExpulsar(p):
+  " queue : IDENTIFICADOR FLECHASIMPLE DEQUEUE PARENIZ PARENDER PUNTOCOMA"
+
+#Avanzar
+# $queue->next();
+def p_colaSiguiente(p):
+  " queue : IDENTIFICADOR FLECHASIMPLE NEXT PARENIZ PARENDER PUNTOCOMA"
+
+#Situa el puntero al principio de la cola
+# $queue->rewind();
+def p_colaPunteroPrincipio(p):
+  " queue : IDENTIFICADOR FLECHASIMPLE REWIND PARENIZ PARENDER PUNTOCOMA"
+
+# Mostrar elemento actual de la cola
+# $queue->current();
+def p_colaActual(p):
+  " queue : IDENTIFICADOR FLECHASIMPLE CURRENT PARENIZ PARENDER PUNTOCOMA"
+
+# Comprobar si en la cola aun hay elementos
+# $queue->valid()
+def p_colaValido(p):
+  " queue : IDENTIFICADOR FLECHASIMPLE VALID PARENIZ PARENDER"
+
+#FIN DIEGO
+
+
+#-----------------------------------------------------
 def p_error(p):
     try:
         if p:
