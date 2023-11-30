@@ -271,10 +271,14 @@ def p_estructurasDeDatos(p):
 # Incio Meiyin
 
 # $stack->push("Deanna");
+
+# $stack = new SplStack();
 def p_stackPush(p):
   ''' stack : IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ valor PARENDER PUNTOCOMA'''
 
-# $stack = new SplStack();
+def p_stackPop(p):
+  ''' stack : IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ PARENDER PUNTOCOMA'''
+
 def p_stack(p):
   ''' stack : IDENTIFICADOR ASIGNAR NEW STACK PARENIZ PARENDER PUNTOCOMA'''
 
