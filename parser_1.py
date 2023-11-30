@@ -61,7 +61,7 @@ def p_valor(p):
 	         | BOOLEAN
              | IDENTIFICADOR
 	'''
-   
+#-------------------------Reglas semanticas de comparadores----------------   
 def p_comparadorNum(p):
 	''' comparadorNum : MAYORQUE
 					| MAYORIGUALQUE
@@ -88,7 +88,7 @@ def p_comparacion(p):
 	''' comparacion :  variable comparadorNum variable 
             | valor comparador valor 
 	'''
-
+#Fin de reglas semanticas de comparadores
 def p_incrementoDecremento(p):
   '''incrementoDecremento : INCREMENTO
                           | DECREMENTO
@@ -378,6 +378,34 @@ def p_array(p):
 #$arrayNumerico = [1, 2, 3, 4, 5];
 #$fibonacci = array();
 #Fin Irving
+
+#----------------------------Reglas Semanticas----------------
+
+#Irving
+def p_operadorSemanticoAritmetico(p):
+    'operadorSemanticoAritmetico : NUMERO operadorAritmetico NUMERO'
+
+
+def p_incrementoDecrementoSemantico(p):
+  '''incrementoDecrementoSemantico : IDENTIFICADOR incrementoDecremento
+                                    | ENTERO incrementoDecremento
+  '''
+
+#Meiying    
+
+def p_push(p):
+  'push : IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ IDENTIFICADOR PARENDER'
+
+def p_pop(p):
+  'pop : IDENTIFICADOR FLECHASIMPLE POP PARENIZ IDENTIFICADOR PARENDER'
+
+#Diego   
+
+def p_condicionesSemanticas(p):
+  '''condicionesSemanticas : BOOLEAN operadores BOOLEAN  
+  '''
+
+
 
 #-----------------------------------------------------
 #-------ERROR ANTERIOR NO USADO PARA LA GRAFICA, NO BORRAR-------------------------

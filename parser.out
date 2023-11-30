@@ -119,6 +119,12 @@ Rule 113   queue -> IDENTIFICADOR FLECHASIMPLE VALID PARENIZ PARENDER
 Rule 114   array -> IDENTIFICADOR ASIGNAR ARRAY PARENIZ PARENDER PUNTOCOMA
 Rule 115   array -> IDENTIFICADOR ASIGNAR ARRAY PARENIZ valores PARENDER PUNTOCOMA
 Rule 116   array -> IDENTIFICADOR ASIGNAR CORCHETEIZ valores CORCHETEDER PUNTOCOMA
+Rule 117   operadorSemanticoAritmetico -> NUMERO operadorAritmetico NUMERO
+Rule 118   incrementoDecrementoSemantico -> IDENTIFICADOR incrementoDecremento
+Rule 119   incrementoDecrementoSemantico -> ENTERO incrementoDecremento
+Rule 120   push -> IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ IDENTIFICADOR PARENDER
+Rule 121   pop -> IDENTIFICADOR FLECHASIMPLE POP PARENIZ IDENTIFICADOR PARENDER
+Rule 122   condicionesSemanticas -> BOOLEAN operadores BOOLEAN
 
 Terminals, with rules where they appear
 
@@ -126,7 +132,7 @@ AND                  : 48
 ARRAY                : 114 115
 AS                   : 83
 ASIGNAR              : 50 53 62 66 72 82 101 106 114 115 116
-BOOLEAN              : 28
+BOOLEAN              : 28 122 122
 BREAK                : 87
 CADENA               : 27
 CASE                 : 87
@@ -146,16 +152,16 @@ ECHO                 : 67
 ELSE                 : 94 95
 ELSEIF               : 90 91 92 93
 ENQUEUE              : 107
-ENTERO               : 23 24 45 46 82 82
+ENTERO               : 23 24 45 46 82 82 119
 FGETS                : 66
-FLECHASIMPLE         : 99 100 102 103 104 105 107 108 109 110 111 112 113
+FLECHASIMPLE         : 99 100 102 103 104 105 107 108 109 110 111 112 113 120 121
 FLOTANTE             : 25
 FLUJOS               : 66
 FOR                  : 82
 FOREACH              : 83
 FUNCTION             : 68
 IDENTICO             : 34
-IDENTIFICADOR        : 29 38 50 53 62 66 69 70 72 73 82 82 82 83 83 89 91 93 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116
+IDENTIFICADOR        : 29 38 50 53 62 66 69 70 72 73 82 82 82 83 83 89 91 93 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 118 120 120 121 121
 IF                   : 88 89
 IGUAL                : 36
 INCREMENTO           : 43
@@ -173,13 +179,13 @@ NEXT                 : 102 110
 NOIDENTICO           : 35
 OPERADOR             : 47
 OR                   : 49
-PARENDER             : 50 63 65 66 68 71 72 81 82 83 84 88 89 90 91 92 93 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115
-PARENIZ              : 50 63 65 66 68 71 72 81 82 83 84 88 89 90 91 92 93 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115
-POP                  : 100
+PARENDER             : 50 63 65 66 68 71 72 81 82 83 84 88 89 90 91 92 93 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 120 121
+PARENIZ              : 50 63 65 66 68 71 72 81 82 83 84 88 89 90 91 92 93 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 120 121
+POP                  : 100 121
 POTENCIA             : 61
 PRINT                : 63 64 65
 PUNTOCOMA            : 50 62 63 64 65 66 67 71 72 73 82 82 87 99 100 101 102 103 104 106 107 108 109 110 111 112 114 115 116
-PUSH                 : 99
+PUSH                 : 99 120
 QUEUE                : 106
 RESTA                : 24 46 56
 RETURN               : 73
@@ -194,7 +200,7 @@ error                :
 
 Nonterminals, with rules where they appear
 
-NUMERO               : 26 37
+NUMERO               : 26 37 117 117
 array                : 98
 asignacion           : 6
 bloque               : 3 4
@@ -206,6 +212,7 @@ comparacion          : 39 40
 comparaciones        : 10 40 81 88 90 92
 comparador           : 42
 comparadorNum        : 41 82
+condicionesSemanticas : 
 echo                 : 15 84 87
 else                 : 78
 elseif               : 77
@@ -217,15 +224,19 @@ funcion              : 19
 funciones            : 7
 if                   : 76
 impresion            : 5
-incrementoDecremento : 82
+incrementoDecremento : 82 118 119
+incrementoDecrementoSemantico : 
 input                : 16
 longitud             : 13
 operacion            : 51 52
 operaciones          : 11 52 53
-operadorAritmetico   : 2 52 54
-operadores           : 40
+operadorAritmetico   : 2 52 54 117
+operadorSemanticoAritmetico : 
+operadores           : 40 122
 parametro            : 68 70 71 72
+pop                  : 
 print                : 14
+push                 : 
 queue                : 96
 return               : 20
 sentencias           : 0
