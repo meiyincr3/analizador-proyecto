@@ -5,16 +5,42 @@ from lexer import tokens
 resultado_sintactico = []
 
 def p_sentencias(p):
-    '''sentencias : asignacion
-                  | echo 
-                  | funcion
-                  | print
+    '''sentencias : bloques
                   | operadorAritmetico
-                  | return 
-                  | estructurasDeDatos
-                  | estructurasControl
-                  | operaciones
                   '''
+
+def p_bloques(p):
+    '''bloques : bloque
+               | bloque bloques
+               '''
+
+def p_bloque(p):
+    '''bloque : impresion
+                | asignacion
+                | funciones
+                | estructurasControl
+                | estructurasDeDatos
+                | comparaciones
+                | operaciones
+                | comentario
+                '''
+    
+def p_impresion(p):
+    '''impresion : print
+                | echo
+                '''
+    
+def p_funciones(p):
+    '''funciones : funcion
+                | return
+               '''
+    
+def p_comentario(p):
+	''' comentario : COMENTARIO
+                  | LLAVEDER
+	'''
+
+
 
 def p_valores(p):
   '''valores : valor
@@ -156,6 +182,8 @@ def p_estructurasControl(p):
   '''estructurasControl : while
                         | for
                         | if
+                        | elseif
+                        | else
                         | foreach
                         | switch
   '''
@@ -207,6 +235,20 @@ def p_if(p):
 #if ($edad >= 18) {
 #if ($esAdmin) { 
 
+def p_elseif(p):
+  ''' elseif : LLAVEDER ELSEIF PARENIZ comparaciones PARENDER LLAVEIZ
+          | LLAVEDER ELSEIF PARENIZ IDENTIFICADOR PARENDER LLAVEIZ 
+          | ELSEIF PARENIZ comparaciones PARENDER LLAVEIZ
+          | ELSEIF PARENIZ IDENTIFICADOR PARENDER LLAVEIZ 
+  '''
+#} elseif ($numero2 > $numero1) {
+
+def p_else(p):
+  ''' else : LLAVEDER ELSE LLAVEIZ
+          | ELSE LLAVEIZ
+          '''
+#} else {
+# else {
 
 #FIN DE DIEGO
 
@@ -311,11 +353,13 @@ def p_colaValido(p):
 #Inicio Irving
 #ARRAY
 def p_array(p):
-  ''' array : IDENTIFICADOR ASIGNAR ARRAY PARENIZ valores PARENDER PUNTOCOMA
+  ''' array : IDENTIFICADOR ASIGNAR ARRAY PARENIZ PARENDER PUNTOCOMA
+            | IDENTIFICADOR ASIGNAR ARRAY PARENIZ valores PARENDER PUNTOCOMA
             | IDENTIFICADOR ASIGNAR CORCHETEIZ valores CORCHETEDER PUNTOCOMA
   '''
 #$arrayNumerico = array(1, 2, 3, 4, 5);
 #$arrayNumerico = [1, 2, 3, 4, 5];
+#$fibonacci = array();
 #Fin Irving
 
 #-----------------------------------------------------

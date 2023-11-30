@@ -268,7 +268,7 @@ $numero1 = 10;
 $numero2 = 20;
 
 // Ejemplo de uso:
-$stack = new splstack();
+$stack = new SplStack();
 
 $fibonacci = array();
 
