@@ -1,7 +1,74 @@
 import ply.yacc as sint
 
 from lexer import tokens
+resultado_sintactico = []
 
+def p_sentencias(p):
+    '''sentencias : asignacion
+                  | echo 
+                  | funcion
+                  | print
+                  | operadorAritmetico
+                  | return 
+                  | estructurasDeDatos
+                  | estructurasControl
+                  | operaciones
+                  '''
+
+def p_valores(p):
+  '''valores : valor
+            | valor COMA valores'''
+
+def p_numero(p):
+  '''NUMERO : ENTERO
+            | FLOTANTE
+  '''
+def p_valor(p):
+    '''valor : NUMERO
+	         | CADENA
+	         | BOOLEAN
+             | IDENTIFICADOR
+	'''
+def p_comparadorNum(p):
+	''' comparadorNum : MAYORQUE
+					| MAYORIGUALQUE
+					| MENORQUE
+					| MENORIGUALQUE
+	'''
+def p_comparador(p):
+	''' comparador : IDENTICO
+					| NOIDENTICO
+					| IGUAL
+	'''
+    
+def p_variableOperacion(p):
+    ''' variable : NUMERO
+                  | IDENTIFICADOR
+    '''
+
+def p_comparaciones(p):
+	''' comparaciones : comparacion  
+					 | comparacion operadores comparaciones
+	'''
+
+def p_comparacion(p):
+	''' comparacion :  variable comparadorNum variable 
+            | valor comparador valor 
+	'''
+
+def p_incrementoDecremento(p):
+  '''incrementoDecremento : INCREMENTO
+                          | DECREMENTO
+                          | SUMA ENTERO
+                          | RESTA ENTERO
+  '''
+
+
+def p_operadores(p):
+   '''operadores : OPERADOR
+	         | AND
+	         | OR
+	'''
 
 # Operaciones aritmeticas
 
@@ -219,7 +286,15 @@ def p_colaValido(p):
   " queue : IDENTIFICADOR FLECHASIMPLE VALID PARENIZ PARENDER"
 
 #FIN DIEGO
-
+#Inicio Irving
+#ARRAY
+def p_array(p):
+  ''' array : IDENTIFICADOR ASIGNAR ARRAY PARENIZ valores PARENDER PUNTOCOMA
+            | IDENTIFICADOR ASIGNAR CORCHETEIZ valores CORCHETEDER PUNTOCOMA
+  '''
+#$arrayNumerico = array(1, 2, 3, 4, 5);
+#$arrayNumerico = [1, 2, 3, 4, 5];
+#Fin Irving
 
 #-----------------------------------------------------
 def p_error(p):
