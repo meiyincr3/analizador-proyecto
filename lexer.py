@@ -53,6 +53,7 @@ reservadas = {
 tokens = (
  #Inicio Irving Macias
   'IDENTIFICADOR',
+  'LETRAS',
   'ENTERO',
   'FLOTANTE',
   'SUMA',
@@ -180,8 +181,13 @@ def t_NAMEFUNCTION(t):
     return t
 
 def t_IDENTIFICADOR(t):
-  r'\$?[a-zA-Z_]\w*'
+  r'\$[a-zA-Z_]\w*'
   t.type = reservadas.get(t.value,'IDENTIFICADOR')
+  return t
+
+def t_LETRAS(t):
+  r'[a-zA-Z_]\w*'
+  t.type = reservadas.get(t.value,'LETRAS')
   return t
 
 # Expresión regular para reconocer saltos de línea
@@ -249,7 +255,7 @@ $numero1 = 10;
 $numero2 = 20;
 
 // Ejemplo de uso:
-$stack = new splstack();
+$stack = new SplStack();
 
 $fibonacci = array();
 

@@ -24,6 +24,7 @@ def p_bloque(p):
                 | operaciones
                 | comentario
                 | longitud
+                | cerrar
                 '''
     
 def p_impresion(p):
@@ -34,7 +35,10 @@ def p_impresion(p):
 
 def p_comentario(p):
 	''' comentario : COMENTARIO
-                  | LLAVEDER
+	'''
+   
+def p_cerrar(p):
+	''' cerrar : LLAVEDER
 	'''
 
 def p_funciones(p):
@@ -128,7 +132,8 @@ def p_operadorAritmetico(p):
 
 # Asignacion
 def p_asignacion(p):
-    '''asignacion : IDENTIFICADOR ASIGNAR valor PUNTOCOMA'''
+    '''asignacion : IDENTIFICADOR ASIGNAR valor PUNTOCOMA
+                  | IDENTIFICADOR PUNTOCOMA'''
 
 # Inicio Meiyin
 # Impresion
@@ -404,6 +409,8 @@ def p_pop(p):
 def p_condicionesSemanticas(p):
   '''condicionesSemanticas : BOOLEAN operadores BOOLEAN  
   '''
+
+
 
 
 
