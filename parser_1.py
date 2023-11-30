@@ -1,6 +1,7 @@
 import ply.yacc as sint
 
 from lexer import tokens
+
 resultado_sintactico = []
 
 def p_sentencias(p):
@@ -106,6 +107,11 @@ def p_print_sinvalor(p):
 
 # Fin Meiyin Chang
 
+#Inicio de Irving
+def p_echo(p):
+  '''echo : ECHO valores PUNTOCOMA
+  '''
+#Fin de Irving
 
 
 
@@ -155,7 +161,20 @@ def p_estructurasControl(p):
                         | switch
   '''
 
+#Inicio de Irving
+# FALTA ARGUMENTOS
+def p_while(p):
+	''' while : WHILE PARENIZ comparaciones PARENDER LLAVEIZ 
+	'''
+#Fin de Irving
+
+
 #Inicio Meiyin
+def p_for(p):
+  ''' for : FOR PARENIZ IDENTIFICADOR ASIGNAR ENTERO PUNTOCOMA IDENTIFICADOR comparadorNum ENTERO PUNTOCOMA IDENTIFICADOR incrementoDecremento PARENDER LLAVEIZ
+  '''
+#for ($i = 2; $i <= 10; $i + 2) {
+
 def p_foreach(p):
   ''' foreach : FOREACH PARENIZ IDENTIFICADOR AS IDENTIFICADOR PARENDER LLAVEIZ'''
 #foreach ($numeros as $numero) {
