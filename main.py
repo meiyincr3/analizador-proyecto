@@ -2,7 +2,7 @@ import sys
 
 from PySide6.QtWidgets import (QApplication, QMainWindow, QFileDialog)
 
-from PHPDiseno import *
+from gui import *
 from lexer import *
 from parser_1 import *
 
@@ -16,36 +16,36 @@ class Main(QMainWindow):
         self.home = Ui_MainWindow()
         self.home.setupUi(self)
 
-        self.home.analisisLexicoButton.clicked.connect(self.ev_lexico)
-        self.home.analisisSintacticoButton.clicked.connect(self.ev_sintactico)
+        self.home.bt_lexico.clicked.connect(self.ev_lexico)
+        self.home.bt_sintactico.clicked.connect(self.ev_sintactico)
 
-        self.home.cargarArchivoButton.clicked.connect(self.ev_archivo)
-        self.home.limpiarButton.clicked.connect(self.ev_limpiar)
+        self.home.bt_archivo.clicked.connect(self.ev_archivo)
+        self.home.bt_limpiar.clicked.connect(self.ev_limpiar)
 
     def ev_lexico(self):
         '''
         Manejo de analisis de expresion lexemas
         '''
 
-        self.home.analisisLexicoTextEdit.setPlainText('')
+        self.home.tx_lexico.setPlainText('')
 
-        datos = self.home.cargaDeArchivoTextEdit.toPlainText().strip()
+        datos = self.home.tx_ingreso.toPlainText().strip()
 
         resultado_lexico = analisis_lexico(datos)
 
         cadena = ''
         for lex in resultado_lexico:
             cadena += lex + "\n"
-        self.home.analisisLexicoTextEdit.setPlainText(cadena)
+        self.home.tx_lexico.setPlainText(cadena)
 
     def ev_sintactico(self):
         '''
         Manejo de analisis sintactico
         '''
 
-        self.home.analisisSintacticoTextEdit.setPlainText('')
+        self.home.tx_sintactico.setPlainText('')
 
-        datos = self.home.cargaDeArchivoTextEdit.toPlainText().strip()
+        datos = self.home.tx_ingreso.toPlainText().strip()
 
         resultado_sintactico = analisis_sintactico(datos)
         cadena = ''
@@ -53,7 +53,7 @@ class Main(QMainWindow):
         for item in resultado_sintactico:
             cadena += item + "\n"
 
-        self.home.analisisSintacticoTextEdit.setPlainText(cadena)
+        self.home.tx_sintactico.setPlainText(cadena)
 
     def ev_archivo(self):
         '''
@@ -68,15 +68,15 @@ class Main(QMainWindow):
             with f:
                 data = f.read().strip()
                 if data:
-                    self.home.cargaDeArchivoTextEdit.setPlainText(data + "\n")
+                    self.home.tx_ingreso.setPlainText(data + "\n")
 
     def ev_limpiar(self):
         '''
         Manejo de limpieza de campos
         '''
-        self.home.cargaDeArchivoTextEdit.setPlainText('')
-        self.home.analisisLexicoTextEdit.setPlainText('')
-        self.home.analisisSintacticoTextEdit.setPlainText('')
+        self.home.tx_ingreso.setPlainText('')
+        self.home.tx_lexico.setPlainText('')
+        self.home.tx_sintactico.setPlainText('')
 
 
 def iniciar():

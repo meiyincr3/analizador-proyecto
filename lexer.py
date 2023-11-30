@@ -200,27 +200,7 @@ def t_error(t):
   )
   t.lexer.skip(1)
 
-# Build the lexer object
-
-def analisis_lexico(data):
-    global resultado_lexema
-    validador = lex()
-    validador.input(data)
-
-    resultado_lexico.clear()
-    # Tokenize
-    while True:
-        tok = validador.token()
-        if not tok:
-            break  # No more input
-        # print(tok)
-        estado = "Linea: {:4} Tipo: {:16} Valor: {:16} Posicion: {:4}".format(str(tok.lineno), str(tok.type),
-                                                                          str(tok.value), str(tok.lexpos))
-        resultado_lexico.append(estado)
-    return resultado_lexico
-
-print("Análisis lexico terminado... :)")
-
+#---------------------------COMENTAR PERO SE USA, NO BORRAR------------------
 """
 # Construye el lexer
 lexer = lex.lex()
@@ -268,7 +248,7 @@ $numero1 = 10;
 $numero2 = 20;
 
 // Ejemplo de uso:
-$stack = new SplStack();
+$stack = new splstack();
 
 $fibonacci = array();
 
@@ -301,3 +281,26 @@ for token in lexer:
   print(token)
 
 """
+#-------------------------SE USA PARA PRUEBAS---------------------
+
+
+# Build the lexer object
+
+def analisis_lexico(data):
+    global resultado_lexema
+    validador = lex.lex() 
+    validador.input(data)
+
+    resultado_lexico.clear()
+    # Tokenize
+    while True:
+        tok = validador.token()
+        if not tok:
+            break  # No more input
+        # print(tok)
+        estado = "Linea: {:4} Tipo: {:16} Valor: {:16} Posicion: {:4}".format(str(tok.lineno), str(tok.type),
+                                                                          str(tok.value), str(tok.lexpos))
+        resultado_lexico.append(estado)
+    return resultado_lexico
+
+print("Análisis lexico terminado... :)")

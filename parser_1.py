@@ -368,6 +368,8 @@ def p_array(p):
 #Fin Irving
 
 #-----------------------------------------------------
+#-------ERROR ANTERIOR NO USADO PARA LA GRAFICA, NO BORRAR-------------------------
+"""
 def p_error(p):
     try:
         if p:
@@ -377,10 +379,62 @@ def p_error(p):
     except Exception as e:
         # Manejar cualquier excepción no esperada y mostrar un mensaje genérico
         print(f"Error inesperado: {str(e)}")
+"""
+#-------ERROR ANTERIOR NO USADO PARA LA GRAFICA, NO BORRAR-------------------------
 
+
+# Imprime errores según las reglas
+def p_error(p):
+    global resultado_sintactico
+    resultado_sintactico.clear()
+    if p:
+        resultado = "Error sintactico de tipo: {} en el valor: {}".format(str(p.type), str(p.value))
+        print(resultado)
+    else:
+        resultado = "Error sintactico: {}".format(p)
+        print(resultado)
+    resultado_sintactico.append(resultado)
+
+
+def p_empty(p):
+    'empty :'
+    pass
+
+
+code = '''
+// Definir dos números
+$numero1 = 10;
+$numero2 = 20;
+
+// Ejemplo de uso:
+$stack = new SplStack();
+
+$fibonacci = array();
+
+// Comprobar cuál número es mayor
+if ($numero1 > $numero2 and  $numero1 > $numero2) {
+    echo "El número $numero1 es mayor que el número $numero2";
+} elseif ($numero2 > $numero1) {
+    echo "El número $numero2 es mayor que el número $numero1";
+} else {
+    echo "Ambos números son iguales";
+  }
+'''
 
 # Build the parser
 parser = sint.yacc()
+
+'''
+while True:
+  try:
+    s = input('prueba > ')
+    #s = code
+  except EOFError:
+    break
+  if not s: continue
+  result = parser.parse(s)
+  print(result)
+'''
 
 def analisis_sintactico(data):
     linea = 0
@@ -406,16 +460,3 @@ def analisis_sintactico(data):
 
 
 print("Analisis sintactico terminado... :)")
-
-
-'''
-while True:
-  try:
-    s = input('prueba > ')
-    #s = code_meiyin
-  except EOFError:
-    break
-  if not s: continue
-  result = parser.parse(s)
-  print(result)
-  '''
