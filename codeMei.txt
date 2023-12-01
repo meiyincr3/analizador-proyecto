@@ -1,0 +1,66 @@
+// Declaración de variables
+$totalNumeros = 10;
+$mensaje = "¡Hola, mundo!";
+$color = "rojo";
+
+// Arreglo numérico
+$arrayNumerico = array(1, 2, 3, 4, 5);
+
+// Cola
+$queue = new SplQueue();
+$queue->enqueue(1);
+$queue->enqueue(2);
+
+// Pila
+$stack = new SplStack();
+$stack->push("elemento1");
+$stack->push("elemento2");
+
+
+// Operaciones aritméticas
+$resultadoSuma = $numero1 + $numero2;
+$resultadoResta = $numero1 - $numero2;
+
+// Función
+function saludar($nombre) {
+    echo "Hola, " . $nombre;
+}
+
+// Llamada a la función
+saludar("Juan");
+
+// Estructuras de control
+if ($totalNumeros > 5) {
+    echo "Hay más de 5 números.";
+} elseif ($totalNumeros == 5) {
+    echo "Hay 5 números.";
+} else {
+    echo "Hay menos de 5 números.";
+}
+
+// Bucle while
+$contador = 0;
+while ($contador < 5) {
+    echo $contador;
+    $contador++;
+}
+
+// Bucle for
+for ($i = 0; $i < $totalNumeros; 5++) {
+    echo $i;
+}
+
+// Switch
+switch ($color) {
+    case "rojo":
+        echo "El color es rojo.";
+        break;
+    case "azul":
+        echo "El color es azul.";
+        break;
+    default:
+        echo "El color no es rojo, verde ni azul.";
+}
+
+
+

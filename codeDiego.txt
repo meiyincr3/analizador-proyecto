@@ -1,0 +1,30 @@
+// Bucle for
+for ($i = 0; $i < 5; $i++) {
+    echo $i;
+}
+
+// Bucle while
+$contador = 0;
+while (True) {
+    echo $contador;
+    $contador++;
+}
+
+$stack->rewind();
+$stack->next();
+$stack->current();
+$stack->valid();
+
+// Operaciones semánticas
+$suma = $numero1 + $numero2;
+$resta = $numero1 - $numero2;
+
+// Funciones de estructuras de datos
+//error
+$primerElementoCola = $queue->dequeue();
+$primerElementoPila = $stack->pop();
+
+
+// Longitud de una cadena
+$longitudMensaje = strlen($mensaje);
+

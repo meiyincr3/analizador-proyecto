@@ -1,0 +1,31 @@
+// Indexación
+$valorIndexado = $numeros[2];
+
+// Incremento y decremento
+$contador++;
+$contador--;
+
+// Operaciones lógicas
+$condicionLogica = ($totalNumeros > 0) && ($totalNumeros < 100);
+
+// Operaciones con strings
+$mensajeConcatenado = $mensaje . " ¡Bienvenido!";
+
+// Return
+function sumar($a, $b) {
+    // da error sintactico
+    return $a + $b;
+}
+$resultadoSuma = sumar(3, 5);
+
+// Input
+$entradaUsuario = fgets(STDIN);
+
+// Imprimir resultado
+echo $resultadoSuma;
+
+// Bucle foreach
+$numeros = array(1, 2, 3, 4, 5);
+foreach ($numeros as $numero) {
+    echo $numero;
+}

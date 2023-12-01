@@ -52,7 +52,6 @@ def p_indexacion(p):
 
 def p_valores(p):
   '''valores : valor
-            | indexacion
             | valor COMA valores'''
 
 def p_numero(p):
@@ -65,6 +64,7 @@ def p_valor(p):
 	         | CADENA
 	         | BOOLEAN
              | IDENTIFICADOR
+             | indexacion
 	'''
 #-------------------------Reglas semanticas de comparadores----------------   
 def p_comparadorNum(p):
@@ -136,7 +136,9 @@ def p_operadorAritmetico(p):
 # Asignacion
 def p_asignacion(p):
     '''asignacion : IDENTIFICADOR ASIGNAR valor PUNTOCOMA
-                  | IDENTIFICADOR PUNTOCOMA'''
+                  | IDENTIFICADOR PUNTOCOMA
+                  | IDENTIFICADOR ASIGNAR pop
+                  | IDENTIFICADOR ASIGNAR push'''
 
 # Inicio Meiyin
 # Impresion
@@ -204,20 +206,24 @@ def p_estructurasControl(p):
                         | foreach
                         | switch
   '''
-
+  #forSemantico
+  #whileSemantico
+    
+    
 #Inicio de Irving
 # FALTA ARGUMENTOS
 def p_while(p):
 	''' while : WHILE PARENIZ comparaciones PARENDER LLAVEIZ 
 	'''
+   
+#for ($i = 2; $i <= 10; $i + 2) {
+def p_for(p):
+  ''' for : FOR PARENIZ IDENTIFICADOR ASIGNAR ENTERO PUNTOCOMA comparacion PUNTOCOMA incrementoDecremento PARENDER LLAVEIZ
+  '''
 #Fin de Irving
 
 
 #Inicio Meiyin
-def p_for(p):
-  ''' for : FOR PARENIZ IDENTIFICADOR ASIGNAR ENTERO PUNTOCOMA IDENTIFICADOR comparadorNum ENTERO PUNTOCOMA incrementoDecremento PARENDER LLAVEIZ
-  '''
-#for ($i = 2; $i <= 10; $i + 2) {
 
 def p_foreach(p):
   ''' foreach : FOREACH PARENIZ IDENTIFICADOR AS IDENTIFICADOR PARENDER LLAVEIZ'''
@@ -419,11 +425,14 @@ def p_booleanosSemantico(p):#   TRUE  or FALSE and TRUE
 
 #Meiyin
 
-def p_push(p): # push(@variable)
-  'push : IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ IDENTIFICADOR PARENDER'
+def p_push(p):
+  '''push : IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ IDENTIFICADOR PARENDER
+          |  IDENTIFICADOR FLECHASIMPLE POP PARENIZ IDENTIFICADOR PARENDER PUNTOCOMA
+  '''
 
-def p_pop(p): # pop(@variable)
-  'pop : IDENTIFICADOR FLECHASIMPLE POP PARENIZ IDENTIFICADOR PARENDER'
+def p_pop(p):
+  '''pop : IDENTIFICADOR FLECHASIMPLE POP PARENIZ PARENDER
+          | IDENTIFICADOR FLECHASIMPLE POP PARENIZ PARENDER PUNTOCOMA'''
 
 def p_indexacionSemantica(p): # @variable[5]
    'indexacionSemantica : IDENTIFICADOR CORCHETEIZ ENTERO CORCHETEDER'
@@ -439,8 +448,8 @@ def p_comparacionSemantico(p): # entero > entero, negativo < negativo, flotante 
             | valor comparador valor 
 	'''
    
-def p_forSemantico(p): # for (@var = 1; @var < 10; $var++) {
-  '''forSemantico : FOR PARENIZ IDENTIFICADOR ASIGNAR ENTERO PUNTOCOMA IDENTIFICADOR comparadorNum ENTERO PUNTOCOMA incrementoDecrementoSemantico PARENDER LLAVEIZ
+def p_forSemantico(p):
+  '''forSemantico : FOR PARENIZ IDENTIFICADOR ASIGNAR ENTERO PUNTOCOMA comparacion PUNTOCOMA incrementoDecrementoSemantico PARENDER LLAVEIZ
   '''
 
 #-----------------------------------------------------
