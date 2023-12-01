@@ -101,10 +101,8 @@ def p_comparacion(p):
 #-----------------------Fin de reglas semanticas de comparadores---------------
 
 def p_incrementoDecremento(p):
-  '''incrementoDecremento : INCREMENTO
-                          | DECREMENTO
-                          | SUMA ENTERO
-                          | RESTA ENTERO
+  '''incrementoDecremento : variable INCREMENTO
+                          | variable DECREMENTO
   '''
 
 def p_operadores(p):
@@ -219,7 +217,7 @@ def p_while(p):
 
 #Inicio Meiyin
 def p_for(p):
-  ''' for : FOR PARENIZ IDENTIFICADOR ASIGNAR ENTERO PUNTOCOMA IDENTIFICADOR comparadorNum ENTERO PUNTOCOMA IDENTIFICADOR incrementoDecremento PARENDER LLAVEIZ
+  ''' for : FOR PARENIZ IDENTIFICADOR ASIGNAR ENTERO PUNTOCOMA IDENTIFICADOR comparadorNum ENTERO PUNTOCOMA incrementoDecremento PARENDER LLAVEIZ
   '''
 #for ($i = 2; $i <= 10; $i + 2) {
 
@@ -409,8 +407,8 @@ def p_operacionSemantico(p):
 
 
 def p_incrementoDecrementoSemantico(p):
-  '''incrementoDecrementoSemantico : IDENTIFICADOR incrementoDecremento
-                                    | ENTERO incrementoDecremento
+  '''incrementoDecrementoSemantico : IDENTIFICADOR INCREMENTO
+                                    | IDENTIFICADOR DECREMENTO
   '''
 
 def p_ifSemantico(p):
@@ -442,6 +440,10 @@ def p_comparacionSemantico(p):
 	''' comparacionSemantico :  NUMERO comparadorNum NUMERO 
             | valor comparador valor 
 	'''
+   
+def p_forSemantico(p):
+  '''forSemantico : FOR PARENIZ IDENTIFICADOR ASIGNAR ENTERO PUNTOCOMA IDENTIFICADOR comparadorNum ENTERO PUNTOCOMA incrementoDecrementoSemantico PARENDER LLAVEIZ
+  '''
 
 #-----------------------------------------------------
 #-------ERROR ANTERIOR NO USADO PARA LA GRAFICA, NO BORRAR-------------------------
