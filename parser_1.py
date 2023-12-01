@@ -162,7 +162,7 @@ def p_echo(p):
 #FUNCIONES
 #declaracion de una funcion
 def p_declaracion_funcion(p):
-    "funcion : FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ"
+    "funcion : FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ"
 # function sumar($numero1, $numero2) {
 
 
@@ -174,8 +174,8 @@ def p_parametro(p):
 
 #llamada a una funcion
 def p_llamada_funcion(p):
-    ''' funcion : NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA
-                | IDENTIFICADOR ASIGNAR NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA
+    ''' funcion : NAMEFUNCTION PARENIZ valores PARENDER PUNTOCOMA
+                | IDENTIFICADOR ASIGNAR NAMEFUNCTION PARENIZ valores PARENDER PUNTOCOMA
 '''
 
 # sumar($valor1, $valor2);
