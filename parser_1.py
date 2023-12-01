@@ -114,12 +114,13 @@ def p_longitud(p):
 
 # Operaciones aritmeticas
 
-def p_operaciones(p):
+def p_operaciones(p): # $variable1 + $variable2 - $variable3
    ''' operaciones : operacion
+                    | operacion PUNTOCOMA
                     | operacion operadorAritmetico operaciones 
                     | IDENTIFICADOR ASIGNAR operaciones'''
 
-def p_operacionAritmentica(p):
+def p_operacion(p): # $variable1 + $variable2
    ''' operacion : variable operadorAritmetico variable
    '''
 
@@ -205,6 +206,9 @@ def p_estructurasControl(p):
                         | else
                         | foreach
                         | switch
+                        | caso
+                        | default
+                        | break
   '''
   #forSemantico
   #whileSemantico
@@ -229,21 +233,49 @@ def p_foreach(p):
   ''' foreach : FOREACH PARENIZ IDENTIFICADOR AS IDENTIFICADOR PARENDER LLAVEIZ'''
 #foreach ($numeros as $numero) {
 
-def p_switch(p):
-  ''' switch : SWITCH PARENIZ valor PARENDER LLAVEIZ casos DEFAULT DOSPUNTOS echo LLAVEDER
-  '''
+#def p_switch(p):
+  #''' switch : SWITCH PARENIZ valor PARENDER LLAVEIZ casos DEFAULT DOSPUNTOS echo LLAVEDER
+  #'''
 #switch ($color) { case "rojo": echo "El color es rojo."; break;default:echo "El color no es rojo, verde ni azul.";}
 #switch ($color) { case "rojo": echo "El color es rojo."; break;case "azul": echo "El color es azul."; break;default:echo "El color no es rojo, verde ni azul.";}
 #switch ($color) { case "rojo": echo "El color es rojo."; break;case "azul": echo "El color es azul."; break;case "verde": echo "El color es verde."; break;default:echo "El color no es rojo, verde ni azul.";}
 
-def p_casos(p):
-  ''' casos : caso 
-             | caso casos
+def p_switch(p):
+  ''' switch : SWITCH PARENIZ valor PARENDER LLAVEIZ 
   '''
 
+#def p_casos(p):
+  #''' casos : caso 
+  #           | caso casos
+  #'''
+
 def p_caso(p):
-  ''' caso : CASE valor DOSPUNTOS echo BREAK PUNTOCOMA
+  ''' caso : CASE valor DOSPUNTOS 
   '''
+
+def p_break(p):
+  ''' break : BREAK PUNTOCOMA
+  '''
+def p_default(p):
+  ''' default : DEFAULT DOSPUNTOS
+  '''
+
+#PRUEBAS PARA SWITCH CASE
+def p_bloqueSPruebas(p):
+    '''bloqueSPruebas : bloquePrueba
+                      | bloquePrueba bloqueSPruebas
+               '''
+
+def p_bloquePrueba(p):
+    '''bloquePrueba : switch 
+                    | caso 
+                    | echo
+                    | break
+                    | default
+                    | LLAVEDER
+               '''
+
+
 #Fin Meiyin
 
 
@@ -290,15 +322,17 @@ def p_estructurasDeDatos(p):
 # STACK 
 # Incio Meiyin
 
-# $stack->push("Deanna");
 
-# $stack = new SplStack();
+
+# $stack->push("Deanna");
 def p_stackPush(p):
   ''' stack : IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ valor PARENDER PUNTOCOMA'''
 
+# $stack->pop();
 def p_stackPop(p):
   ''' stack : IDENTIFICADOR FLECHASIMPLE POP PARENIZ PARENDER PUNTOCOMA'''
 
+# $stack = new SplStack();
 def p_stack(p):
   ''' stack : IDENTIFICADOR ASIGNAR NEW STACK PARENIZ PARENDER PUNTOCOMA'''
 
@@ -343,12 +377,16 @@ def p_colaAnadir(p):
 #Muestra el número de elementos de la cola(3)
 # $queue->count();
 def p_colaContar(p):
-  " queue : IDENTIFICADOR FLECHASIMPLE COUNT PARENIZ PARENDER PUNTOCOMA"
+  ''' queue : IDENTIFICADOR FLECHASIMPLE COUNT PARENIZ PARENDER PUNTOCOMA
+            | IDENTIFICADOR ASIGNAR IDENTIFICADOR FLECHASIMPLE COUNT PARENIZ PARENDER PUNTOCOMA
+  '''
 
 #Saca de la cola el primer elemento y lo muestra
 # $queue->dequeue();
+# $primerElementoCola = $queue->dequeue();
 def p_colaExpulsar(p):
-  " queue : IDENTIFICADOR FLECHASIMPLE DEQUEUE PARENIZ PARENDER PUNTOCOMA"
+  ''' queue : IDENTIFICADOR FLECHASIMPLE DEQUEUE PARENIZ PARENDER PUNTOCOMA
+            | IDENTIFICADOR ASIGNAR IDENTIFICADOR FLECHASIMPLE DEQUEUE PARENIZ PARENDER PUNTOCOMA'''
 
 #Avanzar
 # $queue->next();
@@ -362,13 +400,17 @@ def p_colaPunteroPrincipio(p):
 
 # Mostrar elemento actual de la cola
 # $queue->current();
+# $actual = $cola->current();
 def p_colaActual(p):
-  " queue : IDENTIFICADOR FLECHASIMPLE CURRENT PARENIZ PARENDER PUNTOCOMA"
+  ''' queue : IDENTIFICADOR FLECHASIMPLE CURRENT PARENIZ PARENDER PUNTOCOMA
+            | IDENTIFICADOR ASIGNAR IDENTIFICADOR FLECHASIMPLE CURRENT PARENIZ PARENDER PUNTOCOMA'''
 
 # Comprobar si en la cola aun hay elementos
 # $queue->valid()
+# $condicion = $cola->valid();
 def p_colaValido(p):
-  " queue : IDENTIFICADOR FLECHASIMPLE VALID PARENIZ PARENDER"
+  ''' queue : IDENTIFICADOR FLECHASIMPLE VALID PARENIZ PARENDER
+            | IDENTIFICADOR ASIGNAR IDENTIFICADOR FLECHASIMPLE VALID PARENIZ PARENDER PUNTOCOMA'''
 
 #FIN DIEGO
 
@@ -384,14 +426,20 @@ def p_array(p):
 #$arrayNumerico = array(1, 2, 3, 4, 5);
 #$arrayNumerico = [1, 2, 3, 4, 5];
 #$fibonacci = array();
+
+
 def p_arrayShift(p):
   ''' array : IDENTIFICADOR ASIGNAR ARRAY_SHIFT PARENIZ IDENTIFICADOR PARENDER PUNTOCOMA
   '''
 #$primerElemento = array_shift($miArray);
+
+
 def p_arrayPush(p):
-  ''' array : ARRAY_PUSH PARENIZ IDENTIFICADOR PARENDER PUNTOCOMA
+  ''' array : ARRAY_PUSH PARENIZ IDENTIFICADOR valores PARENDER PUNTOCOMA
+            | ARRAY_PUSH PARENIZ IDENTIFICADOR COMA valores PARENDER PUNTOCOMA
   '''
 #array_push($miArray, 6, 7);
+
 
 def p_arrayIn(p):
   ''' array : IDENTIFICADOR ASIGNAR IN_ARRAY PARENIZ valor COMA IDENTIFICADOR PARENDER PUNTOCOMA
@@ -458,7 +506,7 @@ def p_forSemantico(p):
 #----------ERRORES PERSONALIZADOS------------
 symbol_table = {}  # Inicializar la tabla de símbolos vacía
 
-
+"""
 def p_asignacion(p):
     '''asignacion : IDENTIFICADOR ASIGNAR valor PUNTOCOMA
                   | IDENTIFICADOR ASIGNAR valor
@@ -473,7 +521,7 @@ def p_asignacion(p):
         resultado_sintactico.append("Error: " + error_message)
     else:
         symbol_table[variable_name] = value
-
+"""
 
 
 
@@ -482,10 +530,11 @@ def p_asignacion(p):
 def p_error(p):
     global bandera
     bandera = True
+    print("-----WARNING: ENTRADA AL ERROR Y BANDERA SE HACE TRUE")
     global resultado_sintactico
-    resultado_sintactico.clear()
+    #resultado_sintactico.clear()
     if p:
-        resultado = "Error sintactico de tipo: {}. Token inesperado: {}. Error en la linea: {}".format(str(p.type), str(p.value), str(p.lineno))
+        resultado = "Error sintactico de tipo: {}. Token inesperado: {}. ".format(str(p.type), str(p.value))
         print(resultado)
     else:
         resultado = "Error sintactico: {}".format(p)
@@ -536,16 +585,19 @@ def analisis_sintactico(data):
     global bandera
 
     for item in data.splitlines():
+        print("-------------INICIO FOR-------------------")
         bandera = False
         linea += 1
         # print("item: ", item)
         if item:
+            print(f"Analizando línea {linea}: {item}")
             gram = parser.parse(item)
+            print("ESTADO BANDERA DESPUES DE ANALISIS", bandera)
             # print("gram: ", gram)
             if bandera == False:
                 resultado_sintactico.append("Linea: " + str(linea) + "  Info: No hay errores!")
-            #else:
-                #resultado_sintactico.append("Linea: " + str(linea))
+            else:
+                resultado_sintactico.append("Error en la linea: " + str(linea))
         else:
             print("data vacia")
 
