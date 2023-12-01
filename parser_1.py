@@ -21,12 +21,15 @@ def p_bloque(p):
                 | estructurasControl
                 | estructurasDeDatos
                 | comparaciones
-                | operaciones
+                | operaciones 
                 | comentario
                 | longitud
                 | cerrar
                 | indexacion
                 '''
+    
+    #operacionesSemantico
+    #indexacionSemantica
     
 def p_impresion(p):
     '''impresion : print
@@ -192,10 +195,6 @@ def p_return(p):
 #return $resultado;
 
 #FIN DE DIEGO
-
-
-
-
 
 
 
@@ -401,8 +400,12 @@ def p_arrayIn(p):
 #----------------------------Reglas Semanticas----------------
 
 #Irving
-def p_operadorSemanticoAritmetico(p):
-    'operadorSemanticoAritmetico : NUMERO operadorAritmetico NUMERO'
+def p_operacionesSemantico(p):
+    '''operacionesSemantico : operacionSemantico
+                            | operacionSemantico operadorAritmetico operacionesSemantico'''
+
+def p_operacionSemantico(p):
+    '''operacionSemantico : NUMERO operadorAritmetico NUMERO'''
 
 
 def p_incrementoDecrementoSemantico(p):
