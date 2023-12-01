@@ -22,10 +22,11 @@ def p_bloque(p):
                 | estructurasDeDatos
                 | comparaciones
                 | operaciones 
-                | comentario
+                | COMENTARIO
                 | longitud
-                | cerrar
+                | LLAVEDER
                 | indexacion
+                | incrementoDecremento
                 '''
     
     #operacionesSemantico
@@ -37,13 +38,7 @@ def p_impresion(p):
                 | input
                 '''
 
-def p_comentario(p):
-	''' comentario : COMENTARIO
-	'''
-   
-def p_cerrar(p):
-	''' cerrar : LLAVEDER
-	'''
+
 
 def p_funciones(p):
     '''funciones : funcion
@@ -100,9 +95,12 @@ def p_comparacion(p):
 	'''
 #-----------------------Fin de reglas semanticas de comparadores---------------
 
+
 def p_incrementoDecremento(p):
-  '''incrementoDecremento : variable INCREMENTO
+  '''incrementoDecremento : variable INCREMENTO 
                           | variable DECREMENTO
+                          | variable INCREMENTO PUNTOCOMA
+                          | variable DECREMENTO PUNTOCOMA
   '''
 
 def p_operadores(p):
@@ -398,80 +396,93 @@ def p_arrayIn(p):
 #----------------------------Reglas Semanticas----------------
 
 #Irving
-def p_operacionesSemantico(p):
+def p_operacionesSemantico(p): # entero + entero / negativo - negativo + float * float
     '''operacionesSemantico : operacionSemantico
                             | operacionSemantico operadorAritmetico operacionesSemantico'''
 
-def p_operacionSemantico(p):
+def p_operacionSemantico(p):# entero + entero, negativo - negativo, float * float
     '''operacionSemantico : NUMERO operadorAritmetico NUMERO'''
 
 
-def p_incrementoDecrementoSemantico(p):
+def p_incrementoDecrementoSemantico(p):# $numero++  $numero--
   '''incrementoDecrementoSemantico : IDENTIFICADOR INCREMENTO
                                     | IDENTIFICADOR DECREMENTO
   '''
 
-def p_ifSemantico(p):
+def p_ifSemantico(p): # if (TRUE or FALSE) {
   ''' ifSemantico : IF PARENIZ booleanosSemantico PARENDER LLAVEIZ
   '''
-def p_booleanosSemantico(p):
+def p_booleanosSemantico(p):#   TRUE  or FALSE and TRUE
   '''booleanosSemantico : BOOLEAN
                         | BOOLEAN operadores booleanosSemantico
   '''
 
 #Meiyin
 
-def p_push(p):
+def p_push(p): # push(@variable)
   'push : IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ IDENTIFICADOR PARENDER'
 
-def p_pop(p):
+def p_pop(p): # pop(@variable)
   'pop : IDENTIFICADOR FLECHASIMPLE POP PARENIZ IDENTIFICADOR PARENDER'
 
-def p_indexacionSemantica(p):
+def p_indexacionSemantica(p): # @variable[5]
    'indexacionSemantica : IDENTIFICADOR CORCHETEIZ ENTERO CORCHETEDER'
 
 
 #Diego   
 
-def p_whileSemantico(p):
-  'whileSemantico : WHILE PARENIZ BOOLEAN PARENDER LLAVEIZ '
+def p_whileSemantico(p): # while(True or False)
+  'whileSemantico : WHILE PARENIZ booleanosSemantico PARENDER LLAVEIZ '
 
-def p_comparacionSemantico(p):
+def p_comparacionSemantico(p): # entero > entero, negativo < negativo, flotante >= flotante
 	''' comparacionSemantico :  NUMERO comparadorNum NUMERO 
             | valor comparador valor 
 	'''
    
-def p_forSemantico(p):
+def p_forSemantico(p): # for (@var = 1; @var < 10; $var++) {
   '''forSemantico : FOR PARENIZ IDENTIFICADOR ASIGNAR ENTERO PUNTOCOMA IDENTIFICADOR comparadorNum ENTERO PUNTOCOMA incrementoDecrementoSemantico PARENDER LLAVEIZ
   '''
 
 #-----------------------------------------------------
-#-------ERROR ANTERIOR NO USADO PARA LA GRAFICA, NO BORRAR-------------------------
-"""
-def p_error(p):
-    try:
-        if p:
-            print(f"Error de sintaxis en la línea {p.lineno}, posición {p.lexpos}: Token inesperado '{p.value}'")
-        else:
-            print("Error de sintaxis: entrada inesperada al final del archivo")
-    except Exception as e:
-        # Manejar cualquier excepción no esperada y mostrar un mensaje genérico
-        print(f"Error inesperado: {str(e)}")
-"""
-#-------ERROR ANTERIOR NO USADO PARA LA GRAFICA, NO BORRAR-------------------------
 
 
+#----------ERRORES PERSONALIZADOS------------
+symbol_table = {}  # Inicializar la tabla de símbolos vacía
+
+
+def p_asignacion(p):
+    '''asignacion : IDENTIFICADOR ASIGNAR valor PUNTOCOMA
+                  | IDENTIFICADOR ASIGNAR valor
+    '''
+    variable_name = p[1]
+    value = p[3]
+
+    if len(p) < 5:
+        error_message = f"Error de sintaxis: Falta el punto y coma en la asignación de '{variable_name}'"
+        print(error_message)  # Este mensaje aparece en la consola
+        # Agregar el mensaje de error a la lista resultado_sintactico
+        resultado_sintactico.append("Error: " + error_message)
+    else:
+        symbol_table[variable_name] = value
+
+
+
+
+#----------ERRORES PERSONALIZADOS------------
 # Imprime errores según las reglas
 def p_error(p):
+    global bandera
+    bandera = True
     global resultado_sintactico
     resultado_sintactico.clear()
     if p:
-        resultado = "Error sintactico de tipo: {} en el valor: {}".format(str(p.type), str(p.value))
+        resultado = "Error sintactico de tipo: {}. Token inesperado: {}. Error en la linea: {}".format(str(p.type), str(p.value), str(p.lineno))
         print(resultado)
     else:
         resultado = "Error sintactico: {}".format(p)
         print(resultado)
     resultado_sintactico.append(resultado)
+
 
 
 code = '''
@@ -513,21 +524,19 @@ def analisis_sintactico(data):
     linea = 0
     global resultado_sintactico
     resultado_sintactico.clear()
-    print(resultado_sintactico)
-
-    print("ANTES DE BANDERA")
-    bandera = True
+    global bandera
 
     for item in data.splitlines():
+        bandera = False
         linea += 1
         # print("item: ", item)
         if item:
             gram = parser.parse(item)
             # print("gram: ", gram)
-            if gram is None:
+            if bandera == False:
                 resultado_sintactico.append("Linea: " + str(linea) + "  Info: No hay errores!")
-            else:
-                resultado_sintactico.append("Linea: " + str(linea) + "  Info: " + str(gram))
+            #else:
+                #resultado_sintactico.append("Linea: " + str(linea))
         else:
             print("data vacia")
 
