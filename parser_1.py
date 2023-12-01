@@ -382,6 +382,19 @@ def p_array(p):
 #$arrayNumerico = array(1, 2, 3, 4, 5);
 #$arrayNumerico = [1, 2, 3, 4, 5];
 #$fibonacci = array();
+def p_arrayShift(p):
+  ''' array : IDENTIFICADOR ASIGNAR ARRAY_SHIFT PARENIZ IDENTIFICADOR PARENDER PUNTOCOMA
+  '''
+#$primerElemento = array_shift($miArray);
+def p_arrayPush(p):
+  ''' array : ARRAY_PUSH PARENIZ IDENTIFICADOR PARENDER PUNTOCOMA
+  '''
+#array_push($miArray, 6, 7);
+
+def p_arrayIn(p):
+  ''' array : IDENTIFICADOR ASIGNAR IN_ARRAY PARENIZ valor COMA IDENTIFICADOR PARENDER PUNTOCOMA
+  '''
+#$existe = in_array(3, $miArray);
 #Fin Irving
 
 #----------------------------Reglas Semanticas----------------
@@ -396,6 +409,14 @@ def p_incrementoDecrementoSemantico(p):
                                     | ENTERO incrementoDecremento
   '''
 
+def p_ifSemantico(p):
+  ''' ifSemantico : IF PARENIZ booleanosSemantico PARENDER LLAVEIZ
+  '''
+def p_booleanosSemantico(p):
+  '''booleanosSemantico : BOOLEAN
+                        | BOOLEAN operadores booleanosSemantico
+  '''
+
 #Meiying    
 
 def p_push(p):
@@ -406,13 +427,13 @@ def p_pop(p):
 
 #Diego   
 
-def p_condicionesSemanticas(p):
-  '''condicionesSemanticas : BOOLEAN operadores BOOLEAN  
-  '''
+def p_whileSemantico(p):
+  'whileSemantico : WHILE PARENIZ BOOLEAN PARENDER LLAVEIZ '
 
-
-
-
+def p_comparacionSemantico(p):
+	''' comparacionSemantico :  NUMERO comparadorNum NUMERO 
+            | valor comparador valor 
+	'''
 
 #-----------------------------------------------------
 #-------ERROR ANTERIOR NO USADO PARA LA GRAFICA, NO BORRAR-------------------------

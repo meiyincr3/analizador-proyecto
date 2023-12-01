@@ -45,6 +45,9 @@ reservadas = {
   'break' : 'BREAK',
   'default': 'DEFAULT',
   'strlen' : 'STRLEN',
+  'array_shift' : 'ARRAY_SHIFT', 
+  'in_array' : 'IN_ARRAY',
+  'array_push' : 'ARRAY_PUSH'
   # Fin Irving Macias
 
 }
@@ -202,10 +205,10 @@ t_ignore = ' \t'
 
 # Manejo de errores
 def t_error(t):
-  print(
-      f"{t.type.upper()}: No se reconoce el caracter {t.value[0]} en la línea {t.lineno}"
-  )
-  t.lexer.skip(1)
+    mensaje_error = f"ERROR: No se reconoce el caracter {t.value[0]} en la línea {t.lineno}"
+    print(mensaje_error)
+    resultado_lexico.append(mensaje_error)
+    t.lexer.skip(1)
 
 #---------------------------COMENTAR PERO SE USA, NO BORRAR------------------
 """
@@ -304,9 +307,10 @@ def analisis_lexico(data):
         tok = validador.token()
         if not tok:
             break  # No more input
-        # print(tok)
-        estado = "Linea: {:4} Tipo: {:16} Valor: {:16} Posicion: {:4}".format(str(tok.lineno), str(tok.type),
-                                                                          str(tok.value), str(tok.lexpos))
+        if not hasattr(tok, 'type'):
+            continue  # Si el token no tiene tipo, es un mensaje de error
+        estado = "Linea: {:4} Tipo: {:16} Valor: {:16} Posicion: {:4}".format(
+            str(tok.lineno), str(tok.type), str(tok.value), str(tok.lexpos))
         resultado_lexico.append(estado)
     return resultado_lexico
 
