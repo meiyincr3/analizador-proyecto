@@ -25,6 +25,7 @@ def p_bloque(p):
                 | comentario
                 | longitud
                 | cerrar
+                | indexacion
                 '''
     
 def p_impresion(p):
@@ -45,13 +46,15 @@ def p_funciones(p):
     '''funciones : funcion
                 | return
                '''
-    
 
-#def p_input(p):
-# '''input : PARENIZ values PARENDER SEMICOLON'''
+def p_indexacion(p):
+   '''indexacion : IDENTIFICADOR CORCHETEIZ valor CORCHETEDER
+                  | IDENTIFICADOR CORCHETEIZ valor CORCHETEDER PUNTOCOMA'''
+
 
 def p_valores(p):
   '''valores : valor
+            | indexacion
             | valor COMA valores'''
 
 def p_numero(p):
@@ -92,7 +95,8 @@ def p_comparacion(p):
 	''' comparacion :  variable comparadorNum variable 
             | valor comparador valor 
 	'''
-#Fin de reglas semanticas de comparadores
+#-----------------------Fin de reglas semanticas de comparadores---------------
+
 def p_incrementoDecremento(p):
   '''incrementoDecremento : INCREMENTO
                           | DECREMENTO
@@ -146,7 +150,7 @@ def p_print_sinvalor(p):
 
 def p_input(p):
   "input : IDENTIFICADOR ASIGNAR FGETS PARENIZ FLUJOS PARENDER PUNTOCOMA"
-#$numeroString = fgets(STDIN);
+
 
 # Fin Meiyin Chang
 
@@ -231,7 +235,6 @@ def p_switch(p):
 #switch ($color) { case "rojo": echo "El color es rojo."; break;case "azul": echo "El color es azul."; break;default:echo "El color no es rojo, verde ni azul.";}
 #switch ($color) { case "rojo": echo "El color es rojo."; break;case "azul": echo "El color es azul."; break;case "verde": echo "El color es verde."; break;default:echo "El color no es rojo, verde ni azul.";}
 
-
 def p_casos(p):
   ''' casos : caso 
              | caso casos
@@ -241,8 +244,6 @@ def p_caso(p):
   ''' caso : CASE valor DOSPUNTOS echo BREAK PUNTOCOMA
   '''
 #Fin Meiyin
-
-
 
 
 #INICIO DE DIEGO
@@ -417,13 +418,17 @@ def p_booleanosSemantico(p):
                         | BOOLEAN operadores booleanosSemantico
   '''
 
-#Meiying    
+#Meiyin
 
 def p_push(p):
   'push : IDENTIFICADOR FLECHASIMPLE PUSH PARENIZ IDENTIFICADOR PARENDER'
 
 def p_pop(p):
   'pop : IDENTIFICADOR FLECHASIMPLE POP PARENIZ IDENTIFICADOR PARENDER'
+
+def p_indexacionSemantica(p):
+   'indexacionSemantica : IDENTIFICADOR CORCHETEIZ ENTERO CORCHETEDER'
+
 
 #Diego   
 
