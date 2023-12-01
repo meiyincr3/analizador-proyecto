@@ -18,14 +18,13 @@ def p_bloque(p):
     '''bloque : impresion
                 | asignacion
                 | funciones
-                | estructurasControl
-                | estructurasDeDatos
-                | comparaciones
+                | while
+                | switch
+                | reglasSemanticas
                 | operaciones 
                 | COMENTARIO
                 | longitud
                 | LLAVEDER
-                | indexacion
                 | incrementoDecremento
                 '''
     
@@ -64,7 +63,7 @@ def p_valor(p):
 	         | CADENA
 	         | BOOLEAN
              | IDENTIFICADOR
-             | indexacion
+             | indexacionSemantica
 	'''
 #-------------------------Reglas semanticas de comparadores----------------   
 def p_comparadorNum(p):
@@ -215,9 +214,10 @@ def p_estructurasControl(p):
     
     
 #Inicio de Irving
-# FALTA ARGUMENTOS
+
+# while (9 > 9.75) {
 def p_while(p):
-	''' while : WHILE PARENIZ comparaciones PARENDER LLAVEIZ 
+	''' while : WHILE PARENIZ comparacionSemantico PARENDER LLAVEIZ 
 	'''
    
 #for ($i = 2; $i <= 10; $i + 2) {
@@ -242,6 +242,9 @@ def p_foreach(p):
 
 def p_switch(p):
   ''' switch : SWITCH PARENIZ valor PARENDER LLAVEIZ 
+            | casoSemantico
+            | break
+            | default
   '''
 
 #def p_casos(p):
@@ -449,6 +452,16 @@ def p_arrayIn(p):
 
 #----------------------------Reglas Semanticas----------------
 
+def p_reglasSemanticas(p):
+  '''reglasSemanticas : whileSemantico
+                  | ifSemantico
+                  | forSemantico
+                  | pop
+                  | push
+                  | indexacionSemantica
+                  | comparacionSemantico
+                  '''
+
 #Irving
 def p_operacionesSemantico(p): # entero + entero / negativo - negativo + float * float
     '''operacionesSemantico : operacionSemantico
@@ -466,7 +479,7 @@ def p_incrementoDecrementoSemantico(p):# $numero++  $numero--
 def p_ifSemantico(p): # if (True or False) {
   ''' ifSemantico : IF PARENIZ booleanosSemantico PARENDER LLAVEIZ
   '''
-def p_booleanosSemantico(p):# True  or False and True
+def p_booleanosSemantico(p):#   True  or False and True
   '''booleanosSemantico : BOOLEAN
                         | BOOLEAN operadores booleanosSemantico
   '''
@@ -493,14 +506,13 @@ def p_indexacionSemantica(p): # $variable[5]  | $var=$variable[5];
 
 #Diego   
 
-def p_whileSemantico(p): # while(True or False)
+def p_whileSemantico(p): # while(True or False) {
   'whileSemantico : WHILE PARENIZ booleanosSemantico PARENDER LLAVEIZ '
 
 def p_comparacionSemantico(p): # entero > entero, negativo < negativo, flotante >= flotante
 	''' comparacionSemantico :  NUMERO comparadorNum NUMERO 
-            | valor comparador valor 
 	'''
-
+   
  # for ($i = 0; $i < 5; 5++) //Esto no deberia pasar "5++" pero actualmente esta permitido en el for
 def p_forSemantico(p):# for ($i = 0; $i < 5; $i++) {
   '''forSemantico : FOR PARENIZ IDENTIFICADOR ASIGNAR ENTERO PUNTOCOMA comparacion PUNTOCOMA incrementoDecrementoSemantico PARENDER LLAVEIZ
@@ -584,7 +596,7 @@ while True:
   print(result)
 '''
 
-def analisis_sintactico(data):
+def analisis_sintactico2(data):
     linea = 0
     global resultado_sintactico
     resultado_sintactico.clear()

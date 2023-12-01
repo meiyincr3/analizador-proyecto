@@ -5,6 +5,7 @@ from PySide6.QtWidgets import (QApplication, QMainWindow, QFileDialog)
 from gui import *
 from lexer import *
 from parser_1 import *
+from parser2 import *
 
 
 class Main(QMainWindow):
@@ -47,7 +48,7 @@ class Main(QMainWindow):
 
         datos = self.home.tx_ingreso.toPlainText().strip()
 
-        resultado_sintactico = analisis_sintactico(datos)
+        resultado_sintactico = analisis_sintactico2(datos)
         cadena = ''
 
         for item in resultado_sintactico:
