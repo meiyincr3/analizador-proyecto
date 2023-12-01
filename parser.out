@@ -76,7 +76,7 @@ Rule 66    print -> PRINT valor PUNTOCOMA
 Rule 67    print -> PRINT PARENIZ PARENDER PUNTOCOMA
 Rule 68    input -> IDENTIFICADOR ASIGNAR FGETS PARENIZ FLUJOS PARENDER PUNTOCOMA
 Rule 69    echo -> ECHO valores PUNTOCOMA
-Rule 70    funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ
+Rule 70    funcion -> FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ
 Rule 71    parametro -> IDENTIFICADOR
 Rule 72    parametro -> IDENTIFICADOR COMA parametro
 Rule 73    funcion -> NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA
@@ -254,7 +254,7 @@ operaciones          : 11 53 54
 operadorAritmetico   : 2 53 55 122
 operadorSemanticoAritmetico : 
 operadores           : 41 127
-parametro            : 70 72 73 74
+parametro            : 72 73 74
 pop                  : 
 print                : 15
 push                 : 
@@ -264,7 +264,7 @@ sentencias           : 0
 stack                : 99
 switch               : 82
 valor                : 22 23 43 43 51 63 66 86 89 101 109 121 132 132
-valores              : 23 65 69 117 118
+valores              : 23 65 69 70 117 118
 variable             : 42 42 55 55
 while                : 76
 whileSemantico       : 
@@ -325,7 +325,7 @@ state 0
     (67) print -> . PRINT PARENIZ PARENDER PUNTOCOMA
     (69) echo -> . ECHO valores PUNTOCOMA
     (68) input -> . IDENTIFICADOR ASIGNAR FGETS PARENIZ FLUJOS PARENDER PUNTOCOMA
-    (70) funcion -> . FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ
+    (70) funcion -> . FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ
     (73) funcion -> . NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA
     (74) funcion -> . IDENTIFICADOR ASIGNAR NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA
     (75) return -> . RETURN IDENTIFICADOR PUNTOCOMA
@@ -504,7 +504,7 @@ state 4
     (67) print -> . PRINT PARENIZ PARENDER PUNTOCOMA
     (69) echo -> . ECHO valores PUNTOCOMA
     (68) input -> . IDENTIFICADOR ASIGNAR FGETS PARENIZ FLUJOS PARENDER PUNTOCOMA
-    (70) funcion -> . FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ
+    (70) funcion -> . FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ
     (73) funcion -> . NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA
     (74) funcion -> . IDENTIFICADOR ASIGNAR NAMEFUNCTION PARENIZ parametro PARENDER PUNTOCOMA
     (75) return -> . RETURN IDENTIFICADOR PUNTOCOMA
@@ -1645,7 +1645,7 @@ state 44
 
 state 45
 
-    (70) funcion -> FUNCTION . NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ
+    (70) funcion -> FUNCTION . NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ
 
     NAMEFUNCTION    shift and go to state 86
 
@@ -2413,7 +2413,7 @@ state 85
 
 state 86
 
-    (70) funcion -> FUNCTION NAMEFUNCTION . PARENIZ parametro PARENDER LLAVEIZ
+    (70) funcion -> FUNCTION NAMEFUNCTION . PARENIZ valores PARENDER LLAVEIZ
 
     PARENIZ         shift and go to state 139
 
@@ -3229,13 +3229,27 @@ state 138
 
 state 139
 
-    (70) funcion -> FUNCTION NAMEFUNCTION PARENIZ . parametro PARENDER LLAVEIZ
-    (71) parametro -> . IDENTIFICADOR
-    (72) parametro -> . IDENTIFICADOR COMA parametro
+    (70) funcion -> FUNCTION NAMEFUNCTION PARENIZ . valores PARENDER LLAVEIZ
+    (22) valores -> . valor
+    (23) valores -> . valor COMA valores
+    (27) valor -> . NUMERO
+    (28) valor -> . CADENA
+    (29) valor -> . BOOLEAN
+    (30) valor -> . IDENTIFICADOR
+    (24) NUMERO -> . ENTERO
+    (25) NUMERO -> . RESTA ENTERO
+    (26) NUMERO -> . FLOTANTE
 
-    IDENTIFICADOR   shift and go to state 141
+    CADENA          shift and go to state 59
+    BOOLEAN         shift and go to state 60
+    IDENTIFICADOR   shift and go to state 83
+    ENTERO          shift and go to state 50
+    RESTA           shift and go to state 63
+    FLOTANTE        shift and go to state 61
 
-    parametro                      shift and go to state 180
+    valores                        shift and go to state 180
+    valor                          shift and go to state 85
+    NUMERO                         shift and go to state 82
 
 state 140
 
@@ -3794,7 +3808,7 @@ state 179
 
 state 180
 
-    (70) funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro . PARENDER LLAVEIZ
+    (70) funcion -> FUNCTION NAMEFUNCTION PARENIZ valores . PARENDER LLAVEIZ
 
     PARENDER        shift and go to state 214
 
@@ -4126,7 +4140,7 @@ state 213
 
 state 214
 
-    (70) funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER . LLAVEIZ
+    (70) funcion -> FUNCTION NAMEFUNCTION PARENIZ valores PARENDER . LLAVEIZ
 
     LLAVEIZ         shift and go to state 246
 
@@ -4850,30 +4864,30 @@ state 245
 
 state 246
 
-    (70) funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ .
+    (70) funcion -> FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ .
 
-    IDENTIFICADOR   reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ .)
-    COMENTARIO      reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ .)
-    LLAVEDER        reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ .)
-    PRINT           reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ .)
-    ECHO            reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ .)
-    FUNCTION        reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ .)
-    NAMEFUNCTION    reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ .)
-    RETURN          reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ .)
-    WHILE           reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ .)
-    FOR             reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ .)
-    IF              reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ .)
-    ELSEIF          reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ .)
-    ELSE            reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ .)
-    FOREACH         reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ .)
-    SWITCH          reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ .)
-    ARRAY_PUSH      reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ .)
-    CADENA          reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ .)
-    BOOLEAN         reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ .)
-    ENTERO          reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ .)
-    RESTA           reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ .)
-    FLOTANTE        reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ .)
-    $end            reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ .)
+    IDENTIFICADOR   reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ .)
+    COMENTARIO      reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ .)
+    LLAVEDER        reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ .)
+    PRINT           reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ .)
+    ECHO            reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ .)
+    FUNCTION        reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ .)
+    NAMEFUNCTION    reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ .)
+    RETURN          reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ .)
+    WHILE           reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ .)
+    FOR             reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ .)
+    IF              reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ .)
+    ELSEIF          reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ .)
+    ELSE            reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ .)
+    FOREACH         reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ .)
+    SWITCH          reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ .)
+    ARRAY_PUSH      reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ .)
+    CADENA          reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ .)
+    BOOLEAN         reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ .)
+    ENTERO          reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ .)
+    RESTA           reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ .)
+    FLOTANTE        reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ .)
+    $end            reduce using rule 70 (funcion -> FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ .)
 
 
 state 247

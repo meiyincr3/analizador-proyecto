@@ -162,7 +162,7 @@ def p_echo(p):
 #FUNCIONES
 #declaracion de una funcion
 def p_declaracion_funcion(p):
-    "funcion : FUNCTION NAMEFUNCTION PARENIZ parametro PARENDER LLAVEIZ"
+    "funcion : FUNCTION NAMEFUNCTION PARENIZ valores PARENDER LLAVEIZ"
 # function sumar($numero1, $numero2) {
 
 
@@ -504,6 +504,9 @@ def analisis_sintactico(data):
     global resultado_sintactico
     resultado_sintactico.clear()
     print(resultado_sintactico)
+
+    print("ANTES DE BANDERA")
+    bandera = True
 
     for item in data.splitlines():
         linea += 1
